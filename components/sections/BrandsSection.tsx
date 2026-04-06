@@ -1,23 +1,31 @@
 // SEKCJA PRÓBNA — ocenić czy pasuje do strony przed finalnym wdrożeniem
-// TODO: Zamienić placeholder-loga na prawdziwe pliki SVG/PNG w /public/brands/
+// Loga: https://vl.imgix.net (avto-dev/vehicle-logotypes, open-source)
 
 const BRANDS = [
-  { name: 'BMW',           abbr: 'BMW',  color: '#1C69D4' },
-  { name: 'Mercedes-Benz', abbr: 'MB',   color: '#A0A0A0' },
-  { name: 'Audi',          abbr: 'AUDI', color: '#BB0A14' },
-  { name: 'Volkswagen',    abbr: 'VW',   color: '#1E3A8A' },
-  { name: 'Toyota',        abbr: 'TOY',  color: '#EB0A1E' },
-  { name: 'Ford',          abbr: 'FORD', color: '#003478' },
-  { name: 'Opel',          abbr: 'OPEL', color: '#F5A800' },
-  { name: 'Škoda',         abbr: 'ŠKD',  color: '#4BA82E' },
-  { name: 'Renault',       abbr: 'REN',  color: '#EFDF00' },
-  { name: 'Peugeot',       abbr: 'PEU',  color: '#0055A5' },
-  { name: 'Volvo',         abbr: 'VOL',  color: '#003057' },
-  { name: 'Honda',         abbr: 'HON',  color: '#CC0000' },
+  { name: 'BMW',           slug: 'bmw' },
+  { name: 'Mercedes-Benz', slug: 'mercedes-benz' },
+  { name: 'Audi',          slug: 'audi' },
+  { name: 'Volkswagen',    slug: 'volkswagen' },
+  { name: 'Toyota',        slug: 'toyota' },
+  { name: 'Ford',          slug: 'ford' },
+  { name: 'Opel',          slug: 'opel' },
+  { name: 'Škoda',         slug: 'skoda' },
+  { name: 'Renault',       slug: 'renault' },
+  { name: 'Peugeot',       slug: 'peugeot' },
+  { name: 'Volvo',         slug: 'volvo' },
+  { name: 'Honda',         slug: 'honda' },
+  { name: 'Kia',           slug: 'kia' },
+  { name: 'Hyundai',       slug: 'hyundai' },
+  { name: 'SEAT',          slug: 'seat' },
+  { name: 'Mazda',         slug: 'mazda' },
 ] as const
 
-// Duplikujemy listę żeby animacja marquee była ciągła (pętla bez skoku)
+// Duplikujemy żeby animacja marquee była ciągła bez skoku
 const BRANDS_DOUBLED = [...BRANDS, ...BRANDS]
+
+function logoUrl(slug: string) {
+  return `https://cdn.jsdelivr.net/gh/filippofilip95/car-logos-dataset/logos/optimized/${slug}.png`
+}
 
 export function BrandsSection() {
   return (
@@ -25,7 +33,7 @@ export function BrandsSection() {
       className="py-16 md:py-20 bg-[#080810] relative overflow-hidden border-y border-white/[0.04]"
       aria-labelledby="brands-heading"
     >
-      {/* Subtelny glow od góry */}
+      {/* Subtelny glow */}
       <div
         className="absolute inset-0 bg-[radial-gradient(ellipse_80%_40%_at_50%_0%,_rgba(2,132,199,0.06)_0%,_transparent_70%)]"
         aria-hidden="true"
@@ -65,26 +73,21 @@ export function BrandsSection() {
 
       {/* Taśma marszowa */}
       <div className="relative overflow-hidden" aria-hidden="true">
-        <div className="flex animate-marquee gap-5 w-max">
+        <div className="flex animate-marquee gap-4 w-max">
           {BRANDS_DOUBLED.map((brand, i) => (
             <div
-              key={`${brand.name}-${i}`}
-              className="flex flex-col items-center justify-center gap-2 w-32 h-20 rounded-xl border border-white/[0.07] bg-white/[0.02] backdrop-blur-sm flex-shrink-0 hover:border-brand-blue/30 transition-colors duration-300 group"
+              key={`${brand.slug}-${i}`}
+              className="flex flex-col items-center justify-center gap-2.5 w-40 h-28 rounded-xl border border-slate-200 bg-white shadow-sm flex-shrink-0 transition-all duration-300 group px-4"
             >
               {/* Placeholder loga — zastąp <img> gdy będą pliki SVG */}
-              <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center text-[10px] font-black tracking-wider"
-                style={{
-                  backgroundColor: `${brand.color}18`,
-                  border: `1px solid ${brand.color}35`,
-                  color: brand.color,
-                }}
-              >
-                {brand.abbr}
-              </div>
-              <span className="text-xs text-slate-500 font-medium group-hover:text-slate-300 transition-colors">
-                {brand.name}
-              </span>
+              <img
+                src={logoUrl(brand.slug)}
+                alt={`${brand.name} logo`}
+                width={100}
+                height={50}
+                className="w-auto h-20 object-contain transition-all duration-300"
+                loading="lazy"
+              />
             </div>
           ))}
         </div>
