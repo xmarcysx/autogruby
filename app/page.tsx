@@ -1,4 +1,5 @@
 import { AboutSection } from '@/components/sections/AboutSection'
+import { BrandsSection } from '@/components/sections/BrandsSection'
 import { ContactSection } from '@/components/sections/ContactSection'
 import { CTASection } from '@/components/sections/CTASection'
 import { FAQSection } from '@/components/sections/FAQSection'
@@ -35,6 +36,8 @@ export default function HomePage() {
       <AboutSection />
       <WhyUsSection />
       <FeaturedCarsSection />
+      {/* SEKCJA PRÓBNA — ocenić czy pasuje przed finalnym wdrożeniem */}
+      <BrandsSection />
       <TestimonialsSection />
       <FAQSection />
       <ContactSection />

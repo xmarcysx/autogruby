@@ -66,6 +66,9 @@ const config: Config = {
           gold: '#F59E0B',
           'gold-dark': '#D97706',
           'gold-light': '#FCD34D',
+          red: '#DC2626',
+          'red-light': '#EF4444',
+          'red-dark': '#B91C1C',
         },
       },
       borderRadius: {
@@ -93,12 +96,17 @@ const config: Config = {
           '0%': { backgroundPosition: '-200% 0' },
           '100%': { backgroundPosition: '200% 0' },
         },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 0.4s ease-out',
         shimmer: 'shimmer 2s infinite linear',
+        marquee: 'marquee 35s linear infinite',
       },
     },
   },

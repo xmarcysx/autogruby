@@ -1,7 +1,7 @@
-import Link from 'next/link'
-import { Phone, ChevronDown, Star } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { SITE_CONFIG } from '@/lib/constants'
+import { ChevronDown, Phone, Star } from 'lucide-react'
+import Link from 'next/link'
 
 export function HeroSection() {
   return (
@@ -10,25 +10,30 @@ export function HeroSection() {
       aria-labelledby="hero-heading"
     >
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" aria-hidden="true">
-        {/* Decorative gradient overlay matching brand colors */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(2,132,199,0.15)_0%,_transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(245,158,11,0.08)_0%,_transparent_60%)]" />
-        {/* Grid pattern */}
+      <div className="absolute inset-0 bg-[#080810]" aria-hidden="true">
+        {/* Radial glow — blue top right */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_80%_0%,_rgba(2,132,199,0.18)_0%,_transparent_70%)]" />
+        {/* Radial glow — gold bottom left */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_10%_100%,_rgba(3,105,161,0.5)_0%,_transparent_70%)]" />
+
+        {/* Speed lines — diagonal, automotive feel */}
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.035]"
           style={{
             backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
+              'repeating-linear-gradient(-55deg, transparent, transparent 28px, rgba(255,255,255,0.8) 28px, rgba(255,255,255,0.8) 29px)',
           }}
         />
+
+        {/* Brand-blue racing stripe — left edge */}
+        <div className="absolute top-0 bottom-0 left-0 w-1 bg-gradient-to-b from-brand-blue-light via-brand-blue to-brand-blue-dark" />
+        <div className="absolute top-0 bottom-0 left-[5px] w-px bg-brand-blue/30" />
       </div>
 
       <div className="container relative z-10 py-24 md:py-32">
         <div className="max-w-4xl mx-auto text-center">
           {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 bg-brand-blue/10 border border-brand-blue/20 rounded-full px-4 py-1.5 text-brand-blue text-sm font-medium mb-8 animate-fade-in">
+          <div className="inline-flex items-center gap-2 bg-brand-blue/10 border border-brand-blue/25 rounded-full px-4 py-1.5 text-brand-blue text-sm font-medium mb-8 animate-fade-in">
             <Star className="h-3.5 w-3.5 fill-brand-gold text-brand-gold" aria-hidden="true" />
             Komis samochodowy w Tychach
           </div>
@@ -70,7 +75,7 @@ export function HeroSection() {
           <div className="mt-14 grid grid-cols-3 gap-6 max-w-lg mx-auto">
             {[
               { value: '10+', label: 'lat na rynku' },
-              { value: '500+', label: 'sprzedanych aut' }, // TODO: replace with real stats
+              { value: '500+', label: 'sprzedanych aut' },
               { value: '100%', label: 'transparentność' },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
