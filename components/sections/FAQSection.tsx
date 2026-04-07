@@ -6,7 +6,7 @@ import { FAQ_ITEMS } from '@/lib/constants'
 export function FAQSection() {
   return (
     <section
-      className="py-20 md:py-28 bg-slate-950"
+      className="py-20 md:py-28 bg-slate-900"
       aria-labelledby="faq-heading"
     >
       <div className="container">
@@ -25,7 +25,7 @@ export function FAQSection() {
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
-                  className="bg-slate-900 border border-slate-800 rounded-xl px-5 py-1 data-[state=open]:border-brand-blue/30"
+                  className="bg-slate-800 border border-slate-700 rounded-xl px-5 py-1 data-[state=open]:border-brand-blue/30"
                 >
                   <AccordionTrigger className="text-white text-left text-sm md:text-base hover:no-underline">
                     {item.question}

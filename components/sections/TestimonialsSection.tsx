@@ -7,7 +7,7 @@ import { Star } from 'lucide-react'
 export function TestimonialsSection() {
   return (
     <section
-      className="py-20 md:py-28 bg-slate-900"
+      className="py-20 md:py-28 bg-slate-800"
       aria-labelledby="testimonials-heading"
     >
       <div className="container">
@@ -23,7 +23,7 @@ export function TestimonialsSection() {
           {MOCK_TESTIMONIALS.map((testimonial) => (
             <article
               key={testimonial.id}
-              className="bg-slate-950 rounded-xl border border-slate-800 p-5 flex flex-col"
+              className="bg-slate-900 rounded-xl border border-slate-700 p-5 flex flex-col"
             >
               {/* Stars */}
               <div className="flex gap-0.5 mb-3" aria-label={`Ocena: ${testimonial.rating} na 5`}>

@@ -43,7 +43,7 @@ const BENEFITS = [
 export function WhyUsSection() {
   return (
     <section
-      className="py-20 md:py-28 bg-slate-900"
+      className="py-20 md:py-28 bg-slate-800"
       aria-labelledby="why-us-heading"
     >
       <div className="container">
@@ -61,7 +61,7 @@ export function WhyUsSection() {
             return (
               <div
                 key={benefit.title}
-                className="group relative bg-slate-950 rounded-xl border border-slate-800 p-6 hover:border-brand-blue/40 transition-all duration-300 hover:shadow-lg hover:shadow-brand-blue/5"
+                className="group relative bg-slate-900 rounded-xl border border-slate-700 p-6 hover:border-brand-blue/40 transition-all duration-300 hover:shadow-lg hover:shadow-brand-blue/5"
               >
                 <div className="w-12 h-12 rounded-xl bg-brand-blue/10 border border-brand-blue/20 flex items-center justify-center mb-5 group-hover:bg-brand-blue/20 transition-colors">
                   <Icon className="h-6 w-6 text-brand-blue" aria-hidden="true" />

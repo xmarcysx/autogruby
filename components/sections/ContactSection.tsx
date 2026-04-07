@@ -7,7 +7,7 @@ export function ContactSection() {
   return (
     <section
       id="kontakt-sekcja"
-      className="py-20 md:py-28 bg-slate-900"
+      className="py-20 md:py-28 bg-slate-800"
       aria-labelledby="contact-heading"
     >
       <div className="container">
@@ -24,7 +24,7 @@ export function ContactSection() {
             <div className="mt-8 space-y-4">
               <a
                 href={`tel:${SITE_CONFIG.phone.replace(/\s/g, '')}`}
-                className="flex items-center gap-4 p-4 bg-slate-800 rounded-xl border border-slate-700 hover:border-brand-gold/40 transition-colors group"
+                className="flex items-center gap-4 p-4 bg-slate-700 rounded-xl border border-slate-600 hover:border-brand-gold/40 transition-colors group"
                 aria-label={`Zadzwoń: ${SITE_CONFIG.phone}`}
               >
                 <div className="w-11 h-11 rounded-lg bg-brand-gold/10 flex items-center justify-center shrink-0 group-hover:bg-brand-gold/20 transition-colors">
@@ -38,7 +38,7 @@ export function ContactSection() {
 
               <a
                 href={`mailto:${SITE_CONFIG.email}`}
-                className="flex items-center gap-4 p-4 bg-slate-800 rounded-xl border border-slate-700 hover:border-brand-blue/40 transition-colors group"
+                className="flex items-center gap-4 p-4 bg-slate-700 rounded-xl border border-slate-600 hover:border-brand-blue/40 transition-colors group"
                 aria-label={`Email: ${SITE_CONFIG.email}`}
               >
                 <div className="w-11 h-11 rounded-lg bg-brand-blue/10 flex items-center justify-center shrink-0 group-hover:bg-brand-blue/20 transition-colors">
@@ -50,8 +50,8 @@ export function ContactSection() {
                 </div>
               </a>
 
-              <div className="flex items-center gap-4 p-4 bg-slate-800 rounded-xl border border-slate-700">
-                <div className="w-11 h-11 rounded-lg bg-slate-700 flex items-center justify-center shrink-0">
+              <div className="flex items-center gap-4 p-4 bg-slate-700 rounded-xl border border-slate-600">
+                <div className="w-11 h-11 rounded-lg bg-slate-600 flex items-center justify-center shrink-0">
                   <MapPin className="h-5 w-5 text-slate-400" aria-hidden="true" />
                 </div>
                 <div>
@@ -62,8 +62,8 @@ export function ContactSection() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 p-4 bg-slate-800 rounded-xl border border-slate-700">
-                <div className="w-11 h-11 rounded-lg bg-slate-700 flex items-center justify-center shrink-0">
+              <div className="flex items-center gap-4 p-4 bg-slate-700 rounded-xl border border-slate-600">
+                <div className="w-11 h-11 rounded-lg bg-slate-600 flex items-center justify-center shrink-0">
                   <Clock className="h-5 w-5 text-slate-400" aria-hidden="true" />
                 </div>
                 <div>
@@ -75,7 +75,7 @@ export function ContactSection() {
           </div>
 
           {/* Owner card */}
-          <div className="bg-slate-950 rounded-2xl border border-slate-800 p-8 text-center">
+          <div className="bg-slate-900 rounded-2xl border border-slate-700 p-8 text-center">
             {/* TODO: Replace placeholder with real owner photo */}
             <div className="w-28 h-28 rounded-full bg-slate-700 mx-auto mb-5 flex items-center justify-center text-5xl">
               👨‍💼

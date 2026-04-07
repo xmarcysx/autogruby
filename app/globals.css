@@ -4,25 +4,25 @@
 
 @layer base {
   :root {
-    /* Asphalt-black base — less blue-tinted, more garage/track feel */
-    --background: 240 8% 4%;
+    /* Asphalt-dark base — less blue-tinted, more garage/track feel */
+    --background: 240 8% 10%;
     --foreground: 210 40% 98%;
-    --card: 240 8% 7%;
+    --card: 240 8% 14%;
     --card-foreground: 210 40% 98%;
-    --popover: 240 8% 5%;
+    --popover: 240 8% 12%;
     --popover-foreground: 210 40% 98%;
     --primary: 199 89% 40%;
     --primary-foreground: 210 40% 98%;
     --secondary: 43 96% 56%;
     --secondary-foreground: 240 8% 5%;
-    --muted: 240 6% 12%;
-    --muted-foreground: 215 20% 52%;
+    --muted: 240 6% 18%;
+    --muted-foreground: 215 20% 60%;
     --accent: 43 96% 56%;
     --accent-foreground: 240 8% 5%;
     --destructive: 0 84% 50%;
     --destructive-foreground: 210 40% 98%;
-    --border: 240 6% 14%;
-    --input: 240 6% 12%;
+    --border: 240 6% 22%;
+    --input: 240 6% 18%;
     --ring: 199 89% 48%;
     --radius: 0.75rem;
   }

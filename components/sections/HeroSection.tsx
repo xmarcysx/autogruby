@@ -10,7 +10,7 @@ export function HeroSection() {
       aria-labelledby="hero-heading"
     >
       {/* Background */}
-      <div className="absolute inset-0 bg-[#080810]" aria-hidden="true">
+      <div className="absolute inset-0 bg-slate-900" aria-hidden="true">
         {/* Radial glow — blue top right */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_80%_0%,_rgba(2,132,199,0.18)_0%,_transparent_70%)]" />
         {/* Radial glow — gold bottom left */}

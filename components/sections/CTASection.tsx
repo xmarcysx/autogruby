@@ -6,7 +6,7 @@ import Link from 'next/link'
 export function CTASection() {
   return (
     <section
-      className="py-20 md:py-24 bg-[#080810] relative overflow-hidden"
+      className="py-20 md:py-24 bg-slate-900 relative overflow-hidden"
       aria-labelledby="cta-heading"
     >
       {/* Diagonal racing stripe — brand-blue gradient */}

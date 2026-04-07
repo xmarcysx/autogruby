@@ -12,7 +12,7 @@ export async function FeaturedCarsSection() {
 
   return (
     <section
-      className="py-20 md:py-28 bg-slate-950"
+      className="py-20 md:py-28 bg-slate-900"
       aria-labelledby="featured-heading"
     >
       <div className="container">

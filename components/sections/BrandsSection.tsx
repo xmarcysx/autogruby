@@ -30,7 +30,7 @@ function logoUrl(slug: string) {
 export function BrandsSection() {
   return (
     <section
-      className="py-16 md:py-20 bg-[#080810] relative overflow-hidden border-y border-white/[0.04]"
+      className="py-16 md:py-20 bg-slate-900 relative overflow-hidden border-y border-white/[0.06]"
       aria-labelledby="brands-heading"
     >
       {/* Subtelny glow */}
@@ -66,14 +66,14 @@ export function BrandsSection() {
       <div
         className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
         style={{
-          background: 'linear-gradient(90deg, #080810 0%, transparent 100%)',
+          background: 'linear-gradient(90deg, #0f172a 0%, transparent 100%)',
         }}
         aria-hidden="true"
       />
       <div
         className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
         style={{
-          background: 'linear-gradient(270deg, #080810 0%, transparent 100%)',
+          background: 'linear-gradient(270deg, #0f172a 0%, transparent 100%)',
         }}
         aria-hidden="true"
       />
