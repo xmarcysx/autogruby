@@ -1,20 +1,19 @@
-import type { SiteConfig, FAQItem, Testimonial } from '@/types'
+import type { FAQItem, SiteConfig, Testimonial } from '@/types'
 
-// TODO: Replace with real contact data before launch
 export const SITE_CONFIG: SiteConfig = {
   name: 'Auto Gruby',
   description:
     'Komis samochodowy w Tychach – szeroka oferta sprawdzonych samochodów używanych. Uczciwa sprzedaż, przejrzyste warunki.',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://autogruby.pl',
-  phone: process.env.NEXT_PUBLIC_PHONE ?? '+48 000 000 000', // TODO: real phone
-  email: process.env.NEXT_PUBLIC_EMAIL ?? 'kontakt@autogruby.pl', // TODO: real email
-  address: process.env.NEXT_PUBLIC_ADDRESS ?? 'ul. Przykładowa 1, 43-100 Tychy', // TODO: real address
+  phone: process.env.NEXT_PUBLIC_PHONE ?? '+48 660 740 583',
+  email: process.env.NEXT_PUBLIC_EMAIL ?? 'autogruby@interia.pl',
+  address: process.env.NEXT_PUBLIC_ADDRESS ?? 'ul. Cielmicka 36, 43-100 Tychy',
   city: 'Tychy',
   postalCode: '43-100',
-  nip: '000-000-00-00', // TODO: real NIP
-  openingHours: 'Pon–Pt: 9:00–18:00, Sob: 9:00–14:00', // TODO: real hours
+  nip: '6462932830',
+  openingHours: 'Pon–Pt: 8:00–18:00, Sob: 9:00–16:00',
   socialLinks: {
-    facebook: 'https://facebook.com/autogruby', // TODO: real FB
+    facebook: 'https://www.facebook.com/p/AUTO-GRUBY-Skup-Sprzeda%C5%BC-Import-Samochod%C3%B3w-100054259220646',
     instagram: 'https://instagram.com/autogruby', // TODO: real IG
   },
 }
@@ -84,20 +83,22 @@ export const CARS_PER_PAGE = 12
 export const MOCK_TESTIMONIALS: Testimonial[] = [
   {
     id: '1',
-    name: 'Marek Kowalski',
+    name: 'Marek Czarkowski',
     rating: 5,
     content:
       'Świetna obsługa, uczciwa rozmowa o stanie technicznym auta. Kupiłem Passata i jestem bardzo zadowolony. Polecam każdemu, kto szuka pewnego komisu w Tychach!',
     date: '2024-11-15',
+    gender: 'male',
     carBought: 'Volkswagen Passat',
   },
   {
     id: '2',
-    name: 'Anna Nowak',
+    name: 'Edyta Jawroska',
     rating: 5,
     content:
       'Profesjonalne podejście, bez wciskania towaru. Doradził mi auto idealne pod moje potrzeby. Auto Gruby to komis, któremu można zaufać.',
-    date: '2024-10-22',
+    date: '2025-10-22',
+    gender: 'female',
     carBought: 'Toyota Corolla Hybrid',
   },
   {
@@ -107,15 +108,18 @@ export const MOCK_TESTIMONIALS: Testimonial[] = [
     content:
       'Kupiłem tu BMW 3 – samochód sprawdzony, bez niespodzianek. Dokumentacja kompletna, historia serwisowa przejrzysta. Zdecydowanie wrócę po kolejne auto.',
     date: '2024-09-08',
+    gender: 'male',
     carBought: 'BMW Seria 3',
   },
   {
     id: '4',
     name: 'Katarzyna Zając',
-    rating: 4,
+    rating: 5,
     content:
       'Bardzo pomocny i rzetelny sprzedawca. Nie czułam się zagubiona przy zakupie jako kobieta – wszystko wytłumaczone, żadnych ukrytych kosztów.',
-    date: '2024-08-30',
+    date: '2025-08-30',
+    gender: 'female', 
+    carBought: 'Opel Corsa',
   },
 ]
 
@@ -127,9 +131,9 @@ export const FAQ_ITEMS: FAQItem[] = [
       'Tak, każdy samochód przed wystawieniem na sprzedaż przechodzi weryfikację stanu technicznego. Dokładamy wszelkich starań, by oferta odzwierciedlała rzeczywisty stan pojazdu. Na życzenie organizujemy przegląd w niezależnym warsztacie.',
   },
   {
-    question: 'Czy pomagacie w finansowaniu zakupu samochodu?',
+    question: 'Czy pomagacie w formalnościach związanych z zakupem samochodu?',
     answer:
-      'Tak, współpracujemy z kilkoma instytucjami finansowymi i możemy zaproponować kredyt lub leasing na atrakcyjnych warunkach. Skontaktuj się z nami, a dobierzemy najlepsze rozwiązanie dla Ciebie.',
+      'Tak, wspieramy na każdym etapie zakupu – od przygotowania dokumentów po wskazówki dotyczące rejestracji pojazdu. Skontaktuj się z nami, a przeprowadzimy Cię przez cały proces krok po kroku.',
   },
   {
     question: 'Czy mogę przyjechać na jazdę próbną?',
@@ -149,6 +153,6 @@ export const FAQ_ITEMS: FAQItem[] = [
   {
     question: 'Czy komis znajduje się w Tychach?',
     answer:
-      'Tak, Auto Gruby to komis samochodowy z siedzibą w Tychach na Śląsku. Zapraszamy do odwiedzin – jesteśmy dostępni od poniedziałku do piątku w godzinach 9:00–18:00 oraz w soboty od 9:00 do 14:00.',
+      'Tak, Auto Gruby to komis samochodowy z siedzibą w Tychach na Śląsku. Zapraszamy do odwiedzin – jesteśmy dostępni od poniedziałku do piątku w godzinach 8:00–18:00 oraz w soboty od 9:00 do 16:00.',
   },
 ]

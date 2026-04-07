@@ -1,6 +1,6 @@
-import type { Metadata } from 'next'
 import { Breadcrumbs } from '@/components/common/Breadcrumbs'
 import { SITE_CONFIG } from '@/lib/constants'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Polityka Prywatności | Auto Gruby',
@@ -20,56 +20,113 @@ export default function PrivacyPage() {
 
       <div className="container py-12">
         <div className="max-w-3xl mx-auto prose prose-invert prose-sm space-y-6">
-          {/* TODO: Replace with real privacy policy written by a legal professional */}
-          <div className="bg-brand-gold/10 border border-brand-gold/30 rounded-xl p-5">
-            <p className="text-brand-gold text-sm font-semibold mb-1">Uwaga – placeholder</p>
-            <p className="text-slate-300 text-sm">
-              Poniższy tekst to szablon. Przed wdrożeniem strony uzupełnij go prawdziwą polityką
-              prywatności, najlepiej skonsultowaną z prawnikiem lub doradcą RODO.
-            </p>
-          </div>
-
           <section>
             <h2 className="text-white text-xl font-bold">1. Administrator danych</h2>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Administratorem Twoich danych osobowych jest: <strong className="text-white">[Imię i Nazwisko / Firma]</strong>,{' '}
-              ul. Przykładowa 1, 43-100 Tychy, NIP: 000-000-00-00 (dalej: „Administrator").
-              Kontakt z Administratorem: <a href={`mailto:${SITE_CONFIG.email}`} className="text-brand-gold">{SITE_CONFIG.email}</a>.
+              Administratorem Twoich danych osobowych jest Auto Gruby z siedzibą w Tychach 
+              (dalej: „Administrator”).
+            </p>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Kontakt z Administratorem: 
+              <a href={`mailto:${SITE_CONFIG.email}`} className="text-brand-gold ml-1">
+                {SITE_CONFIG.email}
+              </a>
             </p>
           </section>
 
           <section>
-            <h2 className="text-white text-xl font-bold">2. Cel i podstawa przetwarzania</h2>
+            <h2 className="text-white text-xl font-bold">2. Zakres przetwarzanych danych</h2>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Twoje dane osobowe przetwarzamy w celach:
+              Przetwarzamy dane osobowe podane dobrowolnie przez użytkownika, w szczególności:
             </p>
-            <ul className="text-slate-400 text-sm space-y-1 list-disc list-inside">
-              <li>obsługi zapytań kontaktowych (art. 6 ust. 1 lit. b i f RODO)</li>
-              <li>realizacji transakcji sprzedaży (art. 6 ust. 1 lit. b RODO)</li>
-              <li>spełnienia obowiązków prawnych (art. 6 ust. 1 lit. c RODO)</li>
+            <ul className="text-slate-400 text-sm list-disc list-inside">
+              <li>imię i nazwisko</li>
+              <li>adres e-mail</li>
+              <li>numer telefonu</li>
+              <li>inne dane przekazane w formularzu kontaktowym</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-white text-xl font-bold">3. Prawa użytkownika</h2>
+            <h2 className="text-white text-xl font-bold">3. Cele i podstawy przetwarzania</h2>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Przysługują Ci prawa: dostępu do danych, sprostowania, usunięcia, ograniczenia
-              przetwarzania, przenoszenia danych oraz wniesienia sprzeciwu wobec przetwarzania.
-              W celu realizacji praw skontaktuj się z Administratorem.
+              Twoje dane osobowe przetwarzamy w następujących celach:
+            </p>
+            <ul className="text-slate-400 text-sm list-disc list-inside">
+              <li>obsługa zapytań kontaktowych (art. 6 ust. 1 lit. f RODO – uzasadniony interes)</li>
+              <li>zawarcie i realizacja umowy sprzedaży pojazdu (art. 6 ust. 1 lit. b RODO)</li>
+              <li>wypełnienie obowiązków prawnych (np. księgowych) (art. 6 ust. 1 lit. c RODO)</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-white text-xl font-bold">4. Okres przechowywania danych</h2>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Dane osobowe przechowywane są przez okres niezbędny do realizacji celu, dla którego zostały zebrane:
+            </p>
+            <ul className="text-slate-400 text-sm list-disc list-inside">
+              <li>dane z formularza kontaktowego – do 12 miesięcy</li>
+              <li>dane związane z umową – zgodnie z przepisami prawa (np. 5 lat podatkowo)</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-white text-xl font-bold">5. Odbiorcy danych</h2>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Twoje dane mogą być przekazywane podmiotom wspierającym Administratora, takim jak:
+            </p>
+            <ul className="text-slate-400 text-sm list-disc list-inside">
+              <li>dostawcy hostingu i serwerów</li>
+              <li>dostawcy usług IT</li>
+              <li>biuro rachunkowe</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-white text-xl font-bold">6. Prawa użytkownika</h2>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Masz prawo do:
+            </p>
+            <ul className="text-slate-400 text-sm list-disc list-inside">
+              <li>dostępu do swoich danych</li>
+              <li>sprostowania danych</li>
+              <li>usunięcia danych</li>
+              <li>ograniczenia przetwarzania</li>
+              <li>przenoszenia danych</li>
+              <li>wniesienia sprzeciwu</li>
+            </ul>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Masz również prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych (PUODO).
             </p>
           </section>
 
           <section>
-            <h2 className="text-white text-xl font-bold">4. Pliki cookies</h2>
+            <h2 className="text-white text-xl font-bold">7. Pliki cookies</h2>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Strona korzysta z plików cookies niezbędnych do jej prawidłowego działania.
-              {/* TODO: Rozszerz sekcję cookies o szczegóły dot. analityki, gdy zostanie wdrożona */}
+              Strona wykorzystuje pliki cookies (ciasteczka), które są zapisywane na urządzeniu użytkownika.
+            </p>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Cookies wykorzystywane są w celu:
+            </p>
+            <ul className="text-slate-400 text-sm list-disc list-inside">
+              <li>zapewnienia prawidłowego działania strony</li>
+              <li>analizy ruchu na stronie (np. Google Analytics – jeśli wdrożone)</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-white text-xl font-bold">8. Dobrowolność podania danych</h2>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Podanie danych jest dobrowolne, jednak niezbędne do kontaktu lub realizacji usługi.
             </p>
           </section>
 
-          <p className="text-slate-500 text-xs">
-            Ostatnia aktualizacja: {new Date().toLocaleDateString('pl-PL')} {/* TODO: ustaw stałą datę */}
-          </p>
+          <section>
+            <h2 className="text-white text-xl font-bold">9. Zmiany polityki prywatności</h2>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Administrator zastrzega sobie prawo do wprowadzania zmian w niniejszej polityce prywatności.
+            </p>
+          </section>
         </div>
       </div>
     </div>

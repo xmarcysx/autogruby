@@ -34,10 +34,17 @@ export function BrandsSection() {
       aria-labelledby="brands-heading"
     >
       {/* Subtelny glow */}
-      <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_80%_40%_at_50%_0%,_rgba(2,132,199,0.06)_0%,_transparent_70%)]"
-        aria-hidden="true"
-      />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_80%_0%,_rgba(2,132,199,0.18)_0%,_transparent_70%)]" />
+
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_20%_100%,_rgba(2,132,199,0.18)_0%,_transparent_70%)]" />
+
+              <div
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage:
+              'repeating-linear-gradient(-55deg, transparent, transparent 28px, rgba(255,255,255,0.8) 28px, rgba(255,255,255,0.8) 29px)',
+          }}
+        />
 
       <div className="container relative z-10 mb-10 text-center">
         <p className="text-xs font-semibold tracking-[0.2em] uppercase text-brand-blue mb-3">

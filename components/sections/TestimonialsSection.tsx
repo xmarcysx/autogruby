@@ -1,7 +1,7 @@
-import { Star } from 'lucide-react'
 import { SectionHeading } from '@/components/common/SectionHeading'
 import { MOCK_TESTIMONIALS } from '@/lib/constants'
 import { formatDate } from '@/utils/formatters'
+import { Star } from 'lucide-react'
 
 // TODO: Replace MOCK_TESTIMONIALS with real reviews (e.g. from Google Reviews API)
 export function TestimonialsSection() {
@@ -45,7 +45,7 @@ export function TestimonialsSection() {
               <div className="mt-4 pt-4 border-t border-slate-800">
                 <p className="text-white font-semibold text-sm">{testimonial.name}</p>
                 {testimonial.carBought && (
-                  <p className="text-xs text-brand-gold mt-0.5">Kupił: {testimonial.carBought}</p>
+                  <p className="text-xs text-brand-gold mt-0.5">{testimonial.gender === 'male' ? 'Kupił' : 'Kupiła'}: {testimonial.carBought}</p>
                 )}
                 <time
                   dateTime={testimonial.date}
@@ -64,12 +64,12 @@ export function TestimonialsSection() {
             {/* TODO: Link to real Google Reviews */}
             Przeczytaj więcej opinii na{' '}
             <a
-              href="https://maps.google.com"
+              href="https://www.google.com/search?sa=X&sca_esv=1a51245140343e35&sxsrf=ANbL-n72pls6PDXN2jbuw0PvperPeC9n4Q:1775571277747&q=Auto+Gruby+Opinie&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxI2N7M0MzQ0N7UwMrUwNTe3tDSz2MDI-IpR0LG0JF_Bvag0qVLBvyAzLzN1ESumGAA0nG3HQgAAAA&rldimm=7696117582585779968&tbm=lcl&hl=pl-PL&ved=2ahUKEwj5-aG69tuTAxX4PxAIHcMZO7wQ9fQKegQIRBAG&biw=1232&bih=820&dpr=1#lkt=LocalPoiReviews"
               target="_blank"
               rel="noopener noreferrer"
               className="text-brand-gold hover:underline"
             >
-              Google Maps
+              Google
             </a>
           </p>
         </div>

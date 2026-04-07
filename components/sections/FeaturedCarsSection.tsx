@@ -21,7 +21,7 @@ export async function FeaturedCarsSection() {
             eyebrow="Polecane oferty"
             id="featured-heading"
             title="Wyróżnione samochody"
-            description="Ręcznie wybrane propozycje — sprawdzone auta w świetnym stosunku jakości do ceny."
+            description="Wybrane propozycje — sprawdzone auta w świetnym stosunku jakości do ceny."
           />
           <Button variant="outline-gold" size="default" asChild className="self-start md:self-auto shrink-0">
             <Link href="/oferty" aria-label="Zobacz wszystkie oferty samochodów">

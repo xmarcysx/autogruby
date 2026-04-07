@@ -1,5 +1,5 @@
-import { ShieldCheck, Wrench, HandshakeIcon, CreditCard, Search, Clock } from 'lucide-react'
 import { SectionHeading } from '@/components/common/SectionHeading'
+import { Clock, CreditCard, HandshakeIcon, Search, ShieldCheck, Wrench } from 'lucide-react'
 
 const BENEFITS = [
   {
@@ -22,9 +22,9 @@ const BENEFITS = [
   },
   {
     icon: CreditCard,
-    title: 'Finansowanie i leasing',
+    title: 'Wsparcie przy formalnościach',
     description:
-      'Pomagamy w uzyskaniu kredytu lub leasingu na atrakcyjnych warunkach. Współpracujemy z zaufanymi instytucjami.',
+      'Pomagamy przejść przez cały proces zakupu – od dokumentów po rejestrację pojazdu. Wszystko jasno i bez zbędnych komplikacji.',
   },
   {
     icon: Search,

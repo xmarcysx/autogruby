@@ -1,5 +1,5 @@
-import { MapPin } from 'lucide-react'
 import { SITE_CONFIG } from '@/lib/constants'
+import { MapPin } from 'lucide-react'
 
 interface MapPlaceholderProps {
   className?: string
@@ -11,19 +11,16 @@ export function MapPlaceholder({ className }: MapPlaceholderProps) {
       className={`relative w-full aspect-[16/7] bg-slate-800 rounded-xl overflow-hidden border border-slate-700 flex items-center justify-center ${className ?? ''}`}
       aria-label="Mapa lokalizacji komisu Auto Gruby w Tychach"
     >
-      {/*
-        TODO: Replace this placeholder with a real Google Maps embed:
-        <iframe
-          src="https://www.google.com/maps/embed?pb=YOUR_EMBED_URL"
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Mapa: Auto Gruby Tychy"
-        />
-      */}
+      <iframe
+        src="https://www.google.com/maps?q=Auto+Gruby+Tychy&output=embed"
+        width="100%"
+        height="100%"
+        style={{ border: 0 }}
+        allowFullScreen
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        title="Mapa: Auto Gruby Tychy"
+      />
       <div className="text-center px-6">
         <div className="w-14 h-14 rounded-full bg-brand-blue/20 border border-brand-blue/30 flex items-center justify-center mx-auto mb-4">
           <MapPin className="h-7 w-7 text-brand-blue" aria-hidden="true" />

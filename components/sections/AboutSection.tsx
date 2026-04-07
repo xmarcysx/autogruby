@@ -6,8 +6,8 @@ const HIGHLIGHTS = [
   'Uczciwa i transparentna sprzedaż',
   'Pełna historia serwisowa każdego auta',
   'Możliwość sprawdzenia w niezależnym warsztacie',
-  'Pomoc w finansowaniu i leasingu',
-  'Auta z Niemiec, Francji i z kraju',
+  'Kompleksowe wsparcie przy zakupie i formalnościach',
+  'Auta z Włoch, Niemiec i z kraju',
   'Obsługa bez nacisku i presji sprzedażowej',
 ]
 

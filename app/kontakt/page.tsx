@@ -1,9 +1,9 @@
-import type { Metadata } from 'next'
-import { Phone, Mail, MapPin, Clock } from 'lucide-react'
 import { Breadcrumbs } from '@/components/common/Breadcrumbs'
 import { MapPlaceholder } from '@/components/common/MapPlaceholder'
 import { SITE_CONFIG } from '@/lib/constants'
 import { buildBreadcrumbJsonLd } from '@/utils/seo'
+import { Clock, Mail, MapPin, Phone } from 'lucide-react'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Kontakt – Komis Samochodowy Auto Gruby Tychy',
@@ -103,11 +103,10 @@ export default function ContactPage() {
               {/* NIP / company data */}
               <div className="p-4 bg-slate-900/50 rounded-xl border border-slate-800 text-xs text-slate-500 space-y-1">
                 <p className="font-semibold text-slate-400 text-sm mb-2">Dane firmy</p>
-                {/* TODO: Replace with real company data */}
-                <p>Auto Gruby – [Imię i Nazwisko właściciela]</p>
-                <p>NIP: 000-000-00-00</p>
-                <p>REGON: 000000000</p>
-                <p>ul. Przykładowa 1, 43-100 Tychy</p>
+                <p>Paweł Trzaska Auto-Handel Gruby</p>
+                <p>NIP: 6462932830</p>
+                <p>REGON: 243465713</p>
+                <p>ul. Cielmicka 36, 43-100 Tychy</p>
               </div>
             </div>
 

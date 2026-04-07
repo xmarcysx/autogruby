@@ -1,7 +1,7 @@
-import Link from 'next/link'
-import { Phone, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { SITE_CONFIG } from '@/lib/constants'
+import { ArrowRight, Phone } from 'lucide-react'
+import Link from 'next/link'
 
 export function CTASection() {
   return (
@@ -22,10 +22,9 @@ export function CTASection() {
         className="absolute -left-10 top-0 bottom-0 w-4 skew-x-[-8deg] origin-top-left bg-brand-blue-light/25"
         aria-hidden="true"
       />
-
       {/* Blue accent glow — top right */}
       <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_100%_50%,_rgba(2,132,199,0.12)_0%,_transparent_70%)]"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_100%_90%,_rgba(3,105,161,0.5)_0%,_transparent_70%)]"
         aria-hidden="true"
       />
 

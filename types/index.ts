@@ -25,6 +25,7 @@ export interface Testimonial {
   rating: number
   content: string
   date: string
+  gender: 'male' | 'female',
   carBought?: string
 }
 

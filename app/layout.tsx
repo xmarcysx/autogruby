@@ -1,10 +1,10 @@
+import { Footer } from '@/components/layout/Footer'
+import { Navbar } from '@/components/layout/Navbar'
+import { SITE_CONFIG } from '@/lib/constants'
+import { buildLocalBusinessJsonLd } from '@/utils/seo'
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { Navbar } from '@/components/layout/Navbar'
-import { Footer } from '@/components/layout/Footer'
-import { SITE_CONFIG } from '@/lib/constants'
-import { buildLocalBusinessJsonLd } from '@/utils/seo'
 
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],

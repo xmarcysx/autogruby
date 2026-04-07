@@ -75,7 +75,7 @@ export function HeroSection() {
           <div className="mt-14 grid grid-cols-3 gap-6 max-w-lg mx-auto">
             {[
               { value: '10+', label: 'lat na rynku' },
-              { value: '500+', label: 'sprzedanych aut' },
+              { value: '1000+', label: 'sprzedanych aut' },
               { value: '100%', label: 'transparentność' },
             ].map((stat) => (
               <div key={stat.label} className="text-center">

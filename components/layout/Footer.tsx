@@ -1,7 +1,7 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { Phone, Mail, MapPin, Clock, Facebook, Instagram } from 'lucide-react'
 import { SITE_CONFIG } from '@/lib/constants'
+import { Clock, Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -44,7 +44,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram Auto Gruby"
-                  className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-800 text-slate-400 hover:bg-brand-blue hover:text-white transition-colors"
+                  className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-800 text-slate-400 hover:bg-rose-400 hover:text-white transition-colors"
                 >
                   <Instagram className="h-4 w-4" aria-hidden="true" />
                 </a>
@@ -121,12 +121,12 @@ export function Footer() {
                 <Clock className="h-4 w-4 mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
                 <span>
                   Pon – Pt:&nbsp;
-                  <strong className="text-slate-200">9:00 – 18:00</strong>
+                  <strong className="text-slate-200">8:00 – 18:00</strong>
                 </span>
               </li>
               <li className="pl-6.5">
                 Sobota:&nbsp;
-                <strong className="text-slate-200">9:00 – 14:00</strong>
+                <strong className="text-slate-200">9:00 – 16:00</strong>
               </li>
               <li className="pl-6.5 text-slate-500">Niedziela: zamknięte</li>
             </ul>

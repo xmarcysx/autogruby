@@ -1,8 +1,7 @@
-import Image from 'next/image'
-import { Phone, Mail, Clock, MapPin } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { SectionHeading } from '@/components/common/SectionHeading'
+import { Button } from '@/components/ui/button'
 import { SITE_CONFIG } from '@/lib/constants'
+import { Clock, Mail, MapPin, Phone } from 'lucide-react'
 
 export function ContactSection() {
   return (
@@ -85,8 +84,7 @@ export function ContactSection() {
               Właściciel
             </p>
             <h3 className="text-white text-2xl font-black mb-2">
-              {/* TODO: Replace with real owner name */}
-              Pan Gruby
+              Paweł Trzaska
             </h3>
             <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-xs mx-auto">
               Pasjonat motoryzacji od 20 lat. Znam się na autach i sprzedaję tylko takie, które sam bym kupił. Zadzwoń – porozmawiamy bez owijania w bawełnę.
