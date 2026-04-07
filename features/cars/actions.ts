@@ -28,7 +28,8 @@ export async function submitInquiry(input: InquiryInput): Promise<ActionResult> 
     return { success: false, error: 'Nieprawidłowe dane formularza.' }
   }
 
-  const supabase = await createClient()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const supabase = (await createClient()) as any
 
   const { error } = await supabase.from('inquiries').insert({
     car_id: parsed.data.car_id ?? null,
@@ -52,7 +53,8 @@ export async function submitInquiry(input: InquiryInput): Promise<ActionResult> 
  */
 export async function recordCarView(carId: string, ipHash?: string): Promise<void> {
   try {
-    const supabase = await createClient()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const supabase = (await createClient()) as any
     await supabase.from('car_views_stats').insert({
       car_id: carId,
       ip_hash: ipHash ?? null,

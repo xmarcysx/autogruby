@@ -22,6 +22,8 @@ export interface Car {
   color: string | null
   doors: number | null
   seats: number | null
+  vin: string | null
+  registration_number: string | null
   country_origin: string | null
   first_registration_date: string | null
   accident_free: boolean
@@ -31,6 +33,7 @@ export interface Car {
   currency: Currency
   featured: boolean
   published: boolean
+  sold: boolean
   location_city: string
   created_at: string
   updated_at: string

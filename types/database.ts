@@ -36,6 +36,7 @@ export interface Database {
           currency: string
           featured: boolean
           published: boolean
+          sold: boolean
           location_city: string
           created_at: string
           updated_at: string

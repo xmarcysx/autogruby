@@ -1,6 +1,12 @@
-import { createClient } from '@/lib/supabase/server'
+import { createClient as _createClient } from '@/lib/supabase/server'
 import type { Car, CarCardData, CarImage, CarsFilter, CarsListResult } from '@/types/car'
 import { CARS_PER_PAGE } from '@/lib/constants'
+
+// Cast to any to bypass Supabase PostgrestVersion "12" typing strictness
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function createClient(): Promise<any> {
+  return _createClient()
+}
 
 /**
  * Retrieves a paginated, filtered list of published cars (public).
@@ -75,7 +81,7 @@ export async function getCars(filters: CarsFilter = {}): Promise<CarsListResult>
     return { cars: [], total: 0, page, per_page: perPage, total_pages: 0 }
   }
 
-  const cars = (data ?? []).map((row) => {
+  const cars = (data ?? []).map((row: any) => {
     const images = (row.car_images ?? []) as CarImage[]
     const cover = images.find((img) => img.is_cover) ?? images[0] ?? null
     return {
@@ -152,7 +158,7 @@ export async function getFeaturedCars(limit = 3): Promise<CarCardData[]> {
     return []
   }
 
-  return (data ?? []).map((row) => {
+  return (data ?? []).map((row: any) => {
     const images = (row.car_images ?? []) as CarImage[]
     const cover = images.find((img) => img.is_cover) ?? images[0] ?? null
     return {
@@ -172,7 +178,7 @@ export async function getAllCarSlugs(): Promise<string[]> {
     .select('slug')
     .eq('published', true)
     .order('created_at', { ascending: false })
-  return (data ?? []).map((row) => row.slug)
+  return (data ?? []).map((row: any) => row.slug)
 }
 
 /**
@@ -198,7 +204,7 @@ export async function getSimilarCars(car: Pick<Car, 'brand' | 'body_type' | 'slu
     .order('created_at', { ascending: false })
     .limit(limit)
 
-  return (data ?? []).map((row) => {
+  return (data ?? []).map((row: any) => {
     const images = (row.car_images ?? []) as CarImage[]
     const cover = images.find((img) => img.is_cover) ?? images[0] ?? null
     return {

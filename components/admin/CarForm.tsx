@@ -1,0 +1,474 @@
+'use client'
+
+import { useState, useRef, useTransition } from 'react'
+import Image from 'next/image'
+import {
+  Save,
+  Loader2,
+  ImagePlus,
+  X,
+  Star,
+  AlertCircle,
+} from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { CAR_BRANDS, FUEL_TYPE_LABELS, TRANSMISSION_LABELS, BODY_TYPE_LABELS, DRIVE_TYPE_LABELS } from '@/lib/constants'
+import type { Car, CarImage } from '@/types/car'
+import type { CarFormState } from '@/app/actions/admin/cars'
+
+interface CarFormProps {
+  car?: Car
+  action: (prev: CarFormState, formData: FormData) => Promise<CarFormState>
+  submitLabel?: string
+}
+
+const CURRENT_YEAR = new Date().getFullYear()
+
+interface PreviewImage {
+  file: File
+  previewUrl: string
+  isCover: boolean
+}
+
+export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarFormProps) {
+  const [pending, startTransition] = useTransition()
+  const [formError, setFormError] = useState<string | undefined>()
+  const [previewImages, setPreviewImages] = useState<PreviewImage[]>([])
+  const [existingImages, setExistingImages] = useState<CarImage[]>(car?.car_images ?? [])
+  const [coverExistingId, setCoverExistingId] = useState<string | undefined>(car?.cover_image?.id)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const formRef = useRef<HTMLFormElement>(null)
+
+  const [brand, setBrand] = useState(car?.brand ?? '')
+  const [model, setModel] = useState(car?.model ?? '')
+  const [year, setYear] = useState(car?.year?.toString() ?? '')
+  const [title, setTitle] = useState(car?.title ?? '')
+
+  const updateTitle = (b: string, m: string, y: string) => {
+    const autoTitle = `${b} ${m} ${y}`.trim()
+    setTitle((prev) => {
+      if (!prev || prev === `${brand} ${model} ${year}`.trim()) return autoTitle
+      return prev
+    })
+  }
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? [])
+    setPreviewImages((prev) => {
+      const newImages: PreviewImage[] = files.map((file, i) => ({
+        file,
+        previewUrl: URL.createObjectURL(file),
+        isCover: prev.length === 0 && existingImages.length === 0 && i === 0,
+      }))
+      return [...prev, ...newImages]
+    })
+    // Reset input so same files can be re-selected
+    e.target.value = ''
+  }
+
+  const removePreview = (index: number) => {
+    setPreviewImages((prev) => {
+      URL.revokeObjectURL(prev[index].previewUrl)
+      const updated = prev.filter((_, i) => i !== index)
+      if (prev[index].isCover && updated.length > 0) {
+        updated[0] = { ...updated[0], isCover: true }
+      }
+      return updated
+    })
+  }
+
+  const setCoverPreview = (index: number) => {
+    setPreviewImages((prev) => prev.map((img, i) => ({ ...img, isCover: i === index })))
+    setCoverExistingId(undefined)
+  }
+
+  const setCoverExisting = (imageId: string) => {
+    setCoverExistingId(imageId)
+    setPreviewImages((prev) => prev.map((img) => ({ ...img, isCover: false })))
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setFormError(undefined)
+
+    const rawForm = new FormData(formRef.current!)
+    const formData = new FormData()
+
+    // Copy all regular fields
+    for (const [key, value] of rawForm.entries()) {
+      if (key !== 'images') formData.append(key, value)
+    }
+
+    // Attach file objects from state
+    const coverIndex = previewImages.findIndex((img) => img.isCover)
+    formData.set('cover_index', String(coverIndex))
+    previewImages.forEach((img) => formData.append('images', img.file))
+
+    // Pass existing cover image id if set
+    if (coverExistingId) formData.set('existing_cover_id', coverExistingId)
+
+    startTransition(async () => {
+      const result = await action({}, formData)
+      if (result?.error) setFormError(result.error)
+    })
+  }
+
+  return (
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
+      {car && <input type="hidden" name="slug" value={car.slug} />}
+
+      {formError && (
+        <div className="flex items-start gap-3 rounded-xl bg-red-500/10 border border-red-500/20 px-4 py-3">
+          <AlertCircle className="h-4 w-4 text-red-400 mt-0.5 shrink-0" />
+          <p className="text-red-400 text-sm">{formError}</p>
+        </div>
+      )}
+
+      {/* === SECTION: Zdjęcia === */}
+      <Section title="Zdjęcia" description="Wybierz zdjęcia auta. Kliknij gwiazdkę aby ustawić okładkę.">
+        {existingImages.length > 0 && (
+          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 mb-4">
+            {existingImages.map((img) => (
+              <div key={img.id} className="relative group aspect-[4/3] rounded-xl overflow-hidden bg-slate-800">
+                {img.url && (
+                  <Image src={img.url} alt={img.alt} fill className="object-cover" sizes="120px" />
+                )}
+                {coverExistingId === img.id && (
+                  <div className="absolute top-1 left-1 bg-brand-gold text-slate-900 text-[10px] font-bold px-1.5 py-0.5 rounded-md z-10">
+                    Okładka
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setCoverExisting(img.id)}
+                    className="p-1.5 rounded-lg bg-brand-gold text-slate-900 hover:bg-brand-gold-dark"
+                    title="Ustaw jako okładkę"
+                  >
+                    <Star className="h-3.5 w-3.5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setExistingImages((prev) => prev.filter((i) => i.id !== img.id))}
+                    className="p-1.5 rounded-lg bg-red-500 text-white hover:bg-red-600"
+                    title="Usuń"
+                  >
+                    <X className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {previewImages.length > 0 && (
+          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 mb-4">
+            {previewImages.map((img, i) => (
+              <div key={img.previewUrl} className="relative group aspect-[4/3] rounded-xl overflow-hidden bg-slate-800">
+                <Image src={img.previewUrl} alt={`Nowe ${i + 1}`} fill className="object-cover" sizes="120px" />
+                {img.isCover && (
+                  <div className="absolute top-1 left-1 bg-brand-gold text-slate-900 text-[10px] font-bold px-1.5 py-0.5 rounded-md z-10">
+                    Okładka
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                  <button type="button" onClick={() => setCoverPreview(i)} className="p-1.5 rounded-lg bg-brand-gold text-slate-900 hover:bg-brand-gold-dark" title="Okładka">
+                    <Star className="h-3.5 w-3.5" />
+                  </button>
+                  <button type="button" onClick={() => removePreview(i)} className="p-1.5 rounded-lg bg-red-500 text-white hover:bg-red-600" title="Usuń">
+                    <X className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <button
+          type="button"
+          onClick={() => fileInputRef.current?.click()}
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-dashed border-slate-600 text-slate-400 hover:text-white hover:border-brand-blue hover:bg-brand-blue/5 transition-all text-sm"
+        >
+          <ImagePlus className="h-4 w-4" />
+          Dodaj zdjęcia
+        </button>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          multiple
+          className="hidden"
+          onChange={handleFileSelect}
+        />
+      </Section>
+
+      {/* === SECTION: Podstawowe informacje === */}
+      <Section title="Podstawowe informacje">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Field label="Marka *">
+            <select
+              name="brand"
+              required
+              value={brand}
+              onChange={(e) => { setBrand(e.target.value); updateTitle(e.target.value, model, year) }}
+              className={selectClass}
+            >
+              <option value="">Wybierz markę</option>
+              {CAR_BRANDS.map((b) => <option key={b} value={b}>{b}</option>)}
+            </select>
+          </Field>
+
+          <Field label="Model *">
+            <Input
+              name="model"
+              required
+              value={model}
+              onChange={(e) => { setModel(e.target.value); updateTitle(brand, e.target.value, year) }}
+              placeholder="np. Corolla"
+              className={inputClass}
+            />
+          </Field>
+
+          <Field label="Generacja">
+            <Input name="generation" defaultValue={car?.generation ?? ''} placeholder="np. E210" className={inputClass} />
+          </Field>
+
+          <Field label="Rok *">
+            <Input
+              name="year"
+              type="number"
+              required
+              value={year}
+              onChange={(e) => { setYear(e.target.value); updateTitle(brand, model, e.target.value) }}
+              min={1990}
+              max={CURRENT_YEAR + 1}
+              placeholder={String(CURRENT_YEAR)}
+              className={inputClass}
+            />
+          </Field>
+
+          <Field label="Przebieg (km) *">
+            <Input name="mileage" type="number" required defaultValue={car?.mileage ?? ''} min={0} placeholder="np. 80000" className={inputClass} />
+          </Field>
+
+          <Field label="Tytuł ogłoszenia *" className="sm:col-span-2 lg:col-span-3">
+            <Input
+              name="title"
+              required
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="np. Toyota Corolla 2021 Hybrid"
+              className={inputClass}
+            />
+          </Field>
+        </div>
+      </Section>
+
+      {/* === SECTION: Dane techniczne === */}
+      <Section title="Dane techniczne">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Field label="Rodzaj paliwa *">
+            <select name="fuel_type" required defaultValue={car?.fuel_type ?? ''} className={selectClass}>
+              <option value="">Wybierz</option>
+              {Object.entries(FUEL_TYPE_LABELS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+            </select>
+          </Field>
+
+          <Field label="Skrzynia biegów *">
+            <select name="transmission" required defaultValue={car?.transmission ?? ''} className={selectClass}>
+              <option value="">Wybierz</option>
+              {Object.entries(TRANSMISSION_LABELS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+            </select>
+          </Field>
+
+          <Field label="Typ nadwozia *">
+            <select name="body_type" required defaultValue={car?.body_type ?? ''} className={selectClass}>
+              <option value="">Wybierz</option>
+              {Object.entries(BODY_TYPE_LABELS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+            </select>
+          </Field>
+
+          <Field label="Napęd">
+            <select name="drive_type" defaultValue={car?.drive_type ?? ''} className={selectClass}>
+              <option value="">Nie podano</option>
+              {Object.entries(DRIVE_TYPE_LABELS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+            </select>
+          </Field>
+
+          <Field label="Pojemność silnika (cm³)">
+            <Input name="engine_capacity" type="number" defaultValue={car?.engine_capacity ?? ''} min={0} max={10000} placeholder="np. 1998" className={inputClass} />
+          </Field>
+
+          <Field label="Moc (KM)">
+            <Input name="engine_power_hp" type="number" defaultValue={car?.engine_power_hp ?? ''} min={0} max={2000} placeholder="np. 150" className={inputClass} />
+          </Field>
+
+          <Field label="Kolor">
+            <Input name="color" defaultValue={car?.color ?? ''} placeholder="np. Czarny metalik" className={inputClass} />
+          </Field>
+
+          <Field label="Liczba drzwi">
+            <select name="doors" defaultValue={car?.doors?.toString() ?? ''} className={selectClass}>
+              <option value="">Nie podano</option>
+              {[2, 3, 4, 5].map((n) => <option key={n} value={n}>{n}</option>)}
+            </select>
+          </Field>
+
+          <Field label="Liczba miejsc">
+            <select name="seats" defaultValue={car?.seats?.toString() ?? ''} className={selectClass}>
+              <option value="">Nie podano</option>
+              {[2, 4, 5, 6, 7, 8, 9].map((n) => <option key={n} value={n}>{n}</option>)}
+            </select>
+          </Field>
+        </div>
+      </Section>
+
+      {/* === SECTION: Historia i dokumenty === */}
+      <Section title="Historia i dokumenty">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Field label="VIN">
+            <Input name="vin" defaultValue={car?.vin ?? ''} placeholder="17 znaków" maxLength={17} className={`${inputClass} uppercase`} />
+          </Field>
+
+          <Field label="Nr rejestracyjny">
+            <Input name="registration_number" defaultValue={car?.registration_number ?? ''} placeholder="np. SL 12345" className={`${inputClass} uppercase`} />
+          </Field>
+
+          <Field label="Kraj pochodzenia">
+            <Input name="country_origin" defaultValue={car?.country_origin ?? ''} placeholder="np. Polska" className={inputClass} />
+          </Field>
+
+          <Field label="Data pierwszej rejestracji">
+            <Input name="first_registration_date" type="date" defaultValue={car?.first_registration_date ?? ''} className={inputClass} />
+          </Field>
+
+          <Field label="Bezwypadkowy">
+            <select name="accident_free" defaultValue={car?.accident_free === false ? 'false' : 'true'} className={selectClass}>
+              <option value="true">Tak</option>
+              <option value="false">Nie</option>
+            </select>
+          </Field>
+
+          <Field label="Historia serwisowa">
+            <select name="service_history" defaultValue={car?.service_history === true ? 'true' : 'false'} className={selectClass}>
+              <option value="true">Tak – udokumentowana</option>
+              <option value="false">Nie / brak dokumentacji</option>
+            </select>
+          </Field>
+        </div>
+      </Section>
+
+      {/* === SECTION: Cena i lokalizacja === */}
+      <Section title="Cena i lokalizacja">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Field label="Cena *">
+            <Input name="price" type="number" required defaultValue={car?.price ?? ''} min={1} placeholder="np. 45000" className={inputClass} />
+          </Field>
+
+          <Field label="Waluta">
+            <select name="currency" defaultValue={car?.currency ?? 'PLN'} className={selectClass}>
+              <option value="PLN">PLN</option>
+              <option value="EUR">EUR</option>
+            </select>
+          </Field>
+
+          <Field label="Miejscowość">
+            <Input name="location_city" defaultValue={car?.location_city ?? 'Tychy'} className={inputClass} />
+          </Field>
+        </div>
+      </Section>
+
+      {/* === SECTION: Opis === */}
+      <Section title="Opis ogłoszenia">
+        <textarea
+          name="description"
+          defaultValue={car?.description ?? ''}
+          rows={6}
+          placeholder="Opisz stan techniczny, historię auta, wyposażenie dodatkowe..."
+          className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/20 resize-y"
+        />
+      </Section>
+
+      {/* === SECTION: Ustawienia === */}
+      <Section title="Ustawienia oferty">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <ToggleField name="published" label="Opublikowane" description="Widoczne dla gości" defaultValue={car?.published ?? false} />
+          <ToggleField name="featured" label="Wyróżnione" description="Na stronie głównej" defaultValue={car?.featured ?? false} />
+          <ToggleField name="sold" label="Sprzedane" description="Oznacz jako sprzedane" defaultValue={car?.sold ?? false} />
+        </div>
+      </Section>
+
+      {/* Submit */}
+      <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
+        <Button
+          type="button"
+          variant="outline"
+          className="border-slate-700 text-slate-400 hover:text-white hover:bg-slate-800"
+          onClick={() => window.history.back()}
+        >
+          Anuluj
+        </Button>
+        <Button type="submit" disabled={pending} className="bg-brand-blue hover:bg-brand-blue-dark text-white min-w-32">
+          {pending ? (
+            <span className="flex items-center gap-2">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Zapisywanie...
+            </span>
+          ) : (
+            <span className="flex items-center gap-2">
+              <Save className="h-4 w-4" />
+              {submitLabel}
+            </span>
+          )}
+        </Button>
+      </div>
+    </form>
+  )
+}
+
+function Section({ title, description, children }: { title: string; description?: string; children: React.ReactNode }) {
+  return (
+    <div className="bg-slate-900 rounded-2xl border border-slate-800 p-5 lg:p-6">
+      <div className="mb-5">
+        <h2 className="text-white font-bold text-sm">{title}</h2>
+        {description && <p className="text-slate-500 text-xs mt-0.5">{description}</p>}
+      </div>
+      {children}
+    </div>
+  )
+}
+
+function Field({ label, children, className }: { label: string; children: React.ReactNode; className?: string }) {
+  return (
+    <div className={`space-y-1.5 ${className ?? ''}`}>
+      <Label className="text-slate-300 text-xs font-medium">{label}</Label>
+      {children}
+    </div>
+  )
+}
+
+function ToggleField({ name, label, description, defaultValue }: { name: string; label: string; description: string; defaultValue: boolean }) {
+  const [checked, setChecked] = useState(defaultValue)
+  return (
+    <div className="flex items-center justify-between p-4 rounded-xl bg-slate-800 border border-slate-700">
+      <div>
+        <div className="text-sm font-medium text-white">{label}</div>
+        <div className="text-xs text-slate-500 mt-0.5">{description}</div>
+      </div>
+      <input type="hidden" name={name} value={checked ? 'true' : 'false'} />
+      <button
+        type="button"
+        role="switch"
+        aria-checked={checked}
+        onClick={() => setChecked((v) => !v)}
+        className={`relative w-10 h-5 rounded-full transition-colors ${checked ? 'bg-brand-blue' : 'bg-slate-600'}`}
+      >
+        <span className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform ${checked ? 'translate-x-5' : 'translate-x-0'}`} />
+      </button>
+    </div>
+  )
+}
+
+const inputClass = 'bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus:border-brand-blue focus:ring-brand-blue/20 h-10 text-sm'
+const selectClass = 'w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/20 h-10'
