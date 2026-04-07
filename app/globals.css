@@ -74,3 +74,25 @@
     text-wrap: balance;
   }
 }
+
+@keyframes soft-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-10px);
+  }
+  40% {
+    transform: translateY(0);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
+  80% {
+    transform: translateY(0);
+  }
+}
+
+.animate-soft-bounce {
+  animation: soft-bounce 1.2s ease-out 1;
+}
