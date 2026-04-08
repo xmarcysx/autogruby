@@ -163,7 +163,7 @@ export async function updateCarAction(
   redirect('/admin/cars')
 }
 
-export async function deleteCarAction(carId: string): Promise<void> {
+export async function deleteCarAction(carId: string): Promise<{ error?: string }> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const supabase = (await createAdminClient()) as any
 
@@ -173,23 +173,34 @@ export async function deleteCarAction(carId: string): Promise<void> {
     .eq('car_id', carId)
 
   if (images && images.length > 0) {
-    await supabase.storage
+    const { error: storageError } = await supabase.storage
       .from('car-images')
       .remove(images.map((img: { storage_path: string }) => img.storage_path))
+    if (storageError) console.error('[deleteCarAction] storage error:', storageError.message)
   }
 
-  await supabase.from('cars').delete().eq('id', carId)
+  const { error } = await supabase.from('cars').delete().eq('id', carId)
+  if (error) {
+    console.error('[deleteCarAction] db error:', error.message)
+    return { error: 'Błąd podczas usuwania: ' + error.message }
+  }
 
   revalidatePath('/admin/cars')
   revalidatePath('/oferty')
+  return {}
 }
 
-export async function toggleSoldAction(carId: string, sold: boolean): Promise<void> {
+export async function toggleSoldAction(carId: string, sold: boolean): Promise<{ error?: string }> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const supabase = (await createAdminClient()) as any
-  await supabase.from('cars').update({ sold }).eq('id', carId)
+  const { error } = await supabase.from('cars').update({ sold }).eq('id', carId)
+  if (error) {
+    console.error('[toggleSoldAction] db error:', error.message)
+    return { error: 'Błąd podczas zmiany statusu: ' + error.message }
+  }
   revalidatePath('/admin/cars')
   revalidatePath('/oferty')
+  return {}
 }
 
 export async function deleteCarImageAction(imageId: string, storagePath: string, carId: string): Promise<void> {

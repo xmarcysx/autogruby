@@ -75,7 +75,7 @@ export function ContactSection() {
           </div>
 
           {/* Owner card */}
-          <div className="bg-slate-900 rounded-2xl border border-slate-700 p-8 text-center">
+          <div className="h-full bg-slate-900 rounded-2xl border border-slate-700 p-8 text-center">
             {/* TODO: Replace placeholder with real owner photo */}
             <div className="w-28 h-28 rounded-full bg-slate-700 mx-auto mb-5 flex items-center justify-center text-5xl">
               👨‍💼

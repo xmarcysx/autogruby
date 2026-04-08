@@ -1,8 +1,5 @@
 'use client'
 
-import { useRouter, useSearchParams, usePathname } from 'next/navigation'
-import { useCallback } from 'react'
-import { X, SlidersHorizontal } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -14,11 +11,14 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import {
+  BODY_TYPE_LABELS,
   CAR_BRANDS,
   FUEL_TYPE_LABELS,
   TRANSMISSION_LABELS,
-  BODY_TYPE_LABELS,
 } from '@/lib/constants'
+import { SlidersHorizontal, X } from 'lucide-react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useCallback } from 'react'
 
 export function FiltersSidebar() {
   const router = useRouter()
@@ -51,7 +51,7 @@ export function FiltersSidebar() {
 
   return (
     <aside
-      className="bg-slate-900 rounded-xl border border-slate-800 p-5 space-y-5"
+      className="bg-slate-950 rounded-xl border border-slate-800 p-5 space-y-5"
       aria-label="Filtry ofert"
     >
       <div className="flex items-center justify-between">

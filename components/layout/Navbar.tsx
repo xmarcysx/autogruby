@@ -1,13 +1,13 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-import { usePathname } from 'next/navigation'
-import { Phone, Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
 import { SITE_CONFIG } from '@/lib/constants'
+import { cn } from '@/lib/utils'
+import { Menu, Phone, X } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 const NAV_LINKS = [
   { label: 'Strona główna', href: '/' },
@@ -43,19 +43,23 @@ export function Navbar() {
       role="banner"
     >
       <div className="container">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold rounded-lg"
+            className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold rounded-lg"
             aria-label="Auto Gruby – strona główna"
           >
             <Image
-              src="/logo.webp"
+              src="/logo.jpeg"
               alt="Auto Gruby – komis samochodowy Tychy"
               width={120}
               height={60}
-              className="h-12 w-auto object-contain"
+              className={cn(
+                'w-auto object-contain transition-all duration-500 ease-in-out',
+                isScrolled ? 'h-14 scale-95 opacity-90' : 'h-16',
+                isScrolled ? 'h-14 scale-95 opacity-90' : 'h-16',
+              )}
               priority
             />
           </Link>

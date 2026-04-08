@@ -1,18 +1,18 @@
-import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import { Phone, Mail, ArrowLeft, Share2 } from 'lucide-react'
-import { getCarBySlug, getSimilarCars, getAllCarSlugs } from '@/services/cars'
+import { Breadcrumbs } from '@/components/common/Breadcrumbs'
+import { CarCard } from '@/components/common/CarCard'
 import { CarGallery } from '@/components/common/CarGallery'
 import { CarSpecs } from '@/components/common/CarSpecs'
 import { ContactCard } from '@/components/common/ContactCard'
-import { CarCard } from '@/components/common/CarCard'
-import { Breadcrumbs } from '@/components/common/Breadcrumbs'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { formatPrice } from '@/utils/formatters'
-import { buildCarTitle, buildCarDescription, buildCarKeywords, buildCarJsonLd, buildBreadcrumbJsonLd } from '@/utils/seo'
 import { SITE_CONFIG } from '@/lib/constants'
+import { getAllCarSlugs, getCarBySlug, getSimilarCars } from '@/services/cars'
+import { formatPrice } from '@/utils/formatters'
+import { buildBreadcrumbJsonLd, buildCarDescription, buildCarJsonLd, buildCarKeywords, buildCarTitle } from '@/utils/seo'
+import { ArrowLeft, Mail, Phone } from 'lucide-react'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -90,7 +90,7 @@ export default async function CarDetailPage({ params }: PageProps) {
 
       <div className="min-h-screen bg-slate-950 pt-24">
         {/* Top bar */}
-        <div className="bg-slate-900 border-b border-slate-800">
+        <div className="bg-slate-800 border-b border-slate-800">
           <div className="container py-5">
             <Breadcrumbs
               items={[

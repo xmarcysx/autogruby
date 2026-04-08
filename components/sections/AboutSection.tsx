@@ -23,15 +23,14 @@ export function AboutSection() {
           {/* Image side */}
           <div className="relative">
             {/* TODO: Replace with a real photo of the dealership or owner */}
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-700 border border-slate-600">
-              <div className="absolute inset-0 flex items-center justify-center text-slate-600 text-center p-8">
-                <div>
-                  <p className="text-4xl mb-3">🚗</p>
-                  <p className="text-sm">
-                    TODO: Dodaj zdjęcie komisu / właściciela
-                  </p>
-                </div>
-              </div>
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-slate-600">
+              <Image
+                src="/komis-1.jpeg"
+                alt="Komis Auto Gruby – Tychy"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
             {/* Floating badge */}
             <div className="absolute -bottom-5 -right-5 bg-brand-gold rounded-xl p-5 shadow-xl shadow-brand-gold/20">

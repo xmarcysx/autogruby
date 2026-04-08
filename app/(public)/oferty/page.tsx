@@ -1,19 +1,16 @@
-import type { Metadata } from 'next'
-import { Suspense } from 'react'
-import Link from 'next/link'
-import { getCars } from '@/services/cars'
-import { carsFilterSchema } from '@/lib/schemas/car'
+import { Breadcrumbs } from '@/components/common/Breadcrumbs'
 import { CarCard } from '@/components/common/CarCard'
+import { EmptyState } from '@/components/common/EmptyState'
 import { FiltersSidebar } from '@/components/common/FiltersSidebar'
+import { Pagination } from '@/components/common/Pagination'
 import { SearchBar } from '@/components/common/SearchBar'
 import { SortSelect } from '@/components/common/SortSelect'
-import { Pagination } from '@/components/common/Pagination'
-import { Breadcrumbs } from '@/components/common/Breadcrumbs'
-import { EmptyState } from '@/components/common/EmptyState'
-import { CarsGridSkeleton } from '@/components/common/LoadingSkeleton'
 import { SITE_CONFIG } from '@/lib/constants'
+import { carsFilterSchema } from '@/lib/schemas/car'
+import { getCars } from '@/services/cars'
 import { buildBreadcrumbJsonLd } from '@/utils/seo'
-import { SlidersHorizontal } from 'lucide-react'
+import type { Metadata } from 'next'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   title: 'Oferty samochodów używanych – Komis Tychy | Auto Gruby',
@@ -69,9 +66,9 @@ export default async function OffersPage({ searchParams }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
-      <div className="min-h-screen bg-slate-950 pt-24">
+      <div className="min-h-screen bg-slate-900 pt-24">
         {/* Page header */}
-        <div className="bg-slate-900 border-b border-slate-800">
+        <div className="bg-slate-800 border-b border-slate-800">
           <div className="container py-8">
             <Breadcrumbs items={[{ label: 'Oferty samochodów' }]} />
             <h1 className="text-3xl md:text-4xl font-black text-white mt-4">

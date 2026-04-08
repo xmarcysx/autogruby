@@ -1,11 +1,12 @@
 'use client'
 
-import { useActionState } from 'react'
-import { Car, LogIn } from 'lucide-react'
+import { loginAction } from '@/app/actions/auth'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { loginAction } from '@/app/actions/auth'
+import { LogIn } from 'lucide-react'
+import Image from 'next/image'
+import { useActionState } from 'react'
 
 const initialState: { error?: string } = {}
 
@@ -17,8 +18,14 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-brand-blue/10 border border-brand-blue/20 mb-4">
-            <Car className="h-7 w-7 text-brand-blue" />
+          <div className="inline-flex items-center justify-center mb-4">
+            <Image
+              src="/logo.jpeg"
+              alt="Auto Gruby"
+              width={80}
+              height={40}
+              className="h-20 w-auto object-contain"
+            />
           </div>
           <h1 className="text-2xl font-black text-white">Auto Gruby</h1>
           <p className="text-slate-500 text-sm mt-1">Panel administracyjny</p>

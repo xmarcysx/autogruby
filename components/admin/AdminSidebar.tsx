@@ -1,19 +1,20 @@
 'use client'
 
+import { logoutAction } from '@/app/actions/auth'
+import { cn } from '@/lib/utils'
+import {
+  BarChart3,
+  Car,
+  ChevronRight,
+  ListOrdered,
+  LogOut,
+  MessageSquare,
+  PlusCircle,
+} from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTransition } from 'react'
-import {
-  Car,
-  BarChart3,
-  ListOrdered,
-  MessageSquare,
-  LogOut,
-  PlusCircle,
-  ChevronRight,
-} from 'lucide-react'
-import { logoutAction } from '@/app/actions/auth'
-import { cn } from '@/lib/utils'
 
 const navItems = [
   {
@@ -26,6 +27,7 @@ const navItems = [
     label: 'Oferty',
     href: '/admin/cars',
     icon: ListOrdered,
+    exact: true,
   },
   {
     label: 'Dodaj auto',
@@ -54,9 +56,15 @@ export default function AdminSidebar() {
       {/* Logo */}
       <div className="px-5 py-5 border-b border-slate-800">
         <Link href="/admin" className="flex items-center gap-3 group">
-          <div className="w-9 h-9 rounded-xl bg-brand-blue/10 border border-brand-blue/20 flex items-center justify-center group-hover:border-brand-blue/40 transition-colors">
-            <Car className="h-5 w-5 text-brand-blue" />
-          </div>
+          <div className="w-9 h-9 flex items-center justify-center">
+            <Image
+              src="/logo.jpeg"
+              alt="Auto Gruby"
+              width={80}
+              height={40}
+              className="h-9 w-auto object-cover"
+            />
+          </div> 
           <div>
             <div className="text-sm font-black text-white leading-tight">Auto Gruby</div>
             <div className="text-xs text-slate-500">Panel admina</div>

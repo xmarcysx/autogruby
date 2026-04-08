@@ -34,8 +34,11 @@ export function HeroSection() {
         <div className="max-w-4xl mx-auto text-center">
           {/* Eyebrow */}
           <div className="inline-flex items-center gap-2 bg-brand-blue/10 border border-brand-blue/25 rounded-full px-4 py-1.5 text-brand-blue text-sm font-medium mb-8 animate-fade-in">
-            <Star className="h-3.5 w-3.5 fill-brand-gold text-brand-gold" aria-hidden="true" />
-            Komis samochodowy w Tychach
+            <Star className="h-6 w-6 fill-brand-gold text-brand-gold" aria-hidden="true" />
+            <p className="text-xl md:text-2xl text-slate-200 leading-relaxed">
+              Komis samochodowy{' '}
+              <strong className="fw-bold">Auto <span className='text-brand-blue'>Gruby</span></strong>
+            </p>  
           </div>
 
           {/* Main headline */}
@@ -50,7 +53,7 @@ export function HeroSection() {
           {/* Sub-headline */}
           <p className="text-xl md:text-2xl text-slate-400 leading-relaxed max-w-2xl mx-auto mb-10">
             Sprawdzone samochody używane w Tychach. Uczciwa wycena, pełna historia,{' '}
-            <strong className="text-slate-200">bez niespodzianek.</strong>
+            <strong className="text-slate-200">transparentna oferta.</strong>
           </p>
 
           {/* CTA buttons */}

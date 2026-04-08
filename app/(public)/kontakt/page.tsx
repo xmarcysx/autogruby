@@ -28,8 +28,8 @@ export default function ContactPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
-      <div className="min-h-screen bg-slate-950 pt-24">
-        <div className="bg-slate-900 border-b border-slate-800">
+      <div className="min-h-screen bg-slate-900 pt-24">
+        <div className="bg-slate-800 border-b border-slate-800">
           <div className="container py-8">
             <Breadcrumbs items={[{ label: 'Kontakt' }]} />
             <h1 className="text-3xl md:text-4xl font-black text-white mt-4">Kontakt</h1>

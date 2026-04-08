@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-slate-950 pt-24">
-      <div className="bg-slate-900 border-b border-slate-800">
+    <div className="min-h-screen bg-slate-900 pt-24">
+      <div className="bg-slate-800 border-b border-slate-800">
         <div className="container py-8">
           <Breadcrumbs items={[{ label: 'Polityka prywatności' }]} />
           <h1 className="text-3xl font-black text-white mt-4">Polityka prywatności</h1>

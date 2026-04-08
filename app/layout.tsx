@@ -1,6 +1,3 @@
-import { Footer } from '@/components/layout/Footer'
-import { Navbar } from '@/components/layout/Navbar'
-import { ContactWidget } from '@/components/common/ContactWidget'
 import { SITE_CONFIG } from '@/lib/constants'
 import { buildLocalBusinessJsonLd } from '@/utils/seo'
 import type { Metadata, Viewport } from 'next'
@@ -98,12 +95,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_SUPABASE_URL} />
       </head>
       <body className="min-h-screen bg-background">
-        <Navbar />
-        <main id="main-content" tabIndex={-1}>
-          {children}
-        </main>
-        <Footer />
-        <ContactWidget />
+        {children}
 
         {/*
           TODO: Add cookie consent banner before production launch.

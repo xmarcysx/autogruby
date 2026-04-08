@@ -14,11 +14,11 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" aria-label="Auto Gruby – strona główna">
               <Image
-                src="/logo.webp"
+                src="/logo.jpeg"
                 alt="Auto Gruby"
                 width={140}
                 height={70}
-                className="h-14 w-auto object-contain mb-4"
+                className="h-20 w-auto object-contain mb-4"
               />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed">
