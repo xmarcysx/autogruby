@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         hostname: '*.supabase.co',
         pathname: '/storage/v1/object/public/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'ireland.apollo.olxcdn.com',
+      },
       // TODO: Add any additional image domains here
     ],
     formats: ['image/avif', 'image/webp'],

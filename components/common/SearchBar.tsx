@@ -1,7 +1,7 @@
 'use client'
 
-import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import { Search, X } from 'lucide-react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useRef, useState } from 'react'
 
 export function SearchBar() {
@@ -52,7 +52,7 @@ export function SearchBar() {
         placeholder="Wyszukaj markę, model..."
         value={value}
         onChange={handleChange}
-        className="w-full pl-9 pr-9 h-10 rounded-lg bg-slate-900 border border-slate-700 text-slate-200 placeholder:text-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent"
+        className="w-full pl-9 pr-9 h-10 rounded-lg bg-slate-950 border border-slate-700 text-slate-200 placeholder:text-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent"
         aria-label="Wyszukaj samochód"
       />
       {value && (

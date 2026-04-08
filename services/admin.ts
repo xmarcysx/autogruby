@@ -10,10 +10,10 @@ async function createAdminClient(): Promise<any> {
 }
 
 function withPublicUrl(image: CarImage): CarImage {
-  return {
-    ...image,
-    url: `${SUPABASE_URL}/storage/v1/object/public/car-images/${image.storage_path}`,
-  }
+  const url = image.storage_path.startsWith('http')
+    ? image.storage_path
+    : `${SUPABASE_URL}/storage/v1/object/public/car-images/${image.storage_path}`
+  return { ...image, url }
 }
 
 export interface AdminCarsFilter {

@@ -1,6 +1,6 @@
+import { CARS_PER_PAGE } from '@/lib/constants'
 import { createClient as _createClient } from '@/lib/supabase/server'
 import type { Car, CarCardData, CarImage, CarsFilter, CarsListResult } from '@/types/car'
-import { CARS_PER_PAGE } from '@/lib/constants'
 
 // Cast to any to bypass Supabase PostgrestVersion "12" typing strictness
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -217,10 +217,33 @@ export async function getSimilarCars(car: Pick<Car, 'brand' | 'body_type' | 'slu
 // --- helpers ---
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
+const SUPABASE_BUCKET = 'car-images'
+
+function isExternalUrl(path: string): boolean {
+  return /^https?:\/\//i.test(path)
+}
 
 function withPublicUrl(image: CarImage): CarImage {
+  const storagePath = image.storage_path?.trim() ?? ''
+
+  if (!storagePath) {
+    return {
+      ...image,
+      url: '',
+    }
+  }
+
+  if (isExternalUrl(storagePath)) {
+    return {
+      ...image,
+      url: storagePath,
+    }
+  }
+
+  const normalizedPath = storagePath.replace(/^\/+/, '')
+
   return {
     ...image,
-    url: `${SUPABASE_URL}/storage/v1/object/public/car-images/${image.storage_path}`,
+    url: `${SUPABASE_URL}/storage/v1/object/public/${SUPABASE_BUCKET}/${normalizedPath}`,
   }
 }
