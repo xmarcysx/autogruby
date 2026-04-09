@@ -107,7 +107,7 @@ export default async function CarDetailPage({ params }: PageProps) {
             <div className="space-y-8">
               {/* Back + share */}
               <div className="flex items-center justify-between">
-                <Button variant="ghost" size="sm" className="text-slate-600 hover:text-brand-blue -ml-2" asChild>
+                <Button variant="ghost" size="sm" className="text-slate-600 -ml-2" asChild>
                   <Link href="/oferty">
                     <ArrowLeft className="h-4 w-4 mr-1" aria-hidden="true" />
                     Wróć do ofert

@@ -28,15 +28,17 @@ export function CTASection() {
         aria-hidden="true"
       />
 
-      {/* Speed lines */}
+      {/* Speed lines — start po ukośnym pasku */}
       <div
-        className="absolute right-0 top-0 bottom-0 w-1/2 opacity-[0.05]"
+        className="absolute left-44 right-0 top-0 bottom-0 opacity-[0.05]"
         style={{
           backgroundImage:
-            'repeating-linear-gradient(-55deg, transparent, transparent 28px, rgba(255,255,255,0.8) 28px, rgba(255,255,255,0.8) 29px)',
+            'repeating-linear-gradient(-55deg, transparent, transparent 28px, rgba(255,255,255,0.9) 28px, rgba(255,255,255,0.9) 29px)',
         }}
         aria-hidden="true"
       />
+      {/* Blask górny */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,_rgba(255,255,255,0.08)_0%,_transparent_70%)]" aria-hidden="true" />
 
       {/* Top border */}
       <div

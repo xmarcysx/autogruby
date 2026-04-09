@@ -12,12 +12,12 @@ export function ContactSection() {
     >
       {/* Split background: lewa dark, prawa light */}
       <div className="absolute inset-0 flex" aria-hidden="true">
-        <div className="w-full lg:w-1/2 bg-sky-800" />
+        <div className="w-full lg:w-1/2 bg-sky-600" />
         <div className="hidden lg:block w-1/2 bg-slate-100" />
       </div>
       {/* Speed lines tylko na ciemnej połowie */}
       <div
-        className="absolute inset-y-0 left-0 w-full lg:w-1/2 opacity-[0.04] pointer-events-none"
+        className="absolute inset-y-0 left-0 w-full lg:w-1/2 opacity-[0.05] pointer-events-none"
         style={{
           backgroundImage:
             'repeating-linear-gradient(-55deg, transparent, transparent 28px, rgba(255,255,255,0.9) 28px, rgba(255,255,255,0.9) 29px)',
@@ -41,51 +41,51 @@ export function ContactSection() {
             <div className="mt-8 space-y-3">
               <a
                 href={`tel:${SITE_CONFIG.phone.replace(/\s/g, '')}`}
-                className="flex items-center gap-4 p-4 bg-sky-700/50 rounded-xl border border-sky-600/60 hover:border-brand-gold/60 hover:bg-sky-700/70 transition-all group"
+                className="flex items-center gap-4 p-4 bg-white rounded-xl hover:shadow-xl hover:shadow-sky-900/20 hover:-translate-y-1 transition-all duration-300 group"
                 aria-label={`Zadzwoń: ${SITE_CONFIG.phone}`}
               >
-                <div className="w-11 h-11 rounded-lg bg-brand-gold/20 flex items-center justify-center shrink-0 group-hover:bg-brand-gold/30 transition-colors">
-                  <Phone className="h-5 w-5 text-brand-gold" aria-hidden="true" />
+                <div className="w-11 h-11 rounded-lg bg-sky-600 flex items-center justify-center shrink-0 group-hover:bg-sky-700 transition-colors">
+                  <Phone className="h-5 w-5 text-white" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-xs text-sky-400 mb-0.5">Telefon</p>
-                  <p className="text-white font-bold">{SITE_CONFIG.phone}</p>
+                  <p className="text-xs text-slate-500 mb-0.5">Telefon</p>
+                  <p className="text-slate-900 font-bold">{SITE_CONFIG.phone}</p>
                 </div>
               </a>
 
               <a
                 href={`mailto:${SITE_CONFIG.email}`}
-                className="flex items-center gap-4 p-4 bg-sky-700/50 rounded-xl border border-sky-600/60 hover:border-sky-400/60 hover:bg-sky-700/70 transition-all group"
+                className="flex items-center gap-4 p-4 bg-white rounded-xl hover:shadow-xl hover:shadow-sky-900/20 hover:-translate-y-1 transition-all duration-300 group"
                 aria-label={`Email: ${SITE_CONFIG.email}`}
               >
-                <div className="w-11 h-11 rounded-lg bg-sky-500/20 flex items-center justify-center shrink-0 group-hover:bg-sky-500/30 transition-colors">
-                  <Mail className="h-5 w-5 text-sky-300" aria-hidden="true" />
+                <div className="w-11 h-11 rounded-lg bg-sky-600 flex items-center justify-center shrink-0 group-hover:bg-sky-700 transition-colors">
+                  <Mail className="h-5 w-5 text-white" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-xs text-sky-400 mb-0.5">Email</p>
-                  <p className="text-white font-bold">{SITE_CONFIG.email}</p>
+                  <p className="text-xs text-slate-500 mb-0.5">Email</p>
+                  <p className="text-slate-900 font-bold">{SITE_CONFIG.email}</p>
                 </div>
               </a>
 
-              <div className="flex items-center gap-4 p-4 bg-sky-700/50 rounded-xl border border-sky-600/60">
-                <div className="w-11 h-11 rounded-lg bg-sky-500/20 flex items-center justify-center shrink-0">
-                  <MapPin className="h-5 w-5 text-sky-300" aria-hidden="true" />
+              <div className="flex items-center gap-4 p-4 bg-white rounded-xl">
+                <div className="w-11 h-11 rounded-lg bg-sky-600 flex items-center justify-center shrink-0">
+                  <MapPin className="h-5 w-5 text-white" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-xs text-sky-400 mb-0.5">Adres</p>
-                  <address className="not-italic text-white font-bold text-sm">
+                  <p className="text-xs text-slate-500 mb-0.5">Adres</p>
+                  <address className="not-italic text-slate-900 font-bold text-sm">
                     {SITE_CONFIG.address}
                   </address>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 p-4 bg-sky-700/50 rounded-xl border border-sky-600/60">
-                <div className="w-11 h-11 rounded-lg bg-sky-500/20 flex items-center justify-center shrink-0">
-                  <Clock className="h-5 w-5 text-sky-300" aria-hidden="true" />
+              <div className="flex items-center gap-4 p-4 bg-white rounded-xl">
+                <div className="w-11 h-11 rounded-lg bg-sky-600 flex items-center justify-center shrink-0">
+                  <Clock className="h-5 w-5 text-white" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-xs text-sky-400 mb-0.5">Godziny otwarcia</p>
-                  <p className="text-white font-bold text-sm">{SITE_CONFIG.openingHours}</p>
+                  <p className="text-xs text-slate-500 mb-0.5">Godziny otwarcia</p>
+                  <p className="text-slate-900 font-bold text-sm">{SITE_CONFIG.openingHours}</p>
                 </div>
               </div>
             </div>

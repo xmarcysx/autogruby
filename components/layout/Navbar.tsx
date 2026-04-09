@@ -21,11 +21,18 @@ export function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const pathname = usePathname()
 
+  const isHomePage = pathname === '/'
+
   useEffect(() => {
+    if (!isHomePage) {
+      setIsScrolled(true)
+      return
+    }
     const onScroll = () => setIsScrolled(window.scrollY > 20)
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [isHomePage])
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -72,7 +79,7 @@ export function Navbar() {
                 href={link.href}
                 className={cn(
                   'px-4 py-2 rounded-md text-sm font-medium transition-colors',
-                  'text-slate-600 hover:text-brand-blue hover:bg-sky-100',
+                  isScrolled ? 'text-slate-600 hover:text-brand-blue hover:bg-sky-100' : 'text-white hover:text-brand-blue hover:bg-sky-100',
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold',
                   pathname === link.href && 'text-sky-900 bg-sky-200 font-bold',
                 )}

@@ -1,6 +1,7 @@
-import { Phone, Mail, MessageSquare } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { SITE_CONFIG } from '@/lib/constants'
+import { cn } from '@/lib/utils'
+import { Mail, Phone } from 'lucide-react'
 
 interface ContactCardProps {
   carTitle?: string
@@ -38,7 +39,14 @@ export function ContactCard({ carTitle }: ContactCardProps) {
         </a>
       </Button>
 
-      <Button variant="outline" size="lg" className="w-full border-sky-200 text-slate-700 hover:text-brand-blue hover:bg-sky-50 hover:border-brand-blue" asChild>
+      <Button variant="outline" size="lg" 
+        className={cn(
+          'mt-auto flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-sm font-bold',
+          'bg-brand-blue text-white hover:bg-brand-blue-dark hover:text-white',
+          'transition-colors duration-200',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold',
+        )}
+        asChild>
         <a
           href={`mailto:${SITE_CONFIG.email}?subject=${subject}`}
           aria-label={`Napisz email na ${SITE_CONFIG.email}`}

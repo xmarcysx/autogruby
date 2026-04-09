@@ -28,7 +28,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
               {item.href && !isLast ? (
                 <Link
                   href={item.href}
-                  className="text-sm text-slate-400 hover:text-brand-gold transition-colors"
+                  className="text-sm text-white hover:text-brand-gold transition-colors"
                 >
                   {index === 0 ? <span className="sr-only">Strona główna</span> : item.label}
                 </Link>

@@ -1,11 +1,11 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { Fuel, Gauge, Calendar, Settings2, ShieldCheck, ArrowRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-import { formatPrice, formatMileage } from '@/utils/formatters'
 import { FUEL_TYPE_LABELS, TRANSMISSION_LABELS } from '@/lib/constants'
-import type { CarCardData } from '@/types/car'
 import { cn } from '@/lib/utils'
+import type { CarCardData } from '@/types/car'
+import { formatMileage, formatPrice } from '@/utils/formatters'
+import { ArrowRight, Calendar, Fuel, Gauge, Settings2, ShieldCheck } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 
 interface CarCardProps {
   car: CarCardData
