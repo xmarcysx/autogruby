@@ -43,16 +43,28 @@ const BENEFITS = [
 export function WhyUsSection() {
   return (
     <section
-      className="py-20 md:py-28 bg-slate-800"
+      className="py-20 md:py-28 bg-sky-600 relative overflow-hidden"
       aria-labelledby="why-us-heading"
     >
-      <div className="container">
+      {/* Speed lines */}
+      <div
+        className="absolute inset-0 opacity-[0.05]"
+        style={{
+          backgroundImage:
+            'repeating-linear-gradient(-55deg, transparent, transparent 28px, rgba(255,255,255,0.9) 28px, rgba(255,255,255,0.9) 29px)',
+        }}
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,_rgba(255,255,255,0.08)_0%,_transparent_70%)]" aria-hidden="true" />
+
+      <div className="container relative z-10">
         <SectionHeading
           eyebrow="Dlaczego my"
           id="why-us-heading"
           title="Komis, któremu możesz zaufać"
           description="W Auto Gruby nie sprzedajemy tylko samochodów – dbamy o to, żebyś był zadowolony długo po zakupie."
           centered
+          light
         />
 
         <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -61,13 +73,13 @@ export function WhyUsSection() {
             return (
               <div
                 key={benefit.title}
-                className="group relative bg-slate-900 rounded-xl border border-slate-700 p-6 hover:border-brand-blue/40 transition-all duration-300 hover:shadow-lg hover:shadow-brand-blue/5"
+                className="group bg-white rounded-xl p-6 hover:shadow-xl hover:shadow-sky-900/20 hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-xl bg-brand-blue/10 border border-brand-blue/20 flex items-center justify-center mb-5 group-hover:bg-brand-blue/20 transition-colors">
-                  <Icon className="h-6 w-6 text-brand-blue" aria-hidden="true" />
+                <div className="w-12 h-12 rounded-xl bg-sky-600 flex items-center justify-center mb-5 group-hover:bg-sky-700 transition-colors">
+                  <Icon className="h-6 w-6 text-white" aria-hidden="true" />
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2">{benefit.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">{benefit.description}</p>
+                <h3 className="text-slate-900 font-bold text-lg mb-2">{benefit.title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">{benefit.description}</p>
               </div>
             )
           })}

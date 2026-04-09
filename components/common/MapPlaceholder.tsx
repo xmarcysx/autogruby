@@ -8,7 +8,7 @@ interface MapPlaceholderProps {
 export function MapPlaceholder({ className }: MapPlaceholderProps) {
   return (
     <div
-      className={`relative w-full aspect-[16/7] bg-slate-800 rounded-xl overflow-hidden border border-slate-700 flex items-center justify-center ${className ?? ''}`}
+      className={`relative w-full aspect-[16/7] bg-sky-100 rounded-xl overflow-hidden border border-sky-200 flex items-center justify-center ${className ?? ''}`}
       aria-label="Mapa lokalizacji komisu Auto Gruby w Tychach"
     >
       <iframe

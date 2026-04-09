@@ -12,18 +12,18 @@ export async function FeaturedCarsSection() {
 
   return (
     <section
-      className="py-20 md:py-28 bg-slate-900"
+      className="py-20 md:py-28 bg-slate-100"
       aria-labelledby="featured-heading"
     >
       <div className="container">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <SectionHeading
             eyebrow="Polecane oferty"
             id="featured-heading"
             title="Wyróżnione samochody"
             description="Wybrane propozycje — sprawdzone auta w świetnym stosunku jakości do ceny."
           />
-          <Button variant="outline-gold" size="default" asChild className="self-start md:self-auto shrink-0">
+          <Button variant="gold" size="lg" asChild className="self-start md:self-auto shrink-0">
             <Link href="/oferty" aria-label="Zobacz wszystkie oferty samochodów">
               Wszystkie oferty
               <ArrowRight className="h-4 w-4 ml-1" aria-hidden="true" />
@@ -37,14 +37,15 @@ export async function FeaturedCarsSection() {
           ))}
         </div>
 
-        {/* Mobile CTA */}
-        <div className="mt-10 text-center md:hidden">
-          <Button variant="gold" size="lg" asChild>
+        {/* CTA pod kartami — desktop i mobile */}
+        <div className="mt-12 text-center">
+          <Button variant="gold" size="xl" asChild>
             <Link href="/oferty">
               Zobacz wszystkie oferty
-              <ArrowRight className="h-4 w-4 ml-1" aria-hidden="true" />
+              <ArrowRight className="h-5 w-5 ml-1" aria-hidden="true" />
             </Link>
           </Button>
+          <p className="text-slate-500 text-sm mt-3">Regularnie aktualizowana oferta</p>
         </div>
       </div>
     </section>

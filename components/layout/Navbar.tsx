@@ -37,7 +37,7 @@ export function Navbar() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled || isMobileOpen
-          ? 'bg-slate-950/95 backdrop-blur-md border-b border-slate-800 shadow-xl'
+          ? 'bg-white/95 backdrop-blur-md border-b border-sky-200 shadow-lg'
           : 'bg-transparent',
       )}
       role="banner"
@@ -72,9 +72,9 @@ export function Navbar() {
                 href={link.href}
                 className={cn(
                   'px-4 py-2 rounded-md text-sm font-medium transition-colors',
-                  'text-slate-300 hover:text-white hover:bg-slate-800/60',
+                  'text-slate-600 hover:text-brand-blue hover:bg-sky-100',
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold',
-                  pathname === link.href && 'text-white bg-slate-800/40',
+                  pathname === link.href && 'text-sky-900 bg-sky-200 font-bold',
                 )}
               >
                 {link.label}
@@ -98,7 +98,7 @@ export function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
+            className="md:hidden p-2 rounded-md text-slate-600 hover:text-brand-blue hover:bg-sky-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
             onClick={() => setIsMobileOpen(!isMobileOpen)}
             aria-label={isMobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
             aria-expanded={isMobileOpen}
@@ -113,7 +113,7 @@ export function Navbar() {
       {isMobileOpen && (
         <div
           id="mobile-menu"
-          className="md:hidden border-t border-slate-800 bg-slate-950/98"
+          className="md:hidden border-t border-sky-200 bg-white/98"
           role="navigation"
           aria-label="Menu mobilne"
         >
@@ -124,8 +124,8 @@ export function Navbar() {
                 href={link.href}
                 className={cn(
                   'block px-4 py-3 rounded-md text-sm font-medium transition-colors',
-                  'text-slate-300 hover:text-white hover:bg-slate-800',
-                  pathname === link.href && 'text-white bg-slate-800',
+                  'text-slate-600 hover:text-brand-blue hover:bg-sky-100',
+                  pathname === link.href && 'text-sky-900 bg-sky-200 font-bold',
                 )}
               >
                 {link.label}

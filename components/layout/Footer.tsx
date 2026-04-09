@@ -7,7 +7,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-slate-950 border-t border-slate-800" role="contentinfo">
+    <footer className="bg-sky-900 border-t border-sky-800" role="contentinfo">
       <div className="container py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand column */}
@@ -21,7 +21,7 @@ export function Footer() {
                 className="h-20 w-auto object-contain mb-4"
               />
             </Link>
-            <p className="text-slate-400 text-sm leading-relaxed">
+            <p className="text-sky-200 text-sm leading-relaxed">
               Komis samochodowy w Tychach. Sprawdzone auta, uczciwa obsługa i przejrzyste warunki
               zakupu.
             </p>
@@ -33,7 +33,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook Auto Gruby"
-                  className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-800 text-slate-400 hover:bg-brand-blue hover:text-white transition-colors"
+                  className="w-9 h-9 flex items-center justify-center rounded-full bg-sky-800 text-sky-300 hover:bg-brand-blue hover:text-white transition-colors"
                 >
                   <Facebook className="h-4 w-4" aria-hidden="true" />
                 </a>
@@ -44,7 +44,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram Auto Gruby"
-                  className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-800 text-slate-400 hover:bg-rose-400 hover:text-white transition-colors"
+                  className="w-9 h-9 flex items-center justify-center rounded-full bg-sky-800 text-sky-300 hover:bg-rose-500 hover:text-white transition-colors"
                 >
                   <Instagram className="h-4 w-4" aria-hidden="true" />
                 </a>
@@ -69,7 +69,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-slate-400 hover:text-brand-gold text-sm transition-colors"
+                    className="text-sky-300 hover:text-brand-gold text-sm transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -87,7 +87,7 @@ export function Footer() {
               <li>
                 <a
                   href={`tel:${SITE_CONFIG.phone.replace(/\s/g, '')}`}
-                  className="flex items-start gap-2.5 text-slate-400 hover:text-brand-gold text-sm transition-colors"
+                  className="flex items-start gap-2.5 text-sky-300 hover:text-brand-gold text-sm transition-colors"
                   aria-label={`Zadzwoń: ${SITE_CONFIG.phone}`}
                 >
                   <Phone className="h-4 w-4 mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
@@ -97,14 +97,14 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${SITE_CONFIG.email}`}
-                  className="flex items-start gap-2.5 text-slate-400 hover:text-brand-gold text-sm transition-colors"
+                  className="flex items-start gap-2.5 text-sky-300 hover:text-brand-gold text-sm transition-colors"
                   aria-label={`Email: ${SITE_CONFIG.email}`}
                 >
                   <Mail className="h-4 w-4 mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
                   {SITE_CONFIG.email}
                 </a>
               </li>
-              <li className="flex items-start gap-2.5 text-slate-400 text-sm">
+              <li className="flex items-start gap-2.5 text-sky-300 text-sm">
                 <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
                 <address className="not-italic">{SITE_CONFIG.address}</address>
               </li>
@@ -116,26 +116,26 @@ export function Footer() {
             <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
               Godziny otwarcia
             </h3>
-            <ul className="space-y-2 text-sm text-slate-400">
+            <ul className="space-y-2 text-sm text-sky-300">
               <li className="flex items-start gap-2.5">
                 <Clock className="h-4 w-4 mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
                 <span>
                   Pon – Pt:&nbsp;
-                  <strong className="text-slate-200">8:00 – 18:00</strong>
+                  <strong className="text-white">8:00 – 18:00</strong>
                 </span>
               </li>
               <li className="pl-6.5">
                 Sobota:&nbsp;
-                <strong className="text-slate-200">9:00 – 16:00</strong>
+                <strong className="text-white">9:00 – 16:00</strong>
               </li>
-              <li className="pl-6.5 text-slate-500">Niedziela: zamknięte</li>
+              <li className="pl-6.5 text-sky-500">Niedziela: zamknięte</li>
             </ul>
 
-            <div className="mt-6 p-4 bg-brand-gold/10 border border-brand-gold/20 rounded-lg">
+            <div className="mt-6 p-4 bg-brand-gold/10 border border-brand-gold/25 rounded-lg">
               <p className="text-brand-gold text-xs font-medium">
                 Chcesz zobaczyć auto poza godzinami?
               </p>
-              <p className="text-slate-400 text-xs mt-1">
+              <p className="text-sky-300 text-xs mt-1">
                 Zadzwoń – ustalimy termin indywidualnie.
               </p>
             </div>
@@ -144,11 +144,10 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-slate-800">
-        <div className="container py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+      <div className="border-t border-sky-800">
+        <div className="container py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-sky-500">
           <p>
             © {currentYear} Auto Gruby. Wszelkie prawa zastrzeżone.
-            {/* TODO: add NIP / REGON when ready */}
           </p>
           <p>
             Komis samochodowy Tychy – samochody używane na Śląsku

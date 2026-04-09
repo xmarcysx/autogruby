@@ -113,17 +113,20 @@ export function ContactWidget() {
 
       {/* Dialog */}
       <Dialog open={open} onOpenChange={handleOpenChange}>
-        <DialogContent className="sm:max-w-[480px] max-h-[90vh] overflow-y-auto">
+        <DialogContent className="sm:max-w-[480px] max-h-[90vh] overflow-y-auto bg-slate-900 border-slate-700 text-white">
           {formState === 'success' ? (
             <div className="flex flex-col items-center gap-4 py-6 text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/15 flex items-center justify-center">
-                <Send className="w-8 h-8 text-primary" />
+              <div className="w-16 h-16 rounded-full bg-brand-blue/15 flex items-center justify-center">
+                <Send className="w-8 h-8 text-brand-blue" />
               </div>
-              <DialogTitle className="text-xl">Wiadomość wysłana!</DialogTitle>
-              <p className="text-muted-foreground text-sm">
+              <DialogTitle className="text-xl text-white">Wiadomość wysłana!</DialogTitle>
+              <p className="text-slate-400 text-sm">
                 Odezwiemy się najszybciej jak to możliwe. Dziękujemy za kontakt.
               </p>
-              <Button onClick={() => handleOpenChange(false)} className="mt-2 w-full">
+              <Button
+                onClick={() => handleOpenChange(false)}
+                className="mt-2 w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-semibold"
+              >
                 Zamknij
               </Button>
             </div>
@@ -131,12 +134,12 @@ export function ContactWidget() {
             <>
               <DialogHeader>
                 <div className="flex items-center gap-3 mb-1">
-                  <div className="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
-                    <MessageCircle className="w-5 h-5 text-primary" />
+                  <div className="w-9 h-9 rounded-full bg-brand-blue/15 flex items-center justify-center shrink-0">
+                    <MessageCircle className="w-5 h-5 text-brand-blue" />
                   </div>
-                  <DialogTitle className="text-xl">Napisz do nas</DialogTitle>
+                  <DialogTitle className="text-xl text-white">Napisz do nas</DialogTitle>
                 </div>
-                <DialogDescription>
+                <DialogDescription className="text-slate-400">
                   Wypełnij formularz – odpiszemy tak szybko jak to możliwe.
                 </DialogDescription>
               </DialogHeader>
@@ -145,8 +148,8 @@ export function ContactWidget() {
                 {/* Imię & Nazwisko */}
                 <div className="grid grid-cols-2 gap-3">
                   <div className="flex flex-col gap-1.5">
-                    <Label htmlFor="firstName">
-                      Imię <span className="text-destructive">*</span>
+                    <Label htmlFor="firstName" className="text-slate-400 text-xs uppercase tracking-wide font-semibold">
+                      Imię <span className="text-red-400">*</span>
                     </Label>
                     <Input
                       id="firstName"
@@ -154,15 +157,18 @@ export function ContactWidget() {
                       value={fields.firstName}
                       onChange={handleChange}
                       placeholder="Jan"
-                      className={cn(errors.firstName && 'border-destructive')}
+                      className={cn(
+                        'bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-brand-blue focus-visible:border-brand-blue',
+                        errors.firstName && 'border-red-500',
+                      )}
                     />
                     {errors.firstName && (
-                      <p className="text-destructive text-xs">{errors.firstName}</p>
+                      <p className="text-red-400 text-xs">{errors.firstName}</p>
                     )}
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <Label htmlFor="lastName">
-                      Nazwisko <span className="text-destructive">*</span>
+                    <Label htmlFor="lastName" className="text-slate-400 text-xs uppercase tracking-wide font-semibold">
+                      Nazwisko <span className="text-red-400">*</span>
                     </Label>
                     <Input
                       id="lastName"
@@ -170,18 +176,21 @@ export function ContactWidget() {
                       value={fields.lastName}
                       onChange={handleChange}
                       placeholder="Kowalski"
-                      className={cn(errors.lastName && 'border-destructive')}
+                      className={cn(
+                        'bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-brand-blue focus-visible:border-brand-blue',
+                        errors.lastName && 'border-red-500',
+                      )}
                     />
                     {errors.lastName && (
-                      <p className="text-destructive text-xs">{errors.lastName}</p>
+                      <p className="text-red-400 text-xs">{errors.lastName}</p>
                     )}
                   </div>
                 </div>
 
                 {/* Telefon */}
                 <div className="flex flex-col gap-1.5">
-                  <Label htmlFor="phone">
-                    Telefon <span className="text-destructive">*</span>
+                  <Label htmlFor="phone" className="text-slate-400 text-xs uppercase tracking-wide font-semibold">
+                    Telefon <span className="text-red-400">*</span>
                   </Label>
                   <Input
                     id="phone"
@@ -190,15 +199,18 @@ export function ContactWidget() {
                     value={fields.phone}
                     onChange={handleChange}
                     placeholder="+48 600 000 000"
-                    className={cn(errors.phone && 'border-destructive')}
+                    className={cn(
+                      'bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-brand-blue focus-visible:border-brand-blue',
+                      errors.phone && 'border-red-500',
+                    )}
                   />
-                  {errors.phone && <p className="text-destructive text-xs">{errors.phone}</p>}
+                  {errors.phone && <p className="text-red-400 text-xs">{errors.phone}</p>}
                 </div>
 
                 {/* Temat */}
                 <div className="flex flex-col gap-1.5">
-                  <Label htmlFor="subject">
-                    Temat <span className="text-destructive">*</span>
+                  <Label htmlFor="subject" className="text-slate-400 text-xs uppercase tracking-wide font-semibold">
+                    Temat <span className="text-red-400">*</span>
                   </Label>
                   <Input
                     id="subject"
@@ -206,15 +218,18 @@ export function ContactWidget() {
                     value={fields.subject}
                     onChange={handleChange}
                     placeholder="np. Zapytanie o ofertę"
-                    className={cn(errors.subject && 'border-destructive')}
+                    className={cn(
+                      'bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-brand-blue focus-visible:border-brand-blue',
+                      errors.subject && 'border-red-500',
+                    )}
                   />
-                  {errors.subject && <p className="text-destructive text-xs">{errors.subject}</p>}
+                  {errors.subject && <p className="text-red-400 text-xs">{errors.subject}</p>}
                 </div>
 
                 {/* Wiadomość */}
                 <div className="flex flex-col gap-1.5">
-                  <Label htmlFor="message">
-                    Wiadomość <span className="text-destructive">*</span>
+                  <Label htmlFor="message" className="text-slate-400 text-xs uppercase tracking-wide font-semibold">
+                    Wiadomość <span className="text-red-400">*</span>
                   </Label>
                   <textarea
                     id="message"
@@ -224,17 +239,17 @@ export function ContactWidget() {
                     rows={4}
                     placeholder="Opisz czym możemy Ci pomóc..."
                     className={cn(
-                      'flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none',
-                      errors.message && 'border-destructive',
+                      'flex w-full rounded-md border bg-slate-800 border-slate-700 text-white px-3 py-2 text-sm placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 disabled:cursor-not-allowed disabled:opacity-50 resize-none',
+                      errors.message && 'border-red-500',
                     )}
                   />
-                  {errors.message && <p className="text-destructive text-xs">{errors.message}</p>}
+                  {errors.message && <p className="text-red-400 text-xs">{errors.message}</p>}
                 </div>
 
                 <Button
                   type="submit"
                   disabled={formState === 'sending'}
-                  className="w-full mt-1 h-11 font-semibold"
+                  className="w-full mt-1 h-11 font-semibold bg-brand-blue hover:bg-brand-blue-dark text-white"
                 >
                   {formState === 'sending' ? (
                     <>

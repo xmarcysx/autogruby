@@ -9,36 +9,35 @@ export function HeroSection() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       aria-labelledby="hero-heading"
     >
-      {/* Background */}
-      <div className="absolute inset-0 bg-slate-900" aria-hidden="true">
-        {/* Radial glow — blue top right */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_80%_0%,_rgba(2,132,199,0.18)_0%,_transparent_70%)]" />
-        {/* Radial glow — gold bottom left */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_10%_100%,_rgba(3,105,161,0.5)_0%,_transparent_70%)]" />
+      {/* Background — sky-blue gradient jak tło logo */}
+      <div className="absolute inset-0 bg-gradient-to-br from-sky-500 via-sky-600 to-sky-800" aria-hidden="true">
+        {/* Delikatny blask górny */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,_rgba(255,255,255,0.15)_0%,_transparent_70%)]" />
+        {/* Głębszy cień dolny prawy */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_100%_100%,_rgba(3,105,161,0.5)_0%,_transparent_70%)]" />
 
-        {/* Speed lines — diagonal, automotive feel */}
+        {/* Speed lines */}
         <div
-          className="absolute inset-0 opacity-[0.035]"
+          className="absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage:
-              'repeating-linear-gradient(-55deg, transparent, transparent 28px, rgba(255,255,255,0.8) 28px, rgba(255,255,255,0.8) 29px)',
+              'repeating-linear-gradient(-55deg, transparent, transparent 28px, rgba(255,255,255,0.9) 28px, rgba(255,255,255,0.9) 29px)',
           }}
         />
 
-        {/* Brand-blue racing stripe — left edge */}
-        <div className="absolute top-0 bottom-0 left-0 w-1 bg-gradient-to-b from-brand-blue-light via-brand-blue to-brand-blue-dark" />
-        <div className="absolute top-0 bottom-0 left-[5px] w-px bg-brand-blue/30" />
+        {/* Biały akcent — lewa krawędź */}
+        <div className="absolute top-0 bottom-0 left-0 w-1 bg-gradient-to-b from-white/80 via-white/40 to-white/10" />
       </div>
 
       <div className="container relative z-10 py-24 md:py-32">
         <div className="max-w-4xl mx-auto text-center">
           {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 bg-brand-blue/10 border border-brand-blue/25 rounded-full px-4 py-1.5 text-brand-blue text-sm font-medium mb-8 animate-fade-in">
-            <Star className="h-6 w-6 fill-brand-gold text-brand-gold" aria-hidden="true" />
-            <p className="text-xl md:text-2xl text-slate-200 leading-relaxed">
+          <div className="inline-flex items-center gap-2 bg-white/15 border border-white/30 rounded-full px-4 py-1.5 text-white text-sm font-medium mb-8 animate-fade-in">
+            <Star className="h-6 w-6 fill-white text-white" aria-hidden="true" />
+            <p className="text-xl md:text-2xl text-white leading-relaxed">
               Komis samochodowy{' '}
-              <strong className="fw-bold">Auto <span className='text-brand-blue'>Gruby</span></strong>
-            </p>  
+              <strong className="fw-bold">Auto <span className='text-white'>Gruby</span></strong>
+            </p>
           </div>
 
           {/* Main headline */}
@@ -51,9 +50,9 @@ export function HeroSection() {
           </h1>
 
           {/* Sub-headline */}
-          <p className="text-xl md:text-2xl text-slate-400 leading-relaxed max-w-2xl mx-auto mb-10">
+          <p className="text-xl md:text-2xl text-white/85 leading-relaxed max-w-2xl mx-auto mb-10">
             Sprawdzone samochody używane w Tychach. Uczciwa wycena, pełna historia,{' '}
-            <strong className="text-slate-200">transparentna oferta.</strong>
+            <strong className="text-white">transparentna oferta.</strong>
           </p>
 
           {/* CTA buttons */}
@@ -82,8 +81,8 @@ export function HeroSection() {
               { value: '100%', label: 'transparentność' },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <p className="text-3xl font-black text-brand-gold">{stat.value}</p>
-                <p className="text-sm text-slate-400 mt-0.5">{stat.label}</p>
+                <p className="text-3xl font-black text-white">{stat.value}</p>
+                <p className="text-sm text-white/65 mt-0.5">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -92,7 +91,7 @@ export function HeroSection() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" aria-hidden="true">
-        <ChevronDown className="h-6 w-6 text-slate-500" />
+        <ChevronDown className="h-6 w-6 text-white/60" />
       </div>
     </section>
   )

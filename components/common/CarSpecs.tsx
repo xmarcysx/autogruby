@@ -100,22 +100,22 @@ export function CarSpecs({ car }: CarSpecsProps) {
 
   return (
     <div>
-      <h2 className="text-xl font-bold text-white mb-4">Parametry techniczne</h2>
+      <h2 className="text-xl font-bold text-slate-900 mb-4">Parametry techniczne</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {specs.map((spec) => {
           const Icon = spec.icon
           return (
             <div
               key={spec.label}
-              className="flex items-center gap-3 p-3.5 bg-slate-900 rounded-lg border border-slate-800"
+              className="flex items-center gap-3 p-3.5 bg-white rounded-lg border border-slate-200"
             >
-              <div className="shrink-0 w-8 h-8 rounded-md bg-slate-800 flex items-center justify-center">
+              <div className="shrink-0 w-8 h-8 rounded-md bg-sky-50 flex items-center justify-center">
                 <Icon className="h-4 w-4 text-brand-blue" aria-hidden="true" />
               </div>
               <div className="min-w-0">
                 <p className="text-xs text-slate-500 mb-0.5">{spec.label}</p>
                 <p
-                  className={`text-sm font-semibold ${spec.highlight ? 'text-emerald-400' : 'text-white'}`}
+                  className={`text-sm font-semibold ${spec.highlight ? 'text-emerald-600' : 'text-slate-900'}`}
                 >
                   {spec.value}
                 </p>

@@ -33,20 +33,20 @@ export function SortSelect() {
 
   return (
     <div className="flex items-center gap-2">
-      <label htmlFor="sort-select" className="text-sm text-slate-400 whitespace-nowrap">
+      <label htmlFor="sort-select" className="text-sm text-slate-600 whitespace-nowrap">
         Sortuj:
       </label>
       <Select value={current} onValueChange={handleChange}>
         <SelectTrigger
           id="sort-select"
-          className="w-[200px] bg-slate-900 border-slate-700 text-slate-200 h-9 text-sm"
+          className="w-[200px] bg-white border-sky-200 text-slate-800 h-9 text-sm shadow-sm"
           aria-label="Sortowanie ofert"
         >
           <SelectValue />
         </SelectTrigger>
-        <SelectContent className="bg-slate-900 border-slate-700">
+        <SelectContent className="bg-white border-sky-200">
           {SORT_OPTIONS.map((opt) => (
-            <SelectItem key={opt.value} value={opt.value} className="text-slate-200 focus:bg-slate-800 focus:text-white">
+            <SelectItem key={opt.value} value={opt.value} className="text-slate-800 focus:bg-sky-50 focus:text-brand-blue">
               {opt.label}
             </SelectItem>
           ))}

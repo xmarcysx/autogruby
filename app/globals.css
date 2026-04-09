@@ -4,25 +4,25 @@
 
 @layer base {
   :root {
-    /* Asphalt-dark base — less blue-tinted, more garage/track feel */
-    --background: 240 8% 10%;
-    --foreground: 210 40% 98%;
-    --card: 240 8% 14%;
-    --card-foreground: 210 40% 98%;
-    --popover: 240 8% 12%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 199 89% 40%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 43 96% 56%;
-    --secondary-foreground: 240 8% 5%;
-    --muted: 240 6% 18%;
-    --muted-foreground: 215 20% 60%;
+    /* Mid-light sky-blue palette — inspired by logo background */
+    --background: 204 60% 91%;        /* ~sky-200, lekki błękit */
+    --foreground: 222 47% 11%;        /* slate-900 */
+    --card: 0 0% 100%;                /* white */
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 199 89% 40%;           /* brand-blue */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 43 96% 56%;          /* brand-gold */
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 30% 88%;
+    --muted-foreground: 215 16% 40%;
     --accent: 43 96% 56%;
-    --accent-foreground: 240 8% 5%;
+    --accent-foreground: 222 47% 11%;
     --destructive: 0 84% 50%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 240 6% 22%;
-    --input: 240 6% 18%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 204 50% 80%;            /* ~sky-300 */
+    --input: 210 30% 85%;
     --ring: 199 89% 48%;
     --radius: 0.75rem;
   }
@@ -47,20 +47,20 @@
     @apply outline-none ring-2 ring-brand-gold ring-offset-2 ring-offset-background;
   }
 
-  /* Custom scrollbar for dark theme */
+  /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: hsl(var(--muted));
+    background: hsl(204 100% 95%);
   }
   ::-webkit-scrollbar-thumb {
-    background: hsl(var(--border));
+    background: hsl(199 89% 60%);
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--muted-foreground));
+    background: hsl(199 89% 40%);
   }
 }
 

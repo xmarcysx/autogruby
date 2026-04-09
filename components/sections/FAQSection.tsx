@@ -6,7 +6,7 @@ import { FAQ_ITEMS } from '@/lib/constants'
 export function FAQSection() {
   return (
     <section
-      className="py-20 md:py-28 bg-slate-900"
+      className="py-20 md:py-28 bg-slate-100"
       aria-labelledby="faq-heading"
     >
       <div className="container">
@@ -25,12 +25,12 @@ export function FAQSection() {
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
-                  className="bg-slate-800 border border-slate-700 rounded-xl px-5 py-1 data-[state=open]:border-brand-blue/30"
+                  className="bg-white border border-slate-200 rounded-xl px-5 py-1 data-[state=open]:border-sky-400 data-[state=open]:shadow-sm"
                 >
-                  <AccordionTrigger className="text-white text-left text-sm md:text-base hover:no-underline">
+                  <AccordionTrigger className="text-slate-900 text-left text-sm md:text-base hover:no-underline hover:text-sky-700">
                     {item.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-slate-400 text-sm leading-relaxed">
+                  <AccordionContent className="text-slate-600 text-sm leading-relaxed">
                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -42,7 +42,7 @@ export function FAQSection() {
             Nie znalazłeś odpowiedzi?{' '}
             <a
               href="/kontakt"
-              className="text-brand-gold hover:underline font-medium"
+              className="text-sky-700 hover:underline font-medium"
             >
               Skontaktuj się z nami
             </a>

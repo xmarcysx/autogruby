@@ -20,7 +20,6 @@ const BRANDS = [
   { name: 'Mazda',         slug: 'mazda' },
 ] as const
 
-// Duplikujemy żeby animacja marquee była ciągła bez skoku
 const BRANDS_DOUBLED = [...BRANDS, ...BRANDS]
 
 function logoUrl(slug: string) {
@@ -30,32 +29,19 @@ function logoUrl(slug: string) {
 export function BrandsSection() {
   return (
     <section
-      className="py-16 md:py-20 bg-slate-900 relative overflow-hidden border-y border-white/[0.06]"
+      className="py-16 md:py-20 bg-white relative overflow-hidden border-y border-slate-200"
       aria-labelledby="brands-heading"
     >
-      {/* Subtelny glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_80%_0%,_rgba(2,132,199,0.18)_0%,_transparent_70%)]" />
-
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_20%_100%,_rgba(2,132,199,0.18)_0%,_transparent_70%)]" />
-
-              <div
-          className="absolute inset-0 opacity-[0.035]"
-          style={{
-            backgroundImage:
-              'repeating-linear-gradient(-55deg, transparent, transparent 28px, rgba(255,255,255,0.8) 28px, rgba(255,255,255,0.8) 29px)',
-          }}
-        />
-
       <div className="container relative z-10 mb-10 text-center">
         <p className="text-xs font-semibold tracking-[0.2em] uppercase text-brand-blue mb-3">
           Marki w naszej ofercie
         </p>
         <h2
           id="brands-heading"
-          className="text-2xl md:text-3xl font-black text-white"
+          className="text-2xl md:text-3xl font-black text-slate-900"
         >
           Sprowadzamy i sprzedajemy{' '}
-          <span className="text-brand-gold">sprawdzone marki</span>
+          <span className="text-brand-blue">sprawdzone marki</span>
         </h2>
         <p className="mt-3 text-slate-500 text-sm max-w-md mx-auto">
           Od aut rodzinnych po premium — znajdziesz u nas pojazdy marek, którym możesz zaufać.
@@ -65,16 +51,12 @@ export function BrandsSection() {
       {/* Fade maski po bokach */}
       <div
         className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-        style={{
-          background: 'linear-gradient(90deg, #0f172a 0%, transparent 100%)',
-        }}
+        style={{ background: 'linear-gradient(90deg, #ffffff 0%, transparent 100%)' }}
         aria-hidden="true"
       />
       <div
         className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-        style={{
-          background: 'linear-gradient(270deg, #0f172a 0%, transparent 100%)',
-        }}
+        style={{ background: 'linear-gradient(270deg, #ffffff 0%, transparent 100%)' }}
         aria-hidden="true"
       />
 
@@ -84,15 +66,14 @@ export function BrandsSection() {
           {BRANDS_DOUBLED.map((brand, i) => (
             <div
               key={`${brand.slug}-${i}`}
-              className="flex flex-col items-center justify-center gap-2.5 w-40 h-28 rounded-xl border border-slate-200 bg-white shadow-sm flex-shrink-0 transition-all duration-300 group px-4"
+              className="flex flex-col items-center justify-center gap-2.5 w-40 h-28 rounded-xl border border-slate-200 bg-white shadow-sm flex-shrink-0 hover:border-sky-300 hover:shadow-md transition-all duration-300 px-4"
             >
-              {/* Placeholder loga — zastąp <img> gdy będą pliki SVG */}
               <img
                 src={logoUrl(brand.slug)}
                 alt={`${brand.name} logo`}
                 width={100}
                 height={50}
-                className="w-auto h-20 object-contain transition-all duration-300"
+                className="w-auto h-20 object-contain"
                 loading="lazy"
               />
             </div>

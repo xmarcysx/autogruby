@@ -66,15 +66,15 @@ export default async function OffersPage({ searchParams }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
-      <div className="min-h-screen bg-slate-900 pt-24">
+      <div className="min-h-screen bg-slate-100 pt-24">
         {/* Page header */}
-        <div className="bg-slate-800 border-b border-slate-800">
+        <div className="bg-sky-600">
           <div className="container py-8">
             <Breadcrumbs items={[{ label: 'Oferty samochodów' }]} />
             <h1 className="text-3xl md:text-4xl font-black text-white mt-4">
               Samochody używane – <span className="text-brand-gold">Tychy</span>
             </h1>
-            <p className="text-slate-400 mt-2">
+            <p className="text-sky-100 mt-2">
               {total > 0
                 ? `Znaleziono ${total} ${pluralCars(total)} w naszej ofercie`
                 : 'Brak ofert spełniających kryteria'}
@@ -86,7 +86,7 @@ export default async function OffersPage({ searchParams }: PageProps) {
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Sidebar filters */}
             <aside className="w-full lg:w-72 xl:w-80 shrink-0">
-              <Suspense fallback={<div className="bg-slate-900 rounded-xl h-96 animate-pulse" />}>
+              <Suspense fallback={<div className="bg-white rounded-xl h-96 animate-pulse border border-sky-200" />}>
                 <FiltersSidebar />
               </Suspense>
             </aside>

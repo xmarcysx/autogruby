@@ -15,7 +15,7 @@ export function AboutSection() {
   return (
     <section
       id="o-nas"
-      className="py-20 md:py-28 bg-slate-900"
+      className="py-20 md:py-28 bg-slate-100"
       aria-labelledby="about-heading"
     >
       <div className="container">
@@ -23,7 +23,7 @@ export function AboutSection() {
           {/* Image side */}
           <div className="relative">
             {/* TODO: Replace with a real photo of the dealership or owner */}
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-slate-600">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-sky-200">
               <Image
                 src="/komis-1.jpeg"
                 alt="Komis Auto Gruby – Tychy"
@@ -48,7 +48,7 @@ export function AboutSection() {
               description="Jesteśmy rodzinnym komisem samochodowym działającym w Tychach od ponad dekady. Przez lata zbudowaliśmy reputację opartą na jednej prostej zasadzie: mówimy prawdę o każdym samochodzie."
             />
 
-            <p className="mt-5 text-slate-400 leading-relaxed">
+            <p className="mt-5 text-slate-600 leading-relaxed">
               Każde auto w naszej ofercie trafia do sprzedaży dopiero po dokładnej weryfikacji stanu technicznego i historii. Dla nas ważne jest, żebyś jako klient czuł się pewnie – zarówno przy zakupie, jak i po nim.
             </p>
 
@@ -56,10 +56,10 @@ export function AboutSection() {
               {HIGHLIGHTS.map((item) => (
                 <li key={item} className="flex items-start gap-2.5">
                   <CheckCircle2
-                    className="h-5 w-5 text-brand-gold shrink-0 mt-0.5"
+                    className="h-5 w-5 text-brand-blue shrink-0 mt-0.5"
                     aria-hidden="true"
                   />
-                  <span className="text-sm text-slate-300">{item}</span>
+                  <span className="text-sm text-slate-700">{item}</span>
                 </li>
               ))}
             </ul>

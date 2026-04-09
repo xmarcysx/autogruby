@@ -17,28 +17,10 @@ import { usePathname } from 'next/navigation'
 import { useTransition } from 'react'
 
 const navItems = [
-  {
-    label: 'Dashboard',
-    href: '/admin',
-    icon: BarChart3,
-    exact: true,
-  },
-  {
-    label: 'Oferty',
-    href: '/admin/cars',
-    icon: ListOrdered,
-    exact: true,
-  },
-  {
-    label: 'Dodaj auto',
-    href: '/admin/cars/new',
-    icon: PlusCircle,
-  },
-  {
-    label: 'Zapytania',
-    href: '/admin/inquiries',
-    icon: MessageSquare,
-  },
+  { label: 'Dashboard', href: '/admin', icon: BarChart3, exact: true },
+  { label: 'Oferty', href: '/admin/cars', icon: ListOrdered, exact: true },
+  { label: 'Dodaj auto', href: '/admin/cars/new', icon: PlusCircle },
+  { label: 'Zapytania', href: '/admin/inquiries', icon: MessageSquare },
 ]
 
 export default function AdminSidebar() {
@@ -52,21 +34,19 @@ export default function AdminSidebar() {
   }
 
   return (
-    <aside className="w-64 shrink-0 bg-slate-900 border-r border-slate-800 flex flex-col min-h-screen">
+    <aside className="w-64 shrink-0 bg-white border-r border-slate-200 flex flex-col min-h-screen shadow-sm">
       {/* Logo */}
-      <div className="px-5 py-5 border-b border-slate-800">
+      <div className="px-5 py-5 border-b border-slate-200">
         <Link href="/admin" className="flex items-center gap-3 group">
-          <div className="w-9 h-9 flex items-center justify-center">
-            <Image
-              src="/logo.jpeg"
-              alt="Auto Gruby"
-              width={80}
-              height={40}
-              className="h-9 w-auto object-cover"
-            />
-          </div> 
+          <Image
+            src="/logo.jpeg"
+            alt="Auto Gruby"
+            width={80}
+            height={40}
+            className="h-9 w-auto object-cover"
+          />
           <div>
-            <div className="text-sm font-black text-white leading-tight">Auto Gruby</div>
+            <div className="text-sm font-black text-slate-900 leading-tight">Auto Gruby</div>
             <div className="text-xs text-slate-500">Panel admina</div>
           </div>
         </Link>
@@ -84,13 +64,13 @@ export default function AdminSidebar() {
                 'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 group',
                 isActive
                   ? 'bg-brand-blue/10 text-brand-blue border border-brand-blue/20'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800',
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100',
               )}
             >
               <item.icon
                 className={cn(
                   'h-4 w-4 shrink-0',
-                  isActive ? 'text-brand-blue' : 'text-slate-500 group-hover:text-slate-300',
+                  isActive ? 'text-brand-blue' : 'text-slate-400 group-hover:text-slate-600',
                 )}
               />
               <span className="flex-1">{item.label}</span>
@@ -100,12 +80,12 @@ export default function AdminSidebar() {
         })}
       </nav>
 
-      {/* Bottom: links + logout */}
-      <div className="px-3 pb-4 space-y-1 border-t border-slate-800 pt-4">
+      {/* Bottom */}
+      <div className="px-3 pb-4 space-y-1 border-t border-slate-200 pt-4">
         <Link
           href="/"
           target="_blank"
-          className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:text-white hover:bg-slate-800 transition-all"
+          className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all"
         >
           <Car className="h-4 w-4" />
           <span>Strona publiczna</span>
@@ -113,7 +93,7 @@ export default function AdminSidebar() {
         <button
           onClick={handleLogout}
           disabled={pending}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:text-red-400 hover:bg-red-500/5 transition-all"
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:text-red-600 hover:bg-red-50 transition-all"
         >
           <LogOut className="h-4 w-4" />
           <span>{pending ? 'Wylogowywanie...' : 'Wyloguj się'}</span>

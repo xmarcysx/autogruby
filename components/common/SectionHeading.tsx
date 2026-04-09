@@ -30,7 +30,7 @@ export function SectionHeading({
         id={id}
         className={cn(
           'text-3xl md:text-4xl font-bold tracking-tight',
-          light ? 'text-white' : 'text-white',
+          light ? 'text-white' : 'text-slate-900',
         )}
       >
         {title}
@@ -40,7 +40,7 @@ export function SectionHeading({
           className={cn(
             'mt-4 text-base md:text-lg leading-relaxed max-w-2xl',
             centered && 'mx-auto',
-            'text-slate-400',
+            light ? 'text-slate-300' : 'text-slate-600',
           )}
         >
           {description}

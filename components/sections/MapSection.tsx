@@ -4,7 +4,7 @@ import { SectionHeading } from '@/components/common/SectionHeading'
 export function MapSection() {
   return (
     <section
-      className="py-20 md:py-28 bg-slate-900"
+      className="py-20 md:py-28 bg-slate-200"
       aria-labelledby="map-heading"
     >
       <div className="container">

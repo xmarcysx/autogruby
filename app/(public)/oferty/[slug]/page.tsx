@@ -88,9 +88,9 @@ export default async function CarDetailPage({ params }: PageProps) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(carJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
-      <div className="min-h-screen bg-slate-950 pt-24">
+      <div className="min-h-screen bg-slate-100 pt-24">
         {/* Top bar */}
-        <div className="bg-slate-800 border-b border-slate-800">
+        <div className="bg-sky-600 border-b border-sky-700">
           <div className="container py-5">
             <Breadcrumbs
               items={[
@@ -107,7 +107,7 @@ export default async function CarDetailPage({ params }: PageProps) {
             <div className="space-y-8">
               {/* Back + share */}
               <div className="flex items-center justify-between">
-                <Button variant="ghost" size="sm" className="text-slate-400 hover:text-white -ml-2" asChild>
+                <Button variant="ghost" size="sm" className="text-slate-600 hover:text-brand-blue -ml-2" asChild>
                   <Link href="/oferty">
                     <ArrowLeft className="h-4 w-4 mr-1" aria-hidden="true" />
                     Wróć do ofert
@@ -128,16 +128,16 @@ export default async function CarDetailPage({ params }: PageProps) {
                     {car.accident_free && <Badge variant="success">Bezwypadkowy</Badge>}
                     {car.service_history && <Badge variant="blue">Historia serwisowa</Badge>}
                   </div>
-                  <h1 className="text-3xl md:text-4xl font-black text-white leading-tight">
+                  <h1 className="text-3xl md:text-4xl font-black text-slate-900 leading-tight">
                     {car.title}
                   </h1>
-                  <p className="text-slate-400 mt-1.5 text-sm">{car.location_city}</p>
+                  <p className="text-slate-500 mt-1.5 text-sm">{car.location_city}</p>
                 </div>
                 <div className="shrink-0 text-right">
                   <p className="text-4xl font-black text-brand-gold">
                     {formatPrice(car.price, car.currency)}
                   </p>
-                  <p className="text-slate-500 text-xs mt-1">Cena brutto, do negocjacji</p>
+                  <p className="text-slate-400 text-xs mt-1">Cena brutto, do negocjacji</p>
                 </div>
               </div>
 
@@ -147,11 +147,11 @@ export default async function CarDetailPage({ params }: PageProps) {
               {/* Description */}
               {car.description && (
                 <section aria-labelledby="desc-heading">
-                  <h2 id="desc-heading" className="text-xl font-bold text-white mb-4">
+                  <h2 id="desc-heading" className="text-xl font-bold text-slate-900 mb-4">
                     Opis oferty
                   </h2>
-                  <div className="bg-slate-900 rounded-xl border border-slate-800 p-6">
-                    <div className="prose prose-invert prose-sm max-w-none text-slate-300 leading-relaxed whitespace-pre-line">
+                  <div className="bg-white rounded-xl border border-slate-200 p-6">
+                    <div className="prose prose-sm max-w-none text-slate-600 leading-relaxed whitespace-pre-line">
                       {car.description}
                     </div>
                   </div>
@@ -160,15 +160,15 @@ export default async function CarDetailPage({ params }: PageProps) {
 
               {/* Location */}
               <section
-                className="bg-slate-900 rounded-xl border border-slate-800 p-6"
+                className="bg-white rounded-xl border border-slate-200 p-6"
                 aria-labelledby="location-heading"
               >
-                <h2 id="location-heading" className="text-lg font-bold text-white mb-3">
+                <h2 id="location-heading" className="text-lg font-bold text-slate-900 mb-3">
                   Odbiór i lokalizacja
                 </h2>
-                <p className="text-slate-400 text-sm">
-                  Samochód dostępny do odbioru w komisie <strong className="text-white">Auto Gruby</strong>{' '}
-                  w <strong className="text-white">{car.location_city}</strong>. Zapraszamy na jazdę
+                <p className="text-slate-600 text-sm">
+                  Samochód dostępny do odbioru w komisie <strong className="text-slate-900">Auto Gruby</strong>{' '}
+                  w <strong className="text-slate-900">{car.location_city}</strong>. Zapraszamy na jazdę
                   próbną – wystarczy zadzwonić i umówić termin.
                 </p>
                 <p className="text-brand-gold text-sm font-medium mt-2">
@@ -179,7 +179,7 @@ export default async function CarDetailPage({ params }: PageProps) {
               {/* Similar cars */}
               {similar.length > 0 && (
                 <section aria-labelledby="similar-heading">
-                  <h2 id="similar-heading" className="text-xl font-bold text-white mb-5">
+                  <h2 id="similar-heading" className="text-xl font-bold text-slate-900 mb-5">
                     Podobne oferty
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -203,7 +203,7 @@ export default async function CarDetailPage({ params }: PageProps) {
                     Zadzwoń
                   </a>
                 </Button>
-                <Button variant="outline" size="lg" className="w-full border-slate-700" asChild>
+                <Button variant="outline" size="lg" className="w-full border-sky-200 text-slate-700 hover:text-brand-blue hover:border-brand-blue hover:bg-sky-50" asChild>
                   <a href={`mailto:${SITE_CONFIG.email}?subject=${encodeURIComponent(`Pytanie o: ${car.title}`)}`}>
                     <Mail className="h-4 w-4 mr-2" aria-hidden="true" />
                     Napisz email

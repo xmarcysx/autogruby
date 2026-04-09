@@ -14,7 +14,7 @@ export default function AdminLoginPage() {
   const [state, formAction, pending] = useActionState(loginAction, initialState)
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 bg-slate-950">
+    <div className="min-h-screen flex items-center justify-center p-6 bg-slate-100">
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="text-center mb-8">
@@ -27,17 +27,17 @@ export default function AdminLoginPage() {
               className="h-20 w-auto object-contain"
             />
           </div>
-          <h1 className="text-2xl font-black text-white">Auto Gruby</h1>
+          <h1 className="text-2xl font-black text-slate-900">Auto Gruby</h1>
           <p className="text-slate-500 text-sm mt-1">Panel administracyjny</p>
         </div>
 
         {/* Form */}
-        <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6">
-          <h2 className="text-lg font-bold text-white mb-6">Zaloguj się</h2>
+        <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+          <h2 className="text-lg font-bold text-slate-900 mb-6">Zaloguj się</h2>
 
           <form action={formAction} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-slate-300 text-sm">
+              <Label htmlFor="email" className="text-slate-600 text-sm">
                 Email
               </Label>
               <Input
@@ -47,12 +47,12 @@ export default function AdminLoginPage() {
                 required
                 autoComplete="email"
                 placeholder="admin@autogruby.pl"
-                className="bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus:border-brand-blue focus:ring-brand-blue/20"
+                className="bg-sky-50 border-sky-200 text-slate-900 placeholder:text-slate-400 focus:border-brand-blue focus:ring-brand-blue/20"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-slate-300 text-sm">
+              <Label htmlFor="password" className="text-slate-600 text-sm">
                 Hasło
               </Label>
               <Input
@@ -62,13 +62,13 @@ export default function AdminLoginPage() {
                 required
                 autoComplete="current-password"
                 placeholder="••••••••"
-                className="bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus:border-brand-blue focus:ring-brand-blue/20"
+                className="bg-sky-50 border-sky-200 text-slate-900 placeholder:text-slate-400 focus:border-brand-blue focus:ring-brand-blue/20"
               />
             </div>
 
             {state?.error && (
-              <div className="rounded-lg bg-red-500/10 border border-red-500/20 px-4 py-3">
-                <p className="text-red-400 text-sm">{state.error}</p>
+              <div className="rounded-lg bg-red-50 border border-red-200 px-4 py-3">
+                <p className="text-red-600 text-sm">{state.error}</p>
               </div>
             )}
 
@@ -92,7 +92,7 @@ export default function AdminLoginPage() {
           </form>
         </div>
 
-        <p className="text-center text-slate-600 text-xs mt-6">
+        <p className="text-center text-slate-500 text-xs mt-6">
           Auto Gruby © {new Date().getFullYear()}
         </p>
       </div>
