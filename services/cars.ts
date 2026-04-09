@@ -1,18 +1,18 @@
 import { CARS_PER_PAGE } from '@/lib/constants'
-import { createClient as _createClient } from '@/lib/supabase/server'
+import { createPublicClient } from '@/lib/supabase/server'
 import type { Car, CarCardData, CarImage, CarsFilter, CarsListResult } from '@/types/car'
 
 // Cast to any to bypass Supabase PostgrestVersion "12" typing strictness
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function createClient(): Promise<any> {
-  return _createClient()
+function createClient(): any {
+  return createPublicClient()
 }
 
 /**
  * Retrieves a paginated, filtered list of published cars (public).
  */
 export async function getCars(filters: CarsFilter = {}): Promise<CarsListResult> {
-  const supabase = await createClient()
+  const supabase = createClient()
   const page = filters.page ?? 1
   const perPage = filters.per_page ?? CARS_PER_PAGE
   const from = (page - 1) * perPage
@@ -104,7 +104,7 @@ export async function getCars(filters: CarsFilter = {}): Promise<CarsListResult>
  * Fetches a single published car by slug (public).
  */
 export async function getCarBySlug(slug: string): Promise<Car | null> {
-  const supabase = await createClient()
+  const supabase = createClient()
 
   const { data, error } = await supabase
     .from('cars')
@@ -135,7 +135,7 @@ export async function getCarBySlug(slug: string): Promise<Car | null> {
  * Fetches featured/highlighted cars for the homepage.
  */
 export async function getFeaturedCars(limit = 3): Promise<CarCardData[]> {
-  const supabase = await createClient()
+  const supabase = createClient()
 
   const { data, error } = await supabase
     .from('cars')
@@ -172,7 +172,7 @@ export async function getFeaturedCars(limit = 3): Promise<CarCardData[]> {
  * Fetches slugs of all published cars (for sitemap / generateStaticParams).
  */
 export async function getAllCarSlugs(): Promise<string[]> {
-  const supabase = await createClient()
+  const supabase = createClient()
   const { data } = await supabase
     .from('cars')
     .select('slug')
@@ -185,7 +185,7 @@ export async function getAllCarSlugs(): Promise<string[]> {
  * Returns a list of similar cars (same brand or body type), excluding the given slug.
  */
 export async function getSimilarCars(car: Pick<Car, 'brand' | 'body_type' | 'slug'>, limit = 3): Promise<CarCardData[]> {
-  const supabase = await createClient()
+  const supabase = createClient()
 
   const { data } = await supabase
     .from('cars')

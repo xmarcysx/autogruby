@@ -28,6 +28,20 @@ export async function createClient() {
   )
 }
 
+// Public anon client — no cookies, safe for static generation (generateStaticParams / ISR).
+export function createPublicClient() {
+  return createSupabaseClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    },
+  )
+}
+
 // Service-role client for admin operations (server-only, never expose to client).
 // Uses createClient directly (not createServerClient) so the user session from cookies
 // never overrides the Authorization header — service role key bypasses RLS unconditionally.
