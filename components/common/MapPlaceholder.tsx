@@ -8,7 +8,7 @@ interface MapPlaceholderProps {
 export function MapPlaceholder({ className }: MapPlaceholderProps) {
   return (
     <div
-      className={`relative w-full aspect-[16/7] bg-sky-100 rounded-xl overflow-hidden border border-sky-200 flex items-center justify-center ${className ?? ''}`}
+      className={`relative w-full aspect-[16/7] bg-white rounded-xl overflow-hidden border border-sky-200 flex items-center justify-center ${className ?? ''}`}
       aria-label="Mapa lokalizacji komisu Auto Gruby w Tychach"
     >
       <iframe
@@ -26,9 +26,8 @@ export function MapPlaceholder({ className }: MapPlaceholderProps) {
           <MapPin className="h-7 w-7 text-brand-blue" aria-hidden="true" />
         </div>
         <p className="text-white font-semibold text-lg mb-1">{SITE_CONFIG.name}</p>
-        <address className="not-italic text-slate-400 text-sm">{SITE_CONFIG.address}</address>
+        <address className="not-italic text-slate-600 text-sm">{SITE_CONFIG.address}</address>
         <p className="text-slate-500 text-xs mt-3">
-          {/* TODO: Replace with real Google Maps link */}
           <a
             href={`https://maps.google.com/?q=${encodeURIComponent(SITE_CONFIG.address)}`}
             target="_blank"

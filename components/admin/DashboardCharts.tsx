@@ -31,7 +31,7 @@ export function ViewsAreaChart({ data }: ViewsChartProps) {
             <stop offset="95%" stopColor="#0284C7" stopOpacity={0} />
           </linearGradient>
         </defs>
-        <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
         <XAxis
           dataKey="label"
           tick={{ fill: '#64748b', fontSize: 11 }}
@@ -47,13 +47,13 @@ export function ViewsAreaChart({ data }: ViewsChartProps) {
         />
         <Tooltip
           contentStyle={{
-            backgroundColor: '#0f172a',
-            border: '1px solid #1e293b',
+            backgroundColor: '#ffffff',
+            border: '1px solid #e2e8f0',
             borderRadius: '8px',
-            color: '#fff',
+            color: '#0f172a',
             fontSize: 12,
           }}
-          labelStyle={{ color: '#94a3b8' }}
+          labelStyle={{ color: '#64748b' }}
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           formatter={(value: any) => [value, 'Wyświetlenia']}
         />
@@ -79,7 +79,7 @@ export function WeeklyBarChart({ data }: WeeklyBarChartProps) {
   return (
     <ResponsiveContainer width="100%" height={220}>
       <BarChart data={data} margin={{ top: 5, right: 10, left: -20, bottom: 0 }} barGap={4}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
         <XAxis
           dataKey="day"
           tick={{ fill: '#64748b', fontSize: 11 }}
@@ -94,10 +94,10 @@ export function WeeklyBarChart({ data }: WeeklyBarChartProps) {
         />
         <Tooltip
           contentStyle={{
-            backgroundColor: '#0f172a',
-            border: '1px solid #1e293b',
+            backgroundColor: '#ffffff',
+            border: '1px solid #e2e8f0',
             borderRadius: '8px',
-            color: '#fff',
+            color: '#0f172a',
             fontSize: 12,
           }}
         />

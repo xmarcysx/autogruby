@@ -113,14 +113,14 @@ export function ContactWidget() {
 
       {/* Dialog */}
       <Dialog open={open} onOpenChange={handleOpenChange}>
-        <DialogContent className="sm:max-w-[480px] max-h-[90vh] overflow-y-auto bg-slate-900 border-slate-700 text-white">
+        <DialogContent className="sm:max-w-[480px] max-h-[90vh] overflow-y-auto bg-white border-slate-200 text-slate-900">
           {formState === 'success' ? (
             <div className="flex flex-col items-center gap-4 py-6 text-center">
               <div className="w-16 h-16 rounded-full bg-brand-blue/15 flex items-center justify-center">
                 <Send className="w-8 h-8 text-brand-blue" />
               </div>
-              <DialogTitle className="text-xl text-white">Wiadomość wysłana!</DialogTitle>
-              <p className="text-slate-400 text-sm">
+              <DialogTitle className="text-xl text-slate-900">Wiadomość wysłana!</DialogTitle>
+              <p className="text-slate-500 text-sm">
                 Odezwiemy się najszybciej jak to możliwe. Dziękujemy za kontakt.
               </p>
               <Button
@@ -137,9 +137,9 @@ export function ContactWidget() {
                   <div className="w-9 h-9 rounded-full bg-brand-blue/15 flex items-center justify-center shrink-0">
                     <MessageCircle className="w-5 h-5 text-brand-blue" />
                   </div>
-                  <DialogTitle className="text-xl text-white">Napisz do nas</DialogTitle>
+                  <DialogTitle className="text-xl text-slate-900">Napisz do nas</DialogTitle>
                 </div>
-                <DialogDescription className="text-slate-400">
+                <DialogDescription className="text-slate-500">
                   Wypełnij formularz – odpiszemy tak szybko jak to możliwe.
                 </DialogDescription>
               </DialogHeader>
@@ -148,7 +148,7 @@ export function ContactWidget() {
                 {/* Imię & Nazwisko */}
                 <div className="grid grid-cols-2 gap-3">
                   <div className="flex flex-col gap-1.5">
-                    <Label htmlFor="firstName" className="text-slate-400 text-xs uppercase tracking-wide font-semibold">
+                    <Label htmlFor="firstName" className="text-slate-600 text-xs uppercase tracking-wide font-semibold">
                       Imię <span className="text-red-400">*</span>
                     </Label>
                     <Input
@@ -158,7 +158,7 @@ export function ContactWidget() {
                       onChange={handleChange}
                       placeholder="Jan"
                       className={cn(
-                        'bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-brand-blue focus-visible:border-brand-blue',
+                        'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus-visible:ring-brand-blue focus-visible:border-brand-blue',
                         errors.firstName && 'border-red-500',
                       )}
                     />
@@ -167,7 +167,7 @@ export function ContactWidget() {
                     )}
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <Label htmlFor="lastName" className="text-slate-400 text-xs uppercase tracking-wide font-semibold">
+                    <Label htmlFor="lastName" className="text-slate-600 text-xs uppercase tracking-wide font-semibold">
                       Nazwisko <span className="text-red-400">*</span>
                     </Label>
                     <Input
@@ -177,7 +177,7 @@ export function ContactWidget() {
                       onChange={handleChange}
                       placeholder="Kowalski"
                       className={cn(
-                        'bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-brand-blue focus-visible:border-brand-blue',
+                        'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus-visible:ring-brand-blue focus-visible:border-brand-blue',
                         errors.lastName && 'border-red-500',
                       )}
                     />
@@ -189,7 +189,7 @@ export function ContactWidget() {
 
                 {/* Telefon */}
                 <div className="flex flex-col gap-1.5">
-                  <Label htmlFor="phone" className="text-slate-400 text-xs uppercase tracking-wide font-semibold">
+                  <Label htmlFor="phone" className="text-slate-600 text-xs uppercase tracking-wide font-semibold">
                     Telefon <span className="text-red-400">*</span>
                   </Label>
                   <Input
@@ -200,7 +200,7 @@ export function ContactWidget() {
                     onChange={handleChange}
                     placeholder="+48 600 000 000"
                     className={cn(
-                      'bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-brand-blue focus-visible:border-brand-blue',
+                      'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus-visible:ring-brand-blue focus-visible:border-brand-blue',
                       errors.phone && 'border-red-500',
                     )}
                   />
@@ -209,7 +209,7 @@ export function ContactWidget() {
 
                 {/* Temat */}
                 <div className="flex flex-col gap-1.5">
-                  <Label htmlFor="subject" className="text-slate-400 text-xs uppercase tracking-wide font-semibold">
+                  <Label htmlFor="subject" className="text-slate-600 text-xs uppercase tracking-wide font-semibold">
                     Temat <span className="text-red-400">*</span>
                   </Label>
                   <Input
@@ -219,7 +219,7 @@ export function ContactWidget() {
                     onChange={handleChange}
                     placeholder="np. Zapytanie o ofertę"
                     className={cn(
-                      'bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-brand-blue focus-visible:border-brand-blue',
+                      'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus-visible:ring-brand-blue focus-visible:border-brand-blue',
                       errors.subject && 'border-red-500',
                     )}
                   />
@@ -228,7 +228,7 @@ export function ContactWidget() {
 
                 {/* Wiadomość */}
                 <div className="flex flex-col gap-1.5">
-                  <Label htmlFor="message" className="text-slate-400 text-xs uppercase tracking-wide font-semibold">
+                  <Label htmlFor="message" className="text-slate-600 text-xs uppercase tracking-wide font-semibold">
                     Wiadomość <span className="text-red-400">*</span>
                   </Label>
                   <textarea
@@ -239,7 +239,7 @@ export function ContactWidget() {
                     rows={4}
                     placeholder="Opisz czym możemy Ci pomóc..."
                     className={cn(
-                      'flex w-full rounded-md border bg-slate-800 border-slate-700 text-white px-3 py-2 text-sm placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 disabled:cursor-not-allowed disabled:opacity-50 resize-none',
+                      'flex w-full rounded-md border bg-white border-slate-200 text-slate-900 px-3 py-2 text-sm placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 resize-none',
                       errors.message && 'border-red-500',
                     )}
                   />

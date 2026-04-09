@@ -31,9 +31,9 @@ function Tooltip({ label, children }: { label: string; children: React.ReactNode
   return (
     <div className="relative group/tip">
       {children}
-      <div className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs text-slate-200 whitespace-nowrap opacity-0 group-hover/tip:opacity-100 transition-opacity duration-150 z-10">
+      <div className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 rounded-md bg-slate-900 border border-slate-800 text-xs text-slate-100 whitespace-nowrap opacity-0 group-hover/tip:opacity-100 transition-opacity duration-150 z-10">
         {label}
-        <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-800" />
+        <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900" />
       </div>
     </div>
   )
@@ -85,7 +85,7 @@ export default function CarRowActions({ carId, carSlug, sold }: CarRowActionsPro
           <button
             onClick={() => router.push(`/oferty/${carSlug}`)}
             disabled={pending}
-            className="p-2 rounded-lg text-slate-500 hover:text-slate-200 hover:bg-slate-700 transition-colors"
+            className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
           >
             <Eye className="h-4 w-4" />
           </button>
@@ -149,12 +149,12 @@ export default function CarRowActions({ carId, carSlug, sold }: CarRowActionsPro
 
       {/* Sold confirmation dialog */}
       <Dialog open={soldDialogOpen} onOpenChange={setSoldDialogOpen}>
-        <DialogContent className="max-w-sm bg-slate-900 border-slate-700 text-white">
+        <DialogContent className="max-w-sm bg-white border-slate-200 text-slate-900">
           <DialogHeader>
-            <DialogTitle className="text-white">
+            <DialogTitle className="text-slate-900">
               {sold ? 'Oznacz jako aktywne?' : 'Oznacz jako sprzedane?'}
             </DialogTitle>
-            <DialogDescription className="text-slate-400">
+            <DialogDescription className="text-slate-500">
               {sold
                 ? 'Auto wróci do aktywnych ofert i będzie widoczne na stronie.'
                 : 'Auto zostanie oznaczone jako sprzedane i zniknie z aktywnych ofert.'}
@@ -162,7 +162,7 @@ export default function CarRowActions({ carId, carSlug, sold }: CarRowActionsPro
           </DialogHeader>
           <div className="flex gap-3 justify-end mt-2">
             <DialogClose asChild>
-              <Button variant="ghost" className="text-slate-400 hover:text-white hover:bg-slate-800">
+              <Button variant="ghost" className="text-slate-600 hover:text-slate-900 hover:bg-slate-100">
                 Nie
               </Button>
             </DialogClose>
@@ -178,16 +178,16 @@ export default function CarRowActions({ carId, carSlug, sold }: CarRowActionsPro
 
       {/* Delete confirmation dialog */}
       <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-        <DialogContent className="max-w-sm bg-slate-900 border-slate-700 text-white">
+        <DialogContent className="max-w-sm bg-white border-slate-200 text-slate-900">
           <DialogHeader>
-            <DialogTitle className="text-white">Usunąć auto?</DialogTitle>
-            <DialogDescription className="text-slate-400">
+            <DialogTitle className="text-slate-900">Usunąć auto?</DialogTitle>
+            <DialogDescription className="text-slate-500">
               Ta operacja jest nieodwracalna. Auto oraz wszystkie jego zdjęcia zostaną trwale usunięte z bazy danych.
             </DialogDescription>
           </DialogHeader>
           <div className="flex gap-3 justify-end mt-2">
             <DialogClose asChild>
-              <Button variant="ghost" className="text-slate-400 hover:text-white hover:bg-slate-800">
+              <Button variant="ghost" className="text-slate-600 hover:text-slate-900 hover:bg-slate-100">
                 Nie
               </Button>
             </DialogClose>

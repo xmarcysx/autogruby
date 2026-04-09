@@ -130,7 +130,7 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
         {existingImages.length > 0 && (
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 mb-4">
             {existingImages.map((img) => (
-              <div key={img.id} className="relative group aspect-[4/3] rounded-xl overflow-hidden bg-slate-800">
+              <div key={img.id} className="relative group aspect-[4/3] rounded-xl overflow-hidden bg-slate-100">
                 {img.url && (
                   <Image src={img.url} alt={img.alt} fill className="object-cover" sizes="120px" />
                 )}
@@ -165,7 +165,7 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
         {previewImages.length > 0 && (
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 mb-4">
             {previewImages.map((img, i) => (
-              <div key={img.previewUrl} className="relative group aspect-[4/3] rounded-xl overflow-hidden bg-slate-800">
+              <div key={img.previewUrl} className="relative group aspect-[4/3] rounded-xl overflow-hidden bg-slate-100">
                 <Image src={img.previewUrl} alt={`Nowe ${i + 1}`} fill className="object-cover" sizes="120px" />
                 {img.isCover && (
                   <div className="absolute top-1 left-1 bg-brand-gold text-slate-900 text-[10px] font-bold px-1.5 py-0.5 rounded-md z-10">
@@ -188,7 +188,7 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-dashed border-slate-600 text-slate-400 hover:text-white hover:border-brand-blue hover:bg-brand-blue/5 transition-all text-sm"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-dashed border-slate-300 text-slate-500 hover:text-brand-blue hover:border-brand-blue hover:bg-brand-blue/5 transition-all text-sm"
         >
           <ImagePlus className="h-4 w-4" />
           Dodaj zdjęcia
@@ -386,7 +386,7 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
           defaultValue={car?.description ?? ''}
           rows={6}
           placeholder="Opisz stan techniczny, historię auta, wyposażenie dodatkowe..."
-          className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/20 resize-y"
+          className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/20 resize-y"
         />
       </Section>
 
@@ -400,11 +400,11 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
       </Section>
 
       {/* Submit */}
-      <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
+      <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200">
         <Button
           type="button"
           variant="outline"
-          className="border-slate-700 text-slate-400 hover:text-white hover:bg-slate-800"
+          className="border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100"
           onClick={() => window.history.back()}
         >
           Anuluj
@@ -429,9 +429,9 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
 
 function Section({ title, description, children }: { title: string; description?: string; children: React.ReactNode }) {
   return (
-    <div className="bg-slate-900 rounded-2xl border border-slate-800 p-5 lg:p-6">
+    <div className="bg-white rounded-2xl border border-slate-200 p-5 lg:p-6">
       <div className="mb-5">
-        <h2 className="text-white font-bold text-sm">{title}</h2>
+        <h2 className="text-slate-900 font-bold text-sm">{title}</h2>
         {description && <p className="text-slate-500 text-xs mt-0.5">{description}</p>}
       </div>
       {children}
@@ -442,7 +442,7 @@ function Section({ title, description, children }: { title: string; description?
 function Field({ label, children, className }: { label: string; children: React.ReactNode; className?: string }) {
   return (
     <div className={`space-y-1.5 ${className ?? ''}`}>
-      <Label className="text-slate-300 text-xs font-medium">{label}</Label>
+      <Label className="text-slate-700 text-xs font-medium">{label}</Label>
       {children}
     </div>
   )
@@ -451,9 +451,9 @@ function Field({ label, children, className }: { label: string; children: React.
 function ToggleField({ name, label, description, defaultValue }: { name: string; label: string; description: string; defaultValue: boolean }) {
   const [checked, setChecked] = useState(defaultValue)
   return (
-    <div className="flex items-center justify-between p-4 rounded-xl bg-slate-800 border border-slate-700">
+    <div className="flex items-center justify-between p-4 rounded-xl bg-slate-50 border border-slate-200">
       <div>
-        <div className="text-sm font-medium text-white">{label}</div>
+        <div className="text-sm font-medium text-slate-900">{label}</div>
         <div className="text-xs text-slate-500 mt-0.5">{description}</div>
       </div>
       <input type="hidden" name={name} value={checked ? 'true' : 'false'} />
@@ -462,7 +462,7 @@ function ToggleField({ name, label, description, defaultValue }: { name: string;
         role="switch"
         aria-checked={checked}
         onClick={() => setChecked((v) => !v)}
-        className={`relative w-10 h-5 rounded-full transition-colors ${checked ? 'bg-brand-blue' : 'bg-slate-600'}`}
+        className={`relative w-10 h-5 rounded-full transition-colors ${checked ? 'bg-brand-blue' : 'bg-slate-300'}`}
       >
         <span className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform ${checked ? 'translate-x-5' : 'translate-x-0'}`} />
       </button>
@@ -470,5 +470,5 @@ function ToggleField({ name, label, description, defaultValue }: { name: string;
   )
 }
 
-const inputClass = 'bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus:border-brand-blue focus:ring-brand-blue/20 h-10 text-sm'
-const selectClass = 'w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/20 h-10'
+const inputClass = 'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-brand-blue focus:ring-brand-blue/20 h-10 text-sm'
+const selectClass = 'w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/20 h-10'

@@ -131,7 +131,7 @@ export default function ContactPage() {
 
             {/* Map */}
             <div className="space-y-4">
-              <h2 className="text-xl font-bold text-slate-900">Znajdź nas na mapie</h2>
+              <h2 className="text-xl font-bold text-slate-900 mb-5">Znajdź nas na mapie</h2>
               <MapPlaceholder />
               <p className="text-slate-500 text-sm text-center">
                 Bezpłatny parking dla klientów na miejscu

@@ -30,12 +30,12 @@ export default async function EditCarPage({ params }: PageProps) {
         <div className="flex items-center gap-4">
           <Link
             href="/admin/cars"
-            className="p-2 rounded-xl text-slate-500 hover:text-white hover:bg-slate-800 transition-colors"
+            className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <div>
-            <h1 className="text-2xl font-black text-white">Edytuj auto</h1>
+            <h1 className="text-2xl font-black text-slate-900">Edytuj auto</h1>
             <p className="text-slate-500 text-sm mt-0.5 truncate max-w-96">{car.title}</p>
           </div>
         </div>
