@@ -1,14 +1,34 @@
 'use client'
 
-import { useState } from 'react'
-import Image from 'next/image'
-import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { CarImage } from '@/types/car'
+import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react'
+import Image from 'next/image'
+import { useRef, useState } from 'react'
 
 interface CarGalleryProps {
   images: CarImage[]
   carTitle: string
+}
+
+const SWIPE_THRESHOLD = 50
+
+function useSwipe(onSwipeLeft: () => void, onSwipeRight: () => void) {
+  const touchStartX = useRef<number | null>(null)
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return
+    const delta = touchStartX.current - e.changedTouches[0].clientX
+    if (delta > SWIPE_THRESHOLD) onSwipeLeft()
+    else if (delta < -SWIPE_THRESHOLD) onSwipeRight()
+    touchStartX.current = null
+  }
+
+  return { onTouchStart, onTouchEnd }
 }
 
 export function CarGallery({ images, carTitle }: CarGalleryProps) {
@@ -24,39 +44,50 @@ export function CarGallery({ images, carTitle }: CarGalleryProps) {
   }
 
   const activeImage = images[activeIndex]
+  const total = images.length
 
-  const goTo = (index: number) => {
-    setActiveIndex(Math.max(0, Math.min(images.length - 1, index)))
-  }
+  const goTo = (index: number) => setActiveIndex((index + total) % total)
+  const goPrev = () => goTo(activeIndex - 1)
+  const goNext = () => goTo(activeIndex + 1)
+
+  const gallerySwipe = useSwipe(goNext, goPrev)
+  const lightboxSwipe = useSwipe(goNext, goPrev)
 
   return (
     <>
       {/* Main image */}
-      <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-slate-800 border border-slate-700 cursor-zoom-in group">
+      <div
+        className="relative aspect-[16/10] rounded-xl overflow-hidden bg-slate-800 border border-slate-700 group cursor-zoom-in"
+        onClick={() => setLightboxOpen(true)}
+        {...gallerySwipe}
+        role="button"
+        aria-label="Otwórz podgląd zdjęcia"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === 'Enter' && setLightboxOpen(true)}
+      >
         <Image
           src={activeImage.url ?? ''}
           alt={activeImage.alt || `${carTitle} – zdjęcie ${activeIndex + 1}`}
           fill
-          className="object-cover"
+          className="object-cover select-none pointer-events-none"
           sizes="(max-width: 768px) 100vw, 65vw"
           priority={activeIndex === 0}
+          draggable={false}
         />
 
-        {/* Nav arrows */}
-        {images.length > 1 && (
+        {/* Nav arrows — always visible on mobile, hover-only on desktop */}
+        {total > 1 && (
           <>
             <button
-              onClick={() => goTo(activeIndex - 1)}
-              disabled={activeIndex === 0}
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hover:bg-black/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
+              onClick={(e) => { e.stopPropagation(); goPrev() }}
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity hover:bg-black/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
               aria-label="Poprzednie zdjęcie"
             >
               <ChevronLeft className="h-5 w-5" aria-hidden="true" />
             </button>
             <button
-              onClick={() => goTo(activeIndex + 1)}
-              disabled={activeIndex === images.length - 1}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hover:bg-black/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
+              onClick={(e) => { e.stopPropagation(); goNext() }}
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity hover:bg-black/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
               aria-label="Następne zdjęcie"
             >
               <ChevronRight className="h-5 w-5" aria-hidden="true" />
@@ -66,23 +97,37 @@ export function CarGallery({ images, carTitle }: CarGalleryProps) {
 
         {/* Counter + zoom */}
         <div className="absolute bottom-3 right-3 flex items-center gap-2">
-          {images.length > 1 && (
+          {total > 1 && (
             <span className="bg-black/60 text-white text-xs px-2.5 py-1 rounded-full">
-              {activeIndex + 1} / {images.length}
+              {activeIndex + 1} / {total}
             </span>
           )}
-          <button
-            onClick={() => setLightboxOpen(true)}
-            className="w-8 h-8 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
-            aria-label="Powiększ zdjęcie"
+          <div
+            className="w-8 h-8 rounded-full bg-black/60 text-white flex items-center justify-center"
+            aria-hidden="true"
           >
-            <ZoomIn className="h-4 w-4" aria-hidden="true" />
-          </button>
+            <ZoomIn className="h-4 w-4" />
+          </div>
         </div>
+
+        {/* Mobile dot indicators */}
+        {total > 1 && (
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 sm:hidden">
+            {images.map((_, idx) => (
+              <div
+                key={idx}
+                className={cn(
+                  'w-1.5 h-1.5 rounded-full transition-all',
+                  idx === activeIndex ? 'bg-white w-3' : 'bg-white/50',
+                )}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Thumbnails */}
-      {images.length > 1 && (
+      {total > 1 && (
         <div
           className="flex gap-2 mt-3 overflow-x-auto pb-1 scrollbar-thin"
           role="tablist"
@@ -119,29 +164,30 @@ export function CarGallery({ images, carTitle }: CarGalleryProps) {
           role="dialog"
           aria-label="Podgląd zdjęcia"
           aria-modal="true"
+          onClick={() => setLightboxOpen(false)}
+          {...lightboxSwipe}
         >
+          {/* Close */}
           <button
-            onClick={() => setLightboxOpen(false)}
-            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
+            onClick={(e) => { e.stopPropagation(); setLightboxOpen(false) }}
+            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold z-10"
             aria-label="Zamknij podgląd"
           >
             <X className="h-5 w-5" aria-hidden="true" />
           </button>
 
-          {images.length > 1 && (
+          {total > 1 && (
             <>
               <button
-                onClick={() => goTo(activeIndex - 1)}
-                disabled={activeIndex === 0}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 disabled:opacity-30 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
+                onClick={(e) => { e.stopPropagation(); goPrev() }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold z-10"
                 aria-label="Poprzednie zdjęcie"
               >
                 <ChevronLeft className="h-6 w-6" aria-hidden="true" />
               </button>
               <button
-                onClick={() => goTo(activeIndex + 1)}
-                disabled={activeIndex === images.length - 1}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 disabled:opacity-30 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
+                onClick={(e) => { e.stopPropagation(); goNext() }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold z-10"
                 aria-label="Następne zdjęcie"
               >
                 <ChevronRight className="h-6 w-6" aria-hidden="true" />
@@ -149,18 +195,22 @@ export function CarGallery({ images, carTitle }: CarGalleryProps) {
             </>
           )}
 
-          <div className="relative w-full max-w-5xl max-h-[90vh] aspect-[16/10] mx-6">
+          <div
+            className="relative w-full max-w-5xl max-h-[90vh] aspect-[16/10] mx-6"
+            onClick={(e) => e.stopPropagation()}
+          >
             <Image
               src={activeImage.url ?? ''}
               alt={activeImage.alt || `${carTitle} – zdjęcie ${activeIndex + 1}`}
               fill
-              className="object-contain"
+              className="object-contain select-none"
               sizes="100vw"
+              draggable={false}
             />
           </div>
 
           <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/50 text-sm">
-            {activeIndex + 1} / {images.length}
+            {activeIndex + 1} / {total}
           </p>
         </div>
       )}

@@ -1,21 +1,23 @@
 'use client'
 
-import { useState, useRef, useTransition } from 'react'
-import Image from 'next/image'
-import {
-  Save,
-  Loader2,
-  ImagePlus,
-  X,
-  Star,
-  AlertCircle,
-} from 'lucide-react'
+import type { CarFormState } from '@/app/actions/admin/cars'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { CAR_BRANDS, FUEL_TYPE_LABELS, TRANSMISSION_LABELS, BODY_TYPE_LABELS, DRIVE_TYPE_LABELS } from '@/lib/constants'
+import { BODY_TYPE_LABELS, CAR_BRANDS, DRIVE_TYPE_LABELS, FUEL_TYPE_LABELS, TRANSMISSION_LABELS } from '@/lib/constants'
+import { cn } from '@/lib/utils'
 import type { Car, CarImage } from '@/types/car'
-import type { CarFormState } from '@/app/actions/admin/cars'
+import {
+  AlertCircle,
+  Eye,
+  ImagePlus,
+  Loader2,
+  Save,
+  Star,
+  X,
+} from 'lucide-react'
+import Image from 'next/image'
+import { useRef, useState, useTransition } from 'react'
 
 interface CarFormProps {
   car?: Car
@@ -39,6 +41,9 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
   const [coverExistingId, setCoverExistingId] = useState<string | undefined>(car?.cover_image?.id)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
+
+  const [activeMenu, setActiveMenu] = useState<string | null>(null)
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
 
   const [brand, setBrand] = useState(car?.brand ?? '')
   const [model, setModel] = useState(car?.model ?? '')
@@ -126,62 +131,181 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
       )}
 
       {/* === SECTION: Zdjęcia === */}
-      <Section title="Zdjęcia" description="Wybierz zdjęcia auta. Kliknij gwiazdkę aby ustawić okładkę.">
+      <Section title="Zdjęcia" description="Na telefonie: dotknij zdjęcie by zobaczyć opcje. Na komputerze: najedź myszką.">
+        {/* Backdrop — closes active menu on mobile */}
+        {activeMenu !== null && (
+          <div
+            className="fixed inset-0 z-10 sm:hidden"
+            onClick={() => setActiveMenu(null)}
+            aria-hidden="true"
+          />
+        )}
+
         {existingImages.length > 0 && (
-          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 mb-4">
-            {existingImages.map((img) => (
-              <div key={img.id} className="relative group aspect-[4/3] rounded-xl overflow-hidden bg-slate-100">
-                {img.url && (
-                  <Image src={img.url} alt={img.alt} fill className="object-cover" sizes="120px" />
-                )}
-                {coverExistingId === img.id && (
-                  <div className="absolute top-1 left-1 bg-brand-gold text-slate-900 text-[10px] font-bold px-1.5 py-0.5 rounded-md z-10">
-                    Okładka
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 mb-4">
+            {existingImages.map((img) => {
+              const menuKey = `ex-${img.id}`
+              const isOpen = activeMenu === menuKey
+              return (
+                <div
+                  key={img.id}
+                  className="relative group aspect-[4/3] rounded-xl overflow-hidden bg-slate-100 cursor-pointer"
+                  onClick={() => setActiveMenu(isOpen ? null : menuKey)}
+                >
+                  {img.url && (
+                    <Image src={img.url} alt={img.alt} fill className="object-cover" sizes="160px" />
+                  )}
+                  {coverExistingId === img.id && (
+                    <div className={cn("absolute top-1 left-1 bg-brand-gold text-slate-900 text-[10px] font-bold px-1.5 py-0.5 rounded-md z-20", isOpen && "hidden sm:block")}>
+                      Okładka
+                    </div>
+                  )}
+
+                  {/* Overlay */}
+                  <div
+                    className={cn( 
+                      'absolute inset-0 bg-slate-900/70 transition-opacity z-10',
+                      isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none sm:pointer-events-auto sm:group-hover:opacity-100',
+                    )}
+                  >
+                    {/* Mobile: vertical labeled buttons */}
+                    <div className="sm:hidden flex flex-col gap-1.5 p-2 h-full justify-center">
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); setCoverExisting(img.id); setActiveMenu(null) }}
+                        className="flex items-center gap-2 w-full py-1.5 px-2 rounded-lg bg-brand-gold text-slate-900 text-xs font-semibold"
+                      >
+                        <Star className="h-3.5 w-3.5 shrink-0" /> Okładka
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); setPreviewUrl(img.url ?? null); setActiveMenu(null) }}
+                        className="flex items-center gap-2 w-full py-1.5 px-2 rounded-lg bg-sky-500 text-white text-xs font-semibold"
+                      >
+                        <Eye className="h-3.5 w-3.5 shrink-0" /> Podgląd
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); setExistingImages((prev) => prev.filter((i) => i.id !== img.id)); setActiveMenu(null) }}
+                        className="flex items-center gap-2 w-full py-1.5 px-2 rounded-lg bg-red-500 text-white text-xs font-semibold"
+                      >
+                        <X className="h-3.5 w-3.5 shrink-0" /> Usuń
+                      </button>
+                    </div>
+                    {/* Desktop: icon-only buttons */}
+                    <div className="hidden sm:flex items-center justify-center gap-2 h-full">
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); setCoverExisting(img.id) }}
+                        className="p-2 rounded-lg bg-brand-gold text-slate-900 hover:bg-yellow-400"
+                        title="Ustaw jako okładkę"
+                      >
+                        <Star className="h-5 w-5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); setPreviewUrl(img.url ?? null) }}
+                        className="p-2 rounded-lg bg-sky-500 text-white hover:bg-sky-600"
+                        title="Podgląd"
+                      >
+                        <Eye className="h-5 w-5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); setExistingImages((prev) => prev.filter((i) => i.id !== img.id)) }}
+                        className="p-2 rounded-lg bg-red-500 text-white hover:bg-red-600"
+                        title="Usuń"
+                      >
+                        <X className="h-5 w-5" />
+                      </button>
+                    </div>
                   </div>
-                )}
-                <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setCoverExisting(img.id)}
-                    className="p-1.5 rounded-lg bg-brand-gold text-slate-900 hover:bg-brand-gold-dark"
-                    title="Ustaw jako okładkę"
-                  >
-                    <Star className="h-3.5 w-3.5" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setExistingImages((prev) => prev.filter((i) => i.id !== img.id))}
-                    className="p-1.5 rounded-lg bg-red-500 text-white hover:bg-red-600"
-                    title="Usuń"
-                  >
-                    <X className="h-3.5 w-3.5" />
-                  </button>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         )}
 
         {previewImages.length > 0 && (
-          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 mb-4">
-            {previewImages.map((img, i) => (
-              <div key={img.previewUrl} className="relative group aspect-[4/3] rounded-xl overflow-hidden bg-slate-100">
-                <Image src={img.previewUrl} alt={`Nowe ${i + 1}`} fill className="object-cover" sizes="120px" />
-                {img.isCover && (
-                  <div className="absolute top-1 left-1 bg-brand-gold text-slate-900 text-[10px] font-bold px-1.5 py-0.5 rounded-md z-10">
-                    Okładka
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 mb-4">
+            {previewImages.map((img, i) => {
+              const menuKey = `pre-${i}`
+              const isOpen = activeMenu === menuKey
+              return (
+                <div
+                  key={img.previewUrl}
+                  className="relative group aspect-[4/3] rounded-xl overflow-hidden bg-slate-100 cursor-pointer"
+                  onClick={() => setActiveMenu(isOpen ? null : menuKey)}
+                >
+                  <Image src={img.previewUrl} alt={`Nowe ${i + 1}`} fill className="object-cover" sizes="160px" />
+                  {img.isCover && (
+                    <div className={cn("absolute top-1 left-1 bg-brand-gold text-slate-900 text-[10px] font-bold px-1.5 py-0.5 rounded-md z-20", isOpen && "hidden sm:block")}>
+                      Okładka
+                    </div>
+                  )}
+
+                  {/* Overlay */}
+                  <div
+                    className={cn(
+                      'absolute inset-0 bg-slate-900/70 transition-opacity z-10',
+                      isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none sm:pointer-events-auto sm:group-hover:opacity-100',
+                    )}
+                  >
+                    {/* Mobile: vertical labeled buttons */}
+                    <div className="sm:hidden flex flex-col gap-1.5 p-2 h-full justify-center">
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); setCoverPreview(i); setActiveMenu(null) }}
+                        className="flex items-center gap-2 w-full py-1.5 px-2 rounded-lg bg-brand-gold text-slate-900 text-xs font-semibold"
+                      >
+                        <Star className="h-3.5 w-3.5 shrink-0" /> Okładka
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); setPreviewUrl(img.previewUrl); setActiveMenu(null) }}
+                        className="flex items-center gap-2 w-full py-1.5 px-2 rounded-lg bg-sky-500 text-white text-xs font-semibold"
+                      >
+                        <Eye className="h-3.5 w-3.5 shrink-0" /> Podgląd
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); removePreview(i); setActiveMenu(null) }}
+                        className="flex items-center gap-2 w-full py-1.5 px-2 rounded-lg bg-red-500 text-white text-xs font-semibold"
+                      >
+                        <X className="h-3.5 w-3.5 shrink-0" /> Usuń
+                      </button>
+                    </div>
+                    {/* Desktop: icon-only buttons */}
+                    <div className="hidden sm:flex items-center justify-center gap-2 h-full">
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); setCoverPreview(i) }}
+                        className="p-2 rounded-lg bg-brand-gold text-slate-900 hover:bg-yellow-400"
+                        title="Okładka"
+                      >
+                        <Star className="h-5 w-5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); setPreviewUrl(img.previewUrl) }}
+                        className="p-2 rounded-lg bg-sky-500 text-white hover:bg-sky-600"
+                        title="Podgląd"
+                      >
+                        <Eye className="h-5 w-5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); removePreview(i) }}
+                        className="p-2 rounded-lg bg-red-500 text-white hover:bg-red-600"
+                        title="Usuń"
+                      >
+                        <X className="h-5 w-5" />
+                      </button>
+                    </div>
                   </div>
-                )}
-                <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                  <button type="button" onClick={() => setCoverPreview(i)} className="p-1.5 rounded-lg bg-brand-gold text-slate-900 hover:bg-brand-gold-dark" title="Okładka">
-                    <Star className="h-3.5 w-3.5" />
-                  </button>
-                  <button type="button" onClick={() => removePreview(i)} className="p-1.5 rounded-lg bg-red-500 text-white hover:bg-red-600" title="Usuń">
-                    <X className="h-3.5 w-3.5" />
-                  </button>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         )}
 
@@ -202,6 +326,29 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
           onChange={handleFileSelect}
         />
       </Section>
+
+      {/* Image preview lightbox */}
+      {previewUrl && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setPreviewUrl(null)}
+          role="dialog"
+          aria-label="Podgląd zdjęcia"
+          aria-modal="true"
+        >
+          <button
+            type="button"
+            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors"
+            onClick={() => setPreviewUrl(null)}
+            aria-label="Zamknij podgląd"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <div className="relative w-full max-w-3xl max-h-[85vh] aspect-[4/3]" onClick={(e) => e.stopPropagation()}>
+            <Image src={previewUrl} alt="Podgląd zdjęcia" fill className="object-contain" sizes="100vw" />
+          </div>
+        </div>
+      )}
 
       {/* === SECTION: Podstawowe informacje === */}
       <Section title="Podstawowe informacje">

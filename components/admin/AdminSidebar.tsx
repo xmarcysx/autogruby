@@ -38,7 +38,7 @@ export default function AdminSidebar({ onClose }: AdminSidebarProps) {
   }
 
   return (
-    <aside className="w-64 shrink-0 bg-white border-r border-slate-200 flex flex-col min-h-screen shadow-sm md:shadow-none">
+    <aside className="w-64 shrink-0 bg-white border-r border-slate-200 flex flex-col h-full min-h-screen md:min-h-0 overflow-y-auto shadow-sm md:shadow-none">
       {/* Logo */}
       <div className="px-5 py-5 border-b border-slate-200">
         <Link href="/admin" className="flex items-center gap-3 group">
