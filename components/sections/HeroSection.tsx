@@ -35,7 +35,7 @@ export function HeroSection() {
           <div className="inline-flex items-center gap-2 bg-white/15 border border-white/30 rounded-full px-4 py-1.5 text-white text-sm font-medium mb-8 animate-fade-in">
             <Star className="h-6 w-6 fill-brand-gold text-brand-gold shrink-0" aria-hidden="true" />
             <p className="text-xl md:text-2xl text-white leading-relaxed">
-              Komis samochodowy{' '}
+              <span className="hidden sm:inline">Komis samochodowy{' '}</span>
               <strong className="fw-bold block sm:inline">Auto Gruby</strong>
             </p>
           </div>

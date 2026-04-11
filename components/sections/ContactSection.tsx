@@ -2,6 +2,7 @@ import { SectionHeading } from '@/components/common/SectionHeading'
 import { Button } from '@/components/ui/button'
 import { SITE_CONFIG } from '@/lib/constants'
 import { Clock, MapPin, Phone } from 'lucide-react'
+import Image from 'next/image'
 
 export function ContactSection() {
   return (
@@ -98,9 +99,14 @@ export function ContactSection() {
           {/* Prawa — jasna karta właściciela */}
           <div className="mt-10 lg:mt-0 lg:pl-8 flex items-center">
             <div className="w-full bg-white rounded-2xl border border-slate-200 shadow-xl p-8 text-center">
-              {/* TODO: Replace placeholder with real owner photo */}
-              <div className="w-28 h-28 rounded-full bg-sky-100 border-4 border-sky-200 mx-auto mb-5 flex items-center justify-center text-5xl">
-                👨‍💼
+              <div className="w-32 h-32 rounded-full bg-sky-100 border-4 border-sky-200 mx-auto mb-5 overflow-hidden">
+                <Image
+                  src="/person.png"
+                  alt="Paweł Trzaska"
+                  width={112}
+                  height={112}
+                  className="w-full h-full object-contain"
+                />
               </div>
               <p className="text-brand-blue text-sm font-bold uppercase tracking-wider mb-1">
                 Właściciel
