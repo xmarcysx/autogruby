@@ -9,7 +9,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div className="flex min-h-screen bg-slate-100">
+    <div className="flex min-h-screen bg-slate-100 overflow-x-hidden">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -29,7 +29,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         <AdminSidebar onClose={() => setSidebarOpen(false)} />
       </div>
 
-      <main className="flex-1 overflow-auto min-w-0">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden min-w-0">
         {/* Mobile top bar */}
         <div className="md:hidden sticky top-0 z-10 bg-white border-b border-slate-200 px-4 py-3 flex items-center gap-3">
           <button
