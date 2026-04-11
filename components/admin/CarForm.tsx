@@ -386,7 +386,7 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
           defaultValue={car?.description ?? ''}
           rows={6}
           placeholder="Opisz stan techniczny, historię auta, wyposażenie dodatkowe..."
-          className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/20 resize-y"
+          className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/20 resize-y min-h-[288px] md:min-h-[144px]"
         />
       </Section>
 

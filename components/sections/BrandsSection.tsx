@@ -50,12 +50,12 @@ export function BrandsSection() {
 
       {/* Fade maski po bokach */}
       <div
-        className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+        className="hidden sm:block absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
         style={{ background: 'linear-gradient(90deg, #ffffff 0%, transparent 100%)' }}
         aria-hidden="true"
       />
       <div
-        className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+        className="hidden sm:block absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
         style={{ background: 'linear-gradient(270deg, #ffffff 0%, transparent 100%)' }}
         aria-hidden="true"
       />

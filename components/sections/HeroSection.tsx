@@ -57,12 +57,12 @@ export function HeroSection() {
 
           {/* CTA buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button variant="gold" size="xl" asChild>
+            <Button variant="gold" size="xl" className="w-full sm:w-auto" asChild>
               <Link href="/oferty" aria-label="Zobacz wszystkie oferty samochodów">
                 Zobacz oferty
               </Link>
             </Button>
-            <Button variant="outline-white" size="xl" asChild>
+            <Button variant="outline-white" size="xl" className="w-full sm:w-auto" asChild>
               <a
                 href={`tel:${SITE_CONFIG.phone.replace(/\s/g, '')}`}
                 aria-label={`Zadzwoń do nas: ${SITE_CONFIG.phone}`}

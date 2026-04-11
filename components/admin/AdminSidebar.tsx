@@ -23,7 +23,11 @@ const navItems = [
   { label: 'Zapytania', href: '/admin/inquiries', icon: MessageSquare },
 ]
 
-export default function AdminSidebar() {
+interface AdminSidebarProps {
+  onClose?: () => void
+}
+
+export default function AdminSidebar({ onClose }: AdminSidebarProps) {
   const pathname = usePathname()
   const [pending, startTransition] = useTransition()
 
@@ -34,7 +38,7 @@ export default function AdminSidebar() {
   }
 
   return (
-    <aside className="w-64 shrink-0 bg-white border-r border-slate-200 flex flex-col min-h-screen shadow-sm">
+    <aside className="w-64 shrink-0 bg-white border-r border-slate-200 flex flex-col min-h-screen shadow-sm md:shadow-none">
       {/* Logo */}
       <div className="px-5 py-5 border-b border-slate-200">
         <Link href="/admin" className="flex items-center gap-3 group">
@@ -60,6 +64,7 @@ export default function AdminSidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={onClose}
               className={cn(
                 'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 group',
                 isActive
@@ -85,6 +90,7 @@ export default function AdminSidebar() {
         <Link
           href="/"
           target="_blank"
+          onClick={onClose}
           className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all"
         >
           <Car className="h-4 w-4" />

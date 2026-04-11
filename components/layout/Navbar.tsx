@@ -105,7 +105,10 @@ export function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 rounded-md text-slate-600 hover:text-brand-blue hover:bg-sky-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
+            className={cn(
+              isScrolled || isMobileOpen ? 'text-slate-600' : 'text-sky-50',
+              'md:hidden p-2 rounded-md hover:text-brand-blue hover:bg-sky-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold'
+            )}
             onClick={() => setIsMobileOpen(!isMobileOpen)}
             aria-label={isMobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
             aria-expanded={isMobileOpen}
@@ -129,6 +132,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={() => setIsMobileOpen(false)}
                 className={cn(
                   'block px-4 py-3 rounded-md text-sm font-medium transition-colors',
                   'text-slate-600 hover:text-brand-blue hover:bg-sky-100',

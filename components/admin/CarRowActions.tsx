@@ -25,6 +25,7 @@ interface CarRowActionsProps {
   carId: string
   carSlug: string
   sold: boolean
+  variant?: 'row' | 'card'
 }
 
 function Tooltip({ label, children }: { label: string; children: React.ReactNode }) {
@@ -39,7 +40,7 @@ function Tooltip({ label, children }: { label: string; children: React.ReactNode
   )
 }
 
-export default function CarRowActions({ carId, carSlug, sold }: CarRowActionsProps) {
+export default function CarRowActions({ carId, carSlug, sold, variant = 'row' }: CarRowActionsProps) {
   const router = useRouter()
   const [pending, startTransition] = useTransition()
   const [actionType, setActionType] = useState<'sold' | 'delete' | null>(null)
@@ -79,65 +80,116 @@ export default function CarRowActions({ carId, carSlug, sold }: CarRowActionsPro
 
   return (
     <>
-      <div className="flex items-center gap-1">
-        {/* View public */}
-        <Tooltip label="Podgląd publiczny">
+      {variant === 'row' ? (
+        <div className="flex items-center gap-1">
+          <Tooltip label="Podgląd publiczny">
+            <button
+              onClick={() => router.push(`/oferty/${carSlug}`)}
+              disabled={pending}
+              className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+            >
+              <Eye className="h-4 w-4" />
+            </button>
+          </Tooltip>
+
+          <Tooltip label="Edytuj">
+            <button
+              onClick={() => router.push(`/admin/cars/${carId}/edit`)}
+              disabled={pending}
+              className="p-2 rounded-lg text-slate-500 hover:text-brand-blue hover:bg-brand-blue/10 transition-colors"
+            >
+              <Pencil className="h-4 w-4" />
+            </button>
+          </Tooltip>
+
+          <Tooltip label={sold ? 'Oznacz jako aktywne' : 'Oznacz jako sprzedane'}>
+            <button
+              onClick={() => setSoldDialogOpen(true)}
+              disabled={pending}
+              className={`p-2 rounded-lg transition-colors ${
+                sold
+                  ? 'text-brand-gold hover:text-white hover:bg-brand-gold/10'
+                  : 'text-slate-500 hover:text-brand-gold hover:bg-brand-gold/10'
+              }`}
+            >
+              {pending && actionType === 'sold' ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : sold ? (
+                <CheckCircle2 className="h-4 w-4" />
+              ) : (
+                <CircleDot className="h-4 w-4" />
+              )}
+            </button>
+          </Tooltip>
+
+          <Tooltip label="Usuń">
+            <button
+              onClick={() => setDeleteDialogOpen(true)}
+              disabled={pending}
+              className="p-2 rounded-lg text-slate-500 hover:text-red-400 hover:bg-red-400/10 transition-colors"
+            >
+              {pending && actionType === 'delete' ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Trash2 className="h-4 w-4" />
+              )}
+            </button>
+          </Tooltip>
+        </div>
+      ) : (
+        /* Card variant — large tappable buttons with labels */
+        <div className="grid grid-cols-4 gap-2">
           <button
             onClick={() => router.push(`/oferty/${carSlug}`)}
             disabled={pending}
-            className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+            className="flex flex-col items-center justify-center gap-1.5 min-h-[56px] rounded-xl bg-slate-50 border border-slate-200 text-slate-500 hover:text-slate-900 hover:bg-slate-100 active:scale-95 transition-all text-xs font-medium"
           >
-            <Eye className="h-4 w-4" />
+            <Eye className="h-5 w-5" />
+            Podgląd
           </button>
-        </Tooltip>
 
-        {/* Edit */}
-        <Tooltip label="Edytuj">
           <button
             onClick={() => router.push(`/admin/cars/${carId}/edit`)}
             disabled={pending}
-            className="p-2 rounded-lg text-slate-500 hover:text-brand-blue hover:bg-brand-blue/10 transition-colors"
+            className="flex flex-col items-center justify-center gap-1.5 min-h-[56px] rounded-xl bg-brand-blue/5 border border-brand-blue/20 text-brand-blue hover:bg-brand-blue/10 active:scale-95 transition-all text-xs font-medium"
           >
-            <Pencil className="h-4 w-4" />
+            <Pencil className="h-5 w-5" />
+            Edytuj
           </button>
-        </Tooltip>
 
-        {/* Toggle sold */}
-        <Tooltip label={sold ? 'Oznacz jako aktywne' : 'Oznacz jako sprzedane'}>
           <button
             onClick={() => setSoldDialogOpen(true)}
             disabled={pending}
-            className={`p-2 rounded-lg transition-colors ${
+            className={`flex flex-col items-center justify-center gap-1.5 min-h-[56px] rounded-xl border active:scale-95 transition-all text-xs font-medium ${
               sold
-                ? 'text-brand-gold hover:text-white hover:bg-brand-gold/10'
-                : 'text-slate-500 hover:text-brand-gold hover:bg-brand-gold/10'
+                ? 'bg-brand-gold/10 border-brand-gold/30 text-brand-gold hover:bg-brand-gold/20'
+                : 'bg-emerald-50 border-emerald-200 text-emerald-700 hover:bg-emerald-100'
             }`}
           >
             {pending && actionType === 'sold' ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
+              <Loader2 className="h-5 w-5 animate-spin" />
             ) : sold ? (
-              <CheckCircle2 className="h-4 w-4" />
+              <CheckCircle2 className="h-5 w-5" />
             ) : (
-              <CircleDot className="h-4 w-4" />
+              <CircleDot className="h-5 w-5" />
             )}
+            {sold ? 'Przywróć' : 'Sprzedane'}
           </button>
-        </Tooltip>
 
-        {/* Delete */}
-        <Tooltip label="Usuń">
           <button
             onClick={() => setDeleteDialogOpen(true)}
             disabled={pending}
-            className="p-2 rounded-lg text-slate-500 hover:text-red-400 hover:bg-red-400/10 transition-colors"
+            className="flex flex-col items-center justify-center gap-1.5 min-h-[56px] rounded-xl bg-red-50 border border-red-200 text-red-500 hover:bg-red-100 active:scale-95 transition-all text-xs font-medium"
           >
             {pending && actionType === 'delete' ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
+              <Loader2 className="h-5 w-5 animate-spin" />
             ) : (
-              <Trash2 className="h-4 w-4" />
+              <Trash2 className="h-5 w-5" />
             )}
+            Usuń
           </button>
-        </Tooltip>
-      </div>
+        </div>
+      )}
 
       {/* Inline error */}
       {actionError && (

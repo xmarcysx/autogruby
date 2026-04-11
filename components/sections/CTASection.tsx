@@ -61,13 +61,13 @@ export function CTASection() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button variant="gold" size="xl" asChild>
+          <Button variant="gold" size="xl" className="w-full sm:w-auto" asChild>
             <Link href="/oferty">
               Przeglądaj oferty
               <ArrowRight className="h-5 w-5 ml-1" aria-hidden="true" />
             </Link>
           </Button>
-          <Button variant="outline-white" size="xl" asChild>
+          <Button variant="outline-white" size="xl" className="w-full sm:w-auto" asChild>
             <a
               href={`tel:${SITE_CONFIG.phone.replace(/\s/g, '')}`}
               aria-label={`Zadzwoń: ${SITE_CONFIG.phone}`}

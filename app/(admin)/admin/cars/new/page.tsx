@@ -1,8 +1,8 @@
-import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
+import { createCarAction } from '@/app/actions/admin/cars'
 import AdminShell from '@/components/admin/AdminShell'
 import CarForm from '@/components/admin/CarForm'
-import { createCarAction } from '@/app/actions/admin/cars'
+import { ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
 
 export default function NewCarPage() {
   return (
@@ -17,7 +17,7 @@ export default function NewCarPage() {
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <div>
-            <h1 className="text-2xl font-black text-white">Dodaj nowe auto</h1>
+            <h1 className="text-2xl font-black text-slate-900">Dodaj nowe auto</h1>
             <p className="text-slate-500 text-sm mt-0.5">Uzupełnij dane oferty i dodaj zdjęcia</p>
           </div>
         </div>

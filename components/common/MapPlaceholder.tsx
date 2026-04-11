@@ -8,35 +8,41 @@ interface MapPlaceholderProps {
 export function MapPlaceholder({ className }: MapPlaceholderProps) {
   return (
     <div
-      className={`relative w-full aspect-[16/7] bg-white rounded-xl overflow-hidden border border-sky-200 flex items-center justify-center ${className ?? ''}`}
+      className={`w-full rounded-xl overflow-hidden border border-sky-200 shadow-sm ${className ?? ''}`}
       aria-label="Mapa lokalizacji komisu Auto Gruby w Tychach"
     >
-      <iframe
-        src="https://www.google.com/maps?q=Auto+Gruby+Tychy&output=embed"
-        width="100%"
-        height="100%"
-        style={{ border: 0 }}
-        allowFullScreen
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-        title="Mapa: Auto Gruby Tychy"
-      />
-      <div className="text-center px-6">
-        <div className="w-14 h-14 rounded-full bg-brand-blue/20 border border-brand-blue/30 flex items-center justify-center mx-auto mb-4">
-          <MapPin className="h-7 w-7 text-brand-blue" aria-hidden="true" />
+      {/* Map iframe */}
+      <div className="relative w-full aspect-[4/3] sm:aspect-[16/7]">
+        <iframe
+          src="https://www.google.com/maps?q=Auto+Gruby+Tychy&output=embed"
+          className="absolute inset-0 w-full h-full"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Mapa: Auto Gruby Tychy"
+        />
+      </div>
+
+      {/* Contact info below map */}
+      <div className="bg-white px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-brand-blue/10 border border-brand-blue/20 flex items-center justify-center shrink-0">
+            <MapPin className="h-5 w-5 text-brand-blue" aria-hidden="true" />
+          </div>
+          <div>
+            <p className="font-semibold text-slate-900 text-sm">{SITE_CONFIG.name}</p>
+            <address className="not-italic text-slate-500 text-sm">{SITE_CONFIG.address}</address>
+          </div>
         </div>
-        <p className="text-white font-semibold text-lg mb-1">{SITE_CONFIG.name}</p>
-        <address className="not-italic text-slate-600 text-sm">{SITE_CONFIG.address}</address>
-        <p className="text-slate-500 text-xs mt-3">
-          <a
-            href={`https://maps.google.com/?q=${encodeURIComponent(SITE_CONFIG.address)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-gold hover:underline"
-          >
-            Otwórz w Google Maps →
-          </a>
-        </p>
+        <a
+          href={`https://maps.google.com/?q=${encodeURIComponent(SITE_CONFIG.address)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-brand-gold hover:underline text-sm font-medium shrink-0"
+        >
+          Otwórz w Google Maps →
+        </a>
       </div>
     </div>
   )
