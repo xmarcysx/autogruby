@@ -1,3 +1,4 @@
+import { ViewTracker } from '@/components/common/ViewTracker'
 import { Breadcrumbs } from '@/components/common/Breadcrumbs'
 import { CarCard } from '@/components/common/CarCard'
 import { CarGallery } from '@/components/common/CarGallery'
@@ -85,6 +86,7 @@ export default async function CarDetailPage({ params }: PageProps) {
 
   return (
     <>
+      <ViewTracker carId={car.id} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(carJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 

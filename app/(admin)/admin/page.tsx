@@ -1,28 +1,15 @@
 import { Car, TrendingUp, MessageSquare, Eye, ArrowUpRight } from 'lucide-react'
 import AdminShell from '@/components/admin/AdminShell'
 import { ViewsAreaChart, WeeklyBarChart } from '@/components/admin/DashboardCharts'
-import { getAdminStats, getAdminViewsChart } from '@/services/admin'
-
-const MOCK_WEEKLY = [
-  { day: 'Pon', wyswietlenia: 32, zapytania: 2 },
-  { day: 'Wt', wyswietlenia: 45, zapytania: 3 },
-  { day: 'Śr', wyswietlenia: 28, zapytania: 1 },
-  { day: 'Czw', wyswietlenia: 51, zapytania: 4 },
-  { day: 'Pt', wyswietlenia: 67, zapytania: 5 },
-  { day: 'Sob', wyswietlenia: 89, zapytania: 6 },
-  { day: 'Nd', wyswietlenia: 43, zapytania: 2 },
-]
-
-const MOCK_TOP_CARS = [
-  { title: 'BMW 3 2020 diesel', views: 247 },
-  { title: 'Toyota Corolla Hybrid 2021', views: 189 },
-  { title: 'Volkswagen Golf 2019', views: 154 },
-  { title: 'Audi A4 2018 diesel', views: 132 },
-  { title: 'Ford Focus 2020 benzyna', views: 98 },
-]
+import { getAdminStats, getAdminViewsChart, getAdminWeeklyActivity, getAdminTopCars } from '@/services/admin'
 
 export default async function AdminDashboardPage() {
-  const [stats, viewsData] = await Promise.all([getAdminStats(), getAdminViewsChart()])
+  const [stats, viewsData, weeklyData, topCars] = await Promise.all([
+    getAdminStats(),
+    getAdminViewsChart(),
+    getAdminWeeklyActivity(),
+    getAdminTopCars(),
+  ])
 
   const kpiCards = [
     {
@@ -94,10 +81,12 @@ export default async function AdminDashboardPage() {
                 <h2 className="text-slate-900 font-bold text-sm">Wyświetlenia ofert</h2>
                 <p className="text-slate-500 text-xs mt-0.5">Ostatnie 30 dni</p>
               </div>
-              <div className="flex items-center gap-1 text-emerald-600 text-xs font-medium bg-emerald-50 rounded-lg px-2 py-1">
-                <ArrowUpRight className="h-3 w-3" />
-                <span>+12% vs. poprzedni miesiąc</span>
-              </div>
+              {stats.viewsGrowthPct !== null && (
+                <div className={`flex items-center gap-1 text-xs font-medium rounded-lg px-2 py-1 ${stats.viewsGrowthPct >= 0 ? 'text-emerald-600 bg-emerald-50' : 'text-red-500 bg-red-50'}`}>
+                  <ArrowUpRight className="h-3 w-3" />
+                  <span>{stats.viewsGrowthPct >= 0 ? '+' : ''}{stats.viewsGrowthPct}% vs. poprzedni miesiąc</span>
+                </div>
+              )}
             </div>
             <ViewsAreaChart data={viewsData} />
           </div>
@@ -117,29 +106,36 @@ export default async function AdminDashboardPage() {
                 <span className="text-slate-500 text-xs">Zapytania</span>
               </div>
             </div>
-            <WeeklyBarChart data={MOCK_WEEKLY} />
+            <WeeklyBarChart data={weeklyData} />
           </div>
         </div>
 
         {/* Bottom row */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
           <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
-            <h2 className="text-slate-900 font-bold text-sm mb-4">Najpopularniejsze oferty</h2>
-            <div className="space-y-3">
-              {MOCK_TOP_CARS.map((car, i) => (
-                <div key={car.title} className="flex items-center gap-3">
-                  <div className="w-7 h-7 rounded-lg bg-sky-50 border border-sky-200 flex items-center justify-center text-xs font-bold text-brand-blue">
-                    {i + 1}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-sm text-slate-800 truncate">{car.title}</div>
-                  </div>
-                  <div className="text-xs font-semibold text-brand-blue bg-brand-blue/10 rounded-lg px-2 py-1 shrink-0">
-                    {car.views} wyśw.
-                  </div>
-                </div>
-              ))}
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-slate-900 font-bold text-sm">Najpopularniejsze oferty</h2>
+              <span className="text-slate-400 text-xs">ostatnie 30 dni</span>
             </div>
+            {topCars.length === 0 ? (
+              <p className="text-slate-400 text-sm text-center py-6">Brak danych o wyświetleniach</p>
+            ) : (
+              <div className="space-y-3">
+                {topCars.map((car, i) => (
+                  <div key={car.id} className="flex items-center gap-3">
+                    <div className="w-7 h-7 rounded-lg bg-sky-50 border border-sky-200 flex items-center justify-center text-xs font-bold text-brand-blue">
+                      {i + 1}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm text-slate-800 truncate">{car.title}</div>
+                    </div>
+                    <div className="text-xs font-semibold text-brand-blue bg-brand-blue/10 rounded-lg px-2 py-1 shrink-0">
+                      {car.views} wyśw.
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
