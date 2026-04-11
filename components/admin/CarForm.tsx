@@ -577,7 +577,7 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
           </Field>
 
           <Field label="Waluta">
-            <Select value={currency} onValueChange={setCurrency}>
+            <Select value={currency} onValueChange={(v) => setCurrency(v as 'PLN' | 'EUR')}>
               <SelectTrigger className={triggerClass}>
                 <SelectValue />
               </SelectTrigger>
