@@ -1,5 +1,5 @@
 import { SITE_CONFIG } from '@/lib/constants'
-import { Clock, Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react'
+import { Clock, Facebook, Instagram, MapPin, Phone } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -94,7 +94,7 @@ export function Footer() {
                   {SITE_CONFIG.phone}
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a
                   href={`mailto:${SITE_CONFIG.email}`}
                   className="flex items-start gap-2.5 text-sky-300 hover:text-brand-gold text-sm transition-colors"
@@ -103,7 +103,7 @@ export function Footer() {
                   <Mail className="h-4 w-4 mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
                   {SITE_CONFIG.email}
                 </a>
-              </li>
+              </li> */}
               <li className="flex items-start gap-2.5 text-sky-300 text-sm">
                 <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
                 <address className="not-italic">{SITE_CONFIG.address}</address>

@@ -4,6 +4,13 @@ import type { CarFormState } from '@/app/actions/admin/cars'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { BODY_TYPE_LABELS, CAR_BRANDS, DRIVE_TYPE_LABELS, FUEL_TYPE_LABELS, TRANSMISSION_LABELS } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 import type { Car, CarImage } from '@/types/car'
@@ -50,6 +57,17 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
   const [year, setYear] = useState(car?.year?.toString() ?? '')
   const [title, setTitle] = useState(car?.title ?? '')
 
+  // Select states (needed for controlled Radix Select + FormData)
+  const [fuelType, setFuelType] = useState(car?.fuel_type ?? '')
+  const [transmission, setTransmission] = useState(car?.transmission ?? '')
+  const [bodyType, setBodyType] = useState(car?.body_type ?? '')
+  const [driveType, setDriveType] = useState(car?.drive_type ?? '')
+  const [doors, setDoors] = useState(car?.doors?.toString() ?? '')
+  const [seats, setSeats] = useState(car?.seats?.toString() ?? '')
+  const [currency, setCurrency] = useState(car?.currency ?? 'PLN')
+  const [accidentFree, setAccidentFree] = useState(car?.accident_free === false ? 'false' : 'true')
+  const [serviceHistory, setServiceHistory] = useState(car?.service_history === true ? 'true' : 'false')
+
   const updateTitle = (b: string, m: string, y: string) => {
     const autoTitle = `${b} ${m} ${y}`.trim()
     setTitle((prev) => {
@@ -68,7 +86,6 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
       }))
       return [...prev, ...newImages]
     })
-    // Reset input so same files can be re-selected
     e.target.value = ''
   }
 
@@ -100,17 +117,14 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
     const rawForm = new FormData(formRef.current!)
     const formData = new FormData()
 
-    // Copy all regular fields
     for (const [key, value] of rawForm.entries()) {
       if (key !== 'images') formData.append(key, value)
     }
 
-    // Attach file objects from state
     const coverIndex = previewImages.findIndex((img) => img.isCover)
     formData.set('cover_index', String(coverIndex))
     previewImages.forEach((img) => formData.append('images', img.file))
 
-    // Pass existing cover image id if set
     if (coverExistingId) formData.set('existing_cover_id', coverExistingId)
 
     startTransition(async () => {
@@ -123,6 +137,17 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
     <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
       {car && <input type="hidden" name="slug" value={car.slug} />}
 
+      {/* Hidden inputs for controlled selects */}
+      <input type="hidden" name="fuel_type" value={fuelType} />
+      <input type="hidden" name="transmission" value={transmission} />
+      <input type="hidden" name="body_type" value={bodyType} />
+      <input type="hidden" name="drive_type" value={driveType} />
+      <input type="hidden" name="doors" value={doors} />
+      <input type="hidden" name="seats" value={seats} />
+      <input type="hidden" name="currency" value={currency} />
+      <input type="hidden" name="accident_free" value={accidentFree} />
+      <input type="hidden" name="service_history" value={serviceHistory} />
+
       {formError && (
         <div className="flex items-start gap-3 rounded-xl bg-red-500/10 border border-red-500/20 px-4 py-3">
           <AlertCircle className="h-4 w-4 text-red-400 mt-0.5 shrink-0" />
@@ -132,7 +157,6 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
 
       {/* === SECTION: Zdjęcia === */}
       <Section title="Zdjęcia" description="Na telefonie: dotknij zdjęcie by zobaczyć opcje. Na komputerze: najedź myszką.">
-        {/* Backdrop — closes active menu on mobile */}
         {activeMenu !== null && (
           <div
             className="fixed inset-0 z-10 sm:hidden"
@@ -160,15 +184,12 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
                       Okładka
                     </div>
                   )}
-
-                  {/* Overlay */}
                   <div
-                    className={cn( 
+                    className={cn(
                       'absolute inset-0 bg-slate-900/70 transition-opacity z-10',
                       isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none sm:pointer-events-auto sm:group-hover:opacity-100',
                     )}
                   >
-                    {/* Mobile: vertical labeled buttons */}
                     <div className="sm:hidden flex flex-col gap-1.5 p-2 h-full justify-center">
                       <button
                         type="button"
@@ -192,7 +213,6 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
                         <X className="h-3.5 w-3.5 shrink-0" /> Usuń
                       </button>
                     </div>
-                    {/* Desktop: icon-only buttons */}
                     <div className="hidden sm:flex items-center justify-center gap-2 h-full">
                       <button
                         type="button"
@@ -243,15 +263,12 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
                       Okładka
                     </div>
                   )}
-
-                  {/* Overlay */}
                   <div
                     className={cn(
                       'absolute inset-0 bg-slate-900/70 transition-opacity z-10',
                       isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none sm:pointer-events-auto sm:group-hover:opacity-100',
                     )}
                   >
-                    {/* Mobile: vertical labeled buttons */}
                     <div className="sm:hidden flex flex-col gap-1.5 p-2 h-full justify-center">
                       <button
                         type="button"
@@ -275,7 +292,6 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
                         <X className="h-3.5 w-3.5 shrink-0" /> Usuń
                       </button>
                     </div>
-                    {/* Desktop: icon-only buttons */}
                     <div className="hidden sm:flex items-center justify-center gap-2 h-full">
                       <button
                         type="button"
@@ -354,16 +370,17 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
       <Section title="Podstawowe informacje">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <Field label="Marka *">
-            <select
-              name="brand"
-              required
-              value={brand}
-              onChange={(e) => { setBrand(e.target.value); updateTitle(e.target.value, model, year) }}
-              className={selectClass}
-            >
-              <option value="">Wybierz markę</option>
-              {CAR_BRANDS.map((b) => <option key={b} value={b}>{b}</option>)}
-            </select>
+            <Select value={brand} onValueChange={(v) => { setBrand(v); updateTitle(v, model, year) }}>
+              <SelectTrigger className={triggerClass}>
+                <SelectValue placeholder="Wybierz markę" />
+              </SelectTrigger>
+              <SelectContent className="bg-white border-sky-200 max-h-56">
+                {CAR_BRANDS.map((b) => (
+                  <SelectItem key={b} value={b} className={itemClass}>{b}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <input type="hidden" name="brand" value={brand} />
           </Field>
 
           <Field label="Model *">
@@ -416,31 +433,55 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
       <Section title="Dane techniczne">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <Field label="Rodzaj paliwa *">
-            <select name="fuel_type" required defaultValue={car?.fuel_type ?? ''} className={selectClass}>
-              <option value="">Wybierz</option>
-              {Object.entries(FUEL_TYPE_LABELS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
-            </select>
+            <Select value={fuelType} onValueChange={setFuelType}>
+              <SelectTrigger className={triggerClass}>
+                <SelectValue placeholder="Wybierz" />
+              </SelectTrigger>
+              <SelectContent className="bg-white border-sky-200">
+                {Object.entries(FUEL_TYPE_LABELS).map(([v, l]) => (
+                  <SelectItem key={v} value={v} className={itemClass}>{l}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </Field>
 
           <Field label="Skrzynia biegów *">
-            <select name="transmission" required defaultValue={car?.transmission ?? ''} className={selectClass}>
-              <option value="">Wybierz</option>
-              {Object.entries(TRANSMISSION_LABELS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
-            </select>
+            <Select value={transmission} onValueChange={setTransmission}>
+              <SelectTrigger className={triggerClass}>
+                <SelectValue placeholder="Wybierz" />
+              </SelectTrigger>
+              <SelectContent className="bg-white border-sky-200">
+                {Object.entries(TRANSMISSION_LABELS).map(([v, l]) => (
+                  <SelectItem key={v} value={v} className={itemClass}>{l}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </Field>
 
           <Field label="Typ nadwozia *">
-            <select name="body_type" required defaultValue={car?.body_type ?? ''} className={selectClass}>
-              <option value="">Wybierz</option>
-              {Object.entries(BODY_TYPE_LABELS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
-            </select>
+            <Select value={bodyType} onValueChange={setBodyType}>
+              <SelectTrigger className={triggerClass}>
+                <SelectValue placeholder="Wybierz" />
+              </SelectTrigger>
+              <SelectContent className="bg-white border-sky-200">
+                {Object.entries(BODY_TYPE_LABELS).map(([v, l]) => (
+                  <SelectItem key={v} value={v} className={itemClass}>{l}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </Field>
 
           <Field label="Napęd">
-            <select name="drive_type" defaultValue={car?.drive_type ?? ''} className={selectClass}>
-              <option value="">Nie podano</option>
-              {Object.entries(DRIVE_TYPE_LABELS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
-            </select>
+            <Select value={driveType} onValueChange={setDriveType}>
+              <SelectTrigger className={triggerClass}>
+                <SelectValue placeholder="Nie podano" />
+              </SelectTrigger>
+              <SelectContent className="bg-white border-sky-200">
+                {Object.entries(DRIVE_TYPE_LABELS).map(([v, l]) => (
+                  <SelectItem key={v} value={v} className={itemClass}>{l}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </Field>
 
           <Field label="Pojemność silnika (cm³)">
@@ -456,17 +497,29 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
           </Field>
 
           <Field label="Liczba drzwi">
-            <select name="doors" defaultValue={car?.doors?.toString() ?? ''} className={selectClass}>
-              <option value="">Nie podano</option>
-              {[2, 3, 4, 5].map((n) => <option key={n} value={n}>{n}</option>)}
-            </select>
+            <Select value={doors} onValueChange={setDoors}>
+              <SelectTrigger className={triggerClass}>
+                <SelectValue placeholder="Nie podano" />
+              </SelectTrigger>
+              <SelectContent className="bg-white border-sky-200">
+                {[2, 3, 4, 5].map((n) => (
+                  <SelectItem key={n} value={String(n)} className={itemClass}>{n}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </Field>
 
           <Field label="Liczba miejsc">
-            <select name="seats" defaultValue={car?.seats?.toString() ?? ''} className={selectClass}>
-              <option value="">Nie podano</option>
-              {[2, 4, 5, 6, 7, 8, 9].map((n) => <option key={n} value={n}>{n}</option>)}
-            </select>
+            <Select value={seats} onValueChange={setSeats}>
+              <SelectTrigger className={triggerClass}>
+                <SelectValue placeholder="Nie podano" />
+              </SelectTrigger>
+              <SelectContent className="bg-white border-sky-200">
+                {[2, 4, 5, 6, 7, 8, 9].map((n) => (
+                  <SelectItem key={n} value={String(n)} className={itemClass}>{n}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </Field>
         </div>
       </Section>
@@ -491,17 +544,27 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
           </Field>
 
           <Field label="Bezwypadkowy">
-            <select name="accident_free" defaultValue={car?.accident_free === false ? 'false' : 'true'} className={selectClass}>
-              <option value="true">Tak</option>
-              <option value="false">Nie</option>
-            </select>
+            <Select value={accidentFree} onValueChange={setAccidentFree}>
+              <SelectTrigger className={triggerClass}>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-white border-sky-200">
+                <SelectItem value="true" className={itemClass}>Tak</SelectItem>
+                <SelectItem value="false" className={itemClass}>Nie</SelectItem>
+              </SelectContent>
+            </Select>
           </Field>
 
           <Field label="Historia serwisowa">
-            <select name="service_history" defaultValue={car?.service_history === true ? 'true' : 'false'} className={selectClass}>
-              <option value="true">Tak – udokumentowana</option>
-              <option value="false">Nie / brak dokumentacji</option>
-            </select>
+            <Select value={serviceHistory} onValueChange={setServiceHistory}>
+              <SelectTrigger className={triggerClass}>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-white border-sky-200">
+                <SelectItem value="true" className={itemClass}>Tak – udokumentowana</SelectItem>
+                <SelectItem value="false" className={itemClass}>Nie / brak dokumentacji</SelectItem>
+              </SelectContent>
+            </Select>
           </Field>
         </div>
       </Section>
@@ -514,10 +577,15 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
           </Field>
 
           <Field label="Waluta">
-            <select name="currency" defaultValue={car?.currency ?? 'PLN'} className={selectClass}>
-              <option value="PLN">PLN</option>
-              <option value="EUR">EUR</option>
-            </select>
+            <Select value={currency} onValueChange={setCurrency}>
+              <SelectTrigger className={triggerClass}>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-white border-sky-200">
+                <SelectItem value="PLN" className={itemClass}>PLN</SelectItem>
+                <SelectItem value="EUR" className={itemClass}>EUR</SelectItem>
+              </SelectContent>
+            </Select>
           </Field>
 
           <Field label="Miejscowość">
@@ -533,7 +601,7 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
           defaultValue={car?.description ?? ''}
           rows={6}
           placeholder="Opisz stan techniczny, historię auta, wyposażenie dodatkowe..."
-          className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/20 resize-y min-h-[288px] md:min-h-[144px]"
+          className="w-full bg-sky-50 border border-sky-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/20 resize-y min-h-[288px] md:min-h-[144px]"
         />
       </Section>
 
@@ -617,5 +685,6 @@ function ToggleField({ name, label, description, defaultValue }: { name: string;
   )
 }
 
-const inputClass = 'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-brand-blue focus:ring-brand-blue/20 h-10 text-sm'
-const selectClass = 'w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/20 h-10'
+const inputClass = 'bg-sky-50 border-sky-200 text-slate-800 placeholder:text-slate-400 focus:border-brand-blue focus:ring-brand-blue/20 h-9 text-sm'
+const triggerClass = 'bg-sky-50 border-sky-200 text-slate-800 text-sm h-9'
+const itemClass = 'text-slate-800 focus:bg-sky-50 focus:text-brand-blue'

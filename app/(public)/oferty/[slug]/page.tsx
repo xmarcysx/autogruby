@@ -1,16 +1,16 @@
-import { ViewTracker } from '@/components/common/ViewTracker'
 import { Breadcrumbs } from '@/components/common/Breadcrumbs'
 import { CarCard } from '@/components/common/CarCard'
 import { CarGallery } from '@/components/common/CarGallery'
 import { CarSpecs } from '@/components/common/CarSpecs'
 import { ContactCard } from '@/components/common/ContactCard'
+import { ViewTracker } from '@/components/common/ViewTracker'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { SITE_CONFIG } from '@/lib/constants'
 import { getAllCarSlugs, getCarBySlug, getSimilarCars } from '@/services/cars'
 import { formatPrice } from '@/utils/formatters'
 import { buildBreadcrumbJsonLd, buildCarDescription, buildCarJsonLd, buildCarKeywords, buildCarTitle } from '@/utils/seo'
-import { ArrowLeft, Mail, Phone } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -196,22 +196,6 @@ export default async function CarDetailPage({ params }: PageProps) {
             {/* RIGHT – sticky contact */}
             <div className="xl:sticky xl:top-24 xl:self-start space-y-4">
               <ContactCard carTitle={car.title} />
-
-              {/* Mobile CTAs */}
-              <div className="flex flex-col gap-3 xl:hidden">
-                <Button variant="gold" size="lg" className="w-full" asChild>
-                  <a href={`tel:${SITE_CONFIG.phone.replace(/\s/g, '')}`}>
-                    <Phone className="h-4 w-4 mr-2" aria-hidden="true" />
-                    Zadzwoń
-                  </a>
-                </Button>
-                <Button variant="outline" size="lg" className="w-full border-sky-200 text-slate-700 hover:text-brand-blue hover:border-brand-blue hover:bg-sky-50" asChild>
-                  <a href={`mailto:${SITE_CONFIG.email}?subject=${encodeURIComponent(`Pytanie o: ${car.title}`)}`}>
-                    <Mail className="h-4 w-4 mr-2" aria-hidden="true" />
-                    Napisz email
-                  </a>
-                </Button>
-              </div>
             </div>
           </div>
         </div>

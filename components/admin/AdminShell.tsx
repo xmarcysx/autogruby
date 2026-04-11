@@ -9,7 +9,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div className="flex min-h-screen bg-slate-100 overflow-x-hidden">
+    <div className="flex min-h-screen bg-slate-100">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -22,7 +22,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
       {/* Sidebar */}
       <div
         className={cn(
-          'fixed md:sticky md:top-0 md:h-screen inset-y-0 left-0 z-30 md:z-auto transition-transform duration-300 md:translate-x-0',
+          'fixed md:sticky md:top-0 md:h-screen md:self-start inset-y-0 left-0 z-30 md:z-auto transition-transform duration-300 md:translate-x-0',
           sidebarOpen ? 'translate-x-0' : '-translate-x-full',
         )}
       >

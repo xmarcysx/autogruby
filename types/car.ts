@@ -73,6 +73,7 @@ export interface Inquiry {
   name: string
   phone: string | null
   email: string | null
+  subject: string | null
   message: string
   status: 'new' | 'read' | 'replied' | 'closed'
   created_at: string

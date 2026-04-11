@@ -25,7 +25,7 @@ export default async function EditCarPage({ params }: PageProps) {
 
   return (
     <AdminShell>
-      <div className="p-6 lg:p-8 space-y-6 max-w-5xl">
+      <div className="p-6 lg:p-8 space-y-6 w-full">
         {/* Header */}
         <div className="flex items-center gap-4">
           <Link

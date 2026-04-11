@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import Link from 'next/link'
 
 interface PaginationProps {
   currentPage: number
@@ -46,7 +46,7 @@ export function Pagination({ currentPage, totalPages, buildHref }: PaginationPro
                   'flex items-center justify-center w-9 h-9 rounded-lg border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold',
                   page === currentPage
                     ? 'border-brand-blue bg-brand-blue text-white'
-                    : 'border-slate-700 text-slate-400 hover:border-brand-blue hover:text-brand-blue',
+                    : 'border-slate-700 text-slate-700 hover:border-brand-blue hover:text-brand-blue',
                 )}
                 aria-label={`Strona ${page}`}
                 aria-current={page === currentPage ? 'page' : undefined}

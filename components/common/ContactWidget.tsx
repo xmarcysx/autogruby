@@ -48,7 +48,8 @@ export function ContactWidget() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFields((prev) => ({ ...prev, [name]: value }))
+    const sanitized = name === 'phone' ? value.replace(/\D/g, '').slice(0, 9) : value
+    setFields((prev) => ({ ...prev, [name]: sanitized }))
     if (errors[name as keyof typeof fields]) {
       setErrors((prev) => ({ ...prev, [name]: '' }))
     }
@@ -59,7 +60,7 @@ export function ContactWidget() {
     if (!fields.firstName.trim()) newErrors.firstName = 'Podaj imię'
     if (!fields.lastName.trim()) newErrors.lastName = 'Podaj nazwisko'
     if (!fields.phone.trim()) newErrors.phone = 'Podaj numer telefonu'
-    else if (!/^[\d\s\+\-()]{7,}$/.test(fields.phone)) newErrors.phone = 'Nieprawidłowy numer'
+    else if (fields.phone.replace(/\s/g, '').length !== 9) newErrors.phone = 'Wpisz 9 cyfr'
     if (!fields.subject.trim()) newErrors.subject = 'Podaj temat'
     if (!fields.message.trim()) newErrors.message = 'Wpisz wiadomość'
     return newErrors
@@ -74,9 +75,17 @@ export function ContactWidget() {
     }
 
     setFormState('sending')
-    // TODO: replace with real API call
-    await new Promise((resolve) => setTimeout(resolve, 1200))
-    setFormState('success')
+    try {
+      const res = await fetch('/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...fields, phone: `+48${fields.phone}` }),
+      })
+      if (!res.ok) throw new Error('server error')
+      setFormState('success')
+    } catch {
+      setFormState('error')
+    }
   }
 
   const handleOpenChange = (val: boolean) => {
@@ -116,18 +125,39 @@ export function ContactWidget() {
         <DialogContent className="sm:max-w-[480px] max-h-[90vh] overflow-y-auto bg-white border-slate-200 text-slate-900">
           {formState === 'success' ? (
             <div className="flex flex-col items-center gap-4 py-6 text-center">
-              <div className="w-16 h-16 rounded-full bg-brand-blue/15 flex items-center justify-center">
-                <Send className="w-8 h-8 text-brand-blue" />
+              <div className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center">
+                <Send className="w-7 h-7 text-emerald-500" />
               </div>
-              <DialogTitle className="text-xl text-slate-900">Wiadomość wysłana!</DialogTitle>
-              <p className="text-slate-500 text-sm">
-                Odezwiemy się najszybciej jak to możliwe. Dziękujemy za kontakt.
-              </p>
+              <div>
+                <DialogTitle className="text-xl text-slate-900 mb-1">Wiadomość wysłana!</DialogTitle>
+                <p className="text-slate-500 text-sm leading-relaxed">
+                  Twoje zapytanie trafiło już do nas. Odezwiemy się tak szybko, jak to możliwe —
+                  najczęściej w ciągu kilku godzin.
+                </p>
+              </div>
               <Button
                 onClick={() => handleOpenChange(false)}
-                className="mt-2 w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-semibold"
+                className="mt-1 w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-semibold"
               >
                 Zamknij
+              </Button>
+            </div>
+          ) : formState === 'error' ? (
+            <div className="flex flex-col items-center gap-4 py-6 text-center">
+              <div className="w-16 h-16 rounded-full bg-red-50 border border-red-200 flex items-center justify-center">
+                <MessageCircle className="w-7 h-7 text-red-400" />
+              </div>
+              <div>
+                <DialogTitle className="text-xl text-slate-900 mb-1">Coś poszło nie tak</DialogTitle>
+                <p className="text-slate-500 text-sm leading-relaxed">
+                  Nie udało się wysłać wiadomości. Spróbuj ponownie lub zadzwoń do nas bezpośrednio.
+                </p>
+              </div>
+              <Button
+                onClick={() => setFormState('idle')}
+                className="mt-1 w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-semibold"
+              >
+                Spróbuj ponownie
               </Button>
             </div>
           ) : (
@@ -192,18 +222,25 @@ export function ContactWidget() {
                   <Label htmlFor="phone" className="text-slate-600 text-xs uppercase tracking-wide font-semibold">
                     Telefon <span className="text-red-400">*</span>
                   </Label>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    value={fields.phone}
-                    onChange={handleChange}
-                    placeholder="+48 600 000 000"
-                    className={cn(
-                      'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus-visible:ring-brand-blue focus-visible:border-brand-blue',
-                      errors.phone && 'border-red-500',
-                    )}
-                  />
+                  <div className="relative flex items-center">
+                    <span className="absolute left-3 flex items-center gap-1 text-sm text-slate-600 font-medium pointer-events-none select-none">
+                      🇵🇱 +48
+                    </span>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      inputMode="numeric"
+                      value={fields.phone}
+                      onChange={handleChange}
+                      maxLength={9}
+                      placeholder="600 000 000"
+                      className={cn(
+                        'pl-[76px] bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus-visible:ring-brand-blue focus-visible:border-brand-blue',
+                        errors.phone && 'border-red-500',
+                      )}
+                    />
+                  </div>
                   {errors.phone && <p className="text-red-400 text-xs">{errors.phone}</p>}
                 </div>
 
