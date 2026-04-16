@@ -101,11 +101,11 @@ export function ContactSection() {
             <div className="w-full bg-white rounded-2xl border border-slate-200 shadow-xl p-8 text-center">
               <div className="w-32 h-32 rounded-full bg-sky-100 border-4 border-sky-200 mx-auto mb-5 overflow-hidden">
                 <Image
-                  src="/person.png"
+                  src="/person-2.png"
                   alt="Paweł Trzaska"
                   width={112}
                   height={112}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain scale-110"
                 />
               </div>
               <p className="text-brand-blue text-sm font-bold uppercase tracking-wider mb-1">
