@@ -73,29 +73,28 @@ export function buildLocalBusinessJsonLd() {
     email: SITE_CONFIG.email,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'ul. Przykładowa 1', // TODO: real address
+      streetAddress: 'ul. Cielmicka 36',
       addressLocality: 'Tychy',
       postalCode: '43-100',
       addressCountry: 'PL',
     },
     geo: {
       '@type': 'GeoCoordinates',
-      // TODO: replace with real coordinates
-      latitude: 50.1373,
-      longitude: 18.9959,
+      latitude: 50.1005,
+      longitude: 18.9884,
     },
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        opens: '09:00',
+        opens: '08:00',
         closes: '18:00',
       },
       {
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: 'Saturday',
         opens: '09:00',
-        closes: '14:00',
+        closes: '16:00',
       },
     ],
     priceRange: '$$',

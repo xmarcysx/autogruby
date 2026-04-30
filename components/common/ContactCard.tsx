@@ -19,7 +19,6 @@ export function ContactCard({ carTitle }: ContactCardProps) {
       aria-label="Skontaktuj się z komisem"
     >
       <div className="text-center pb-4 border-b border-slate-200">
-        {/* TODO: Replace with real owner photo */}
         <div
           className="w-16 h-16 rounded-full bg-sky-100 mx-auto mb-3 flex items-center justify-center text-2xl"
           aria-hidden="true"

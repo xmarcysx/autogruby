@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from '@/components/common/GoogleAnalytics'
 import { SITE_CONFIG } from '@/lib/constants'
 import { buildLocalBusinessJsonLd } from '@/utils/seo'
 import type { Metadata, Viewport } from 'next'
@@ -19,14 +20,36 @@ export const metadata: Metadata = {
   description:
     'Auto Gruby – komis samochodowy w Tychach. Sprawdzone samochody używane, uczciwa sprzedaż, pełna historia serwisowa. Zadzwoń i umów się na jazdę próbną!',
   keywords: [
-    'komis Tychy',
-    'komis samochodowy Tychy',
-    'samochody używane Tychy',
     'Auto Gruby',
+    'komis samochodowy Tychy',
+    'komis Tychy',
     'auto komis Tychy',
+    'samochody używane Tychy',
     'używane samochody Tychy',
     'sprzedaż samochodów Tychy',
     'samochody Tychy Śląsk',
+    'komis samochodowy Śląsk',
+    'samochody używane Śląsk',
+    'auto komis Katowice okolice',
+    'komis samochodowy Katowice',
+    'skup aut Tychy',
+    'skup samochodów Tychy',
+    'skup aut Śląsk',
+    'sprowadzone samochody Tychy',
+    'import samochodów Tychy',
+    'używany BMW Tychy',
+    'używana Toyota Tychy',
+    'Toyota Corolla używana Tychy',
+    'używany Volkswagen Tychy',
+    'VW Passat używany Tychy',
+    'używany Ford Tychy',
+    'używana Skoda Tychy',
+    'używany Opel Tychy',
+    'używany Audi Tychy',
+    'używana Kia Tychy',
+    'BMW Seria 3 Tychy',
+    'jazda próbna Tychy',
+    'tanie samochody używane Tychy',
   ],
   authors: [{ name: 'Auto Gruby' }],
   creator: 'Auto Gruby',
@@ -68,8 +91,7 @@ export const metadata: Metadata = {
     canonical: SITE_CONFIG.url,
   },
   verification: {
-    // TODO: Add Google Search Console verification token
-    // google: 'your-verification-token',
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
 }
 
@@ -95,13 +117,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_SUPABASE_URL} />
       </head>
       <body className="min-h-screen bg-background">
+        <GoogleAnalytics />
         {children}
-
-        {/*
-          TODO: Add cookie consent banner before production launch.
-          A lightweight custom implementation is recommended over heavy CMP libraries.
-          See: /components/common/CookieBanner.tsx (placeholder ready)
-        */}
       </body>
     </html>
   )

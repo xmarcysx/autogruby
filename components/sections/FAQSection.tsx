@@ -2,7 +2,6 @@ import { SectionHeading } from '@/components/common/SectionHeading'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { FAQ_ITEMS } from '@/lib/constants'
 
-// TODO: Update FAQ_ITEMS in lib/constants.ts with real questions from customers
 export function FAQSection() {
   return (
     <section

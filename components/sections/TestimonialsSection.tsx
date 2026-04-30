@@ -3,7 +3,6 @@ import { MOCK_TESTIMONIALS } from '@/lib/constants'
 import { formatDate } from '@/utils/formatters'
 import { Star } from 'lucide-react'
 
-// TODO: Replace MOCK_TESTIMONIALS with real reviews (e.g. from Google Reviews API)
 export function TestimonialsSection() {
   return (
     <section

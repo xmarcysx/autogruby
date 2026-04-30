@@ -79,7 +79,6 @@ export const DRIVE_TYPE_LABELS: Record<string, string> = {
 
 export const CARS_PER_PAGE = 12
 
-// TODO: Replace with real testimonials (from Google reviews, etc.)
 export const MOCK_TESTIMONIALS: Testimonial[] = [
   {
     id: '1',
@@ -123,7 +122,6 @@ export const MOCK_TESTIMONIALS: Testimonial[] = [
   },
 ]
 
-// TODO: Uzupełnij o prawdziwe pytania klientów
 export const FAQ_ITEMS: FAQItem[] = [
   {
     question: 'Czy samochody w komisie Auto Gruby są sprawdzone technicznie?',

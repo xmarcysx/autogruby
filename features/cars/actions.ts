@@ -1,24 +1,8 @@
 'use server'
 
-/**
- * Server Actions for car-related mutations.
- *
- * Current:
- * - submitInquiry: Save contact inquiry from a car detail page
- *
- * TODO (admin panel):
- * - createCar
- * - updateCar
- * - deleteCar
- * - uploadCarImage
- * - deleteCarImage
- * - setCoverImage
- * - publishCar / unpublishCar
- */
-
-import { createClient } from '@/lib/supabase/server'
-import { inquirySchema } from '@/lib/schemas/car'
 import type { InquiryInput } from '@/lib/schemas/car'
+import { inquirySchema } from '@/lib/schemas/car'
+import { createClient } from '@/lib/supabase/server'
 
 type ActionResult = { success: true } | { success: false; error: string }
 

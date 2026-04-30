@@ -22,7 +22,6 @@ export function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           {/* Image side */}
           <div className="relative">
-            {/* TODO: Replace with a real photo of the dealership or owner */}
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-sky-200">
               <Image
                 src="/komis-1.jpeg"

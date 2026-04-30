@@ -1,24 +1,7 @@
 'use client'
 
-/**
- * Cookie consent banner placeholder.
- *
- * TODO: Implement before production launch.
- * Requirements:
- * - Show only if consent not yet given (check localStorage / cookie)
- * - Allow accept all / accept necessary only
- * - Block analytics (GA etc.) until consent given
- * - Store consent in a cookie (e.g. 'cookie_consent=all' or 'necessary')
- * - GDPR compliant — no analytics before explicit opt-in
- *
- * Lightweight approach (no heavy CMP library needed for this scale):
- * 1. useState for banner visibility
- * 2. useEffect to check localStorage
- * 3. On accept: set cookie + initialize analytics
- */
-
-import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
+import { useEffect, useState } from 'react'
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false)
@@ -31,7 +14,6 @@ export function CookieBanner() {
   function accept() {
     localStorage.setItem('cookie_consent', 'all')
     setVisible(false)
-    // TODO: Initialize analytics scripts here
   }
 
   function acceptNecessary() {
