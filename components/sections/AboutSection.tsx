@@ -32,7 +32,7 @@ export function AboutSection() {
               />
             </div>
             {/* Floating badge */}
-            <div className="absolute -bottom-5 -right-5 bg-brand-gold rounded-xl p-5 shadow-xl shadow-brand-gold/20">
+            <div className="absolute -bottom-5 right-2 lg:-right-5 bg-brand-gold rounded-xl p-5 shadow-xl shadow-brand-gold/20">
               <p className="text-slate-900 font-black text-3xl leading-none">10+</p>
               <p className="text-slate-800 text-xs font-semibold mt-0.5">lat doświadczenia</p>
             </div>

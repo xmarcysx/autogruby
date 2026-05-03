@@ -104,7 +104,7 @@ export default async function CarDetailPage({ params }: PageProps) {
         </div>
 
         <div className="container py-8 md:py-10">
-          <div className="grid grid-cols-1 xl:grid-cols-[1fr_340px] gap-8 xl:gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-8 lg:gap-10">
             {/* LEFT – main content */}
             <div className="space-y-8">
               {/* Back + share */}
@@ -141,6 +141,11 @@ export default async function CarDetailPage({ params }: PageProps) {
                   </p>
                   <p className="text-slate-400 text-xs mt-1">Cena brutto, do negocjacji</p>
                 </div>
+              </div>
+
+              {/* Contact – mobile only (below gallery, above specs) */}
+              <div className="lg:hidden">
+                <ContactCard carTitle={car.title} />
               </div>
 
               {/* Specs */}
@@ -193,8 +198,8 @@ export default async function CarDetailPage({ params }: PageProps) {
               )}
             </div>
 
-            {/* RIGHT – sticky contact */}
-            <div className="xl:sticky xl:top-24 xl:self-start space-y-4">
+            {/* RIGHT – sticky contact (lg+) */}
+            <div className="hidden lg:block lg:sticky lg:top-24 lg:self-start space-y-4">
               <ContactCard carTitle={car.title} />
             </div>
           </div>
