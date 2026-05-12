@@ -15,6 +15,7 @@ const nextConfig: NextConfig = {
       // TODO: Add any additional image domains here
     ],
     formats: ['image/avif', 'image/webp'],
+    unoptimized: true,
   },
   // Enable strict mode for better React practices
   reactStrictMode: true,
