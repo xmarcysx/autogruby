@@ -16,7 +16,7 @@ function StatusBadges({ sold, published, featured }: { sold: boolean; published:
       ) : (
         <Badge className="bg-emerald-50 text-emerald-700 border-emerald-200 text-xs">Aktywny</Badge>
       )}
-      {!published && <Badge className="bg-slate-100 text-slate-500 border-slate-200 text-xs">Ukryty</Badge>}
+      {!published && <Badge className="bg-red-50 text-red-600 border-red-200 text-xs">Ukryty</Badge>}
       {featured && <Badge className="bg-brand-blue/10 text-brand-blue border-brand-blue/20 text-xs">Wyróżniony</Badge>}
     </div>
   )
@@ -151,7 +151,7 @@ export default async function AdminCarsPage({ searchParams }: PageProps) {
 
                   {/* Actions */}
                   <div className="px-3 pb-3">
-                    <CarRowActions carId={car.id} carSlug={car.slug} sold={car.sold} variant="card" />
+                    <CarRowActions carId={car.id} carSlug={car.slug} sold={car.sold} published={car.published} variant="card" />
                   </div>
                 </div>
               ))}
@@ -245,7 +245,7 @@ export default async function AdminCarsPage({ searchParams }: PageProps) {
                         </td>
 
                         <td className="px-4 py-3 text-right">
-                          <CarRowActions carId={car.id} carSlug={car.slug} sold={car.sold} />
+                          <CarRowActions carId={car.id} carSlug={car.slug} sold={car.sold} published={car.published} />
                         </td>
                       </tr>
                     ))}

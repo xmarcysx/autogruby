@@ -43,6 +43,7 @@ interface PreviewImage {
 export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarFormProps) {
   const [pending, startTransition] = useTransition()
   const [formError, setFormError] = useState<string | undefined>()
+  const [showErrors, setShowErrors] = useState(false)
   const [previewImages, setPreviewImages] = useState<PreviewImage[]>([])
   const [existingImages, setExistingImages] = useState<CarImage[]>(car?.car_images ?? [])
   const [coverExistingId, setCoverExistingId] = useState<string | undefined>(car?.cover_image?.id)
@@ -56,6 +57,8 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
   const [model, setModel] = useState(car?.model ?? '')
   const [year, setYear] = useState(car?.year?.toString() ?? '')
   const [title, setTitle] = useState(car?.title ?? '')
+  const [mileage, setMileage] = useState(car?.mileage?.toString() ?? '')
+  const [price, setPrice] = useState(car?.price?.toString() ?? '')
 
   // Select states (needed for controlled Radix Select + FormData)
   const [fuelType, setFuelType] = useState(car?.fuel_type ?? '')
@@ -113,6 +116,15 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setFormError(undefined)
+
+    const missingRequired = !brand || !model || !year || !mileage || !title || !fuelType || !transmission || !bodyType || !price
+    if (missingRequired) {
+      setShowErrors(true)
+      const firstError = formRef.current?.querySelector('[data-error="true"]')
+      firstError?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      return
+    }
+    setShowErrors(false)
 
     const rawForm = new FormData(formRef.current!)
     const formData = new FormData()
@@ -371,7 +383,7 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <Field label="Marka *">
             <Select value={brand} onValueChange={(v) => { setBrand(v); updateTitle(v, model, year) }}>
-              <SelectTrigger className={triggerClass}>
+              <SelectTrigger data-error={showErrors && !brand ? 'true' : 'false'} className={cn(triggerClass, showErrors && !brand && 'border-red-400 bg-red-50 focus:border-red-400')}>
                 <SelectValue placeholder="Wybierz markę" />
               </SelectTrigger>
               <SelectContent className="bg-white border-sky-200 max-h-56">
@@ -386,11 +398,11 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
           <Field label="Model *">
             <Input
               name="model"
-              required
               value={model}
               onChange={(e) => { setModel(e.target.value); updateTitle(brand, e.target.value, year) }}
               placeholder="np. Corolla"
-              className={inputClass}
+              data-error={showErrors && !model ? 'true' : 'false'}
+              className={cn(inputClass, showErrors && !model && 'border-red-400 bg-red-50 focus:border-red-400 focus:ring-red-400/20')}
             />
           </Field>
 
@@ -402,28 +414,37 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
             <Input
               name="year"
               type="number"
-              required
               value={year}
               onChange={(e) => { setYear(e.target.value); updateTitle(brand, model, e.target.value) }}
               min={1990}
               max={CURRENT_YEAR + 1}
               placeholder={String(CURRENT_YEAR)}
-              className={inputClass}
+              data-error={showErrors && !year ? 'true' : 'false'}
+              className={cn(inputClass, showErrors && !year && 'border-red-400 bg-red-50 focus:border-red-400 focus:ring-red-400/20')}
             />
           </Field>
 
           <Field label="Przebieg (km) *">
-            <Input name="mileage" type="number" required defaultValue={car?.mileage ?? ''} min={0} placeholder="np. 80000" className={inputClass} />
+            <Input
+              name="mileage"
+              type="number"
+              value={mileage}
+              onChange={(e) => setMileage(e.target.value)}
+              min={0}
+              placeholder="np. 80000"
+              data-error={showErrors && !mileage ? 'true' : 'false'}
+              className={cn(inputClass, showErrors && !mileage && 'border-red-400 bg-red-50 focus:border-red-400 focus:ring-red-400/20')}
+            />
           </Field>
 
           <Field label="Tytuł ogłoszenia *" className="sm:col-span-2 lg:col-span-3">
             <Input
               name="title"
-              required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="np. Toyota Corolla 2021 Hybrid"
-              className={inputClass}
+              data-error={showErrors && !title ? 'true' : 'false'}
+              className={cn(inputClass, showErrors && !title && 'border-red-400 bg-red-50 focus:border-red-400 focus:ring-red-400/20')}
             />
           </Field>
         </div>
@@ -434,7 +455,7 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <Field label="Rodzaj paliwa *">
             <Select value={fuelType} onValueChange={setFuelType}>
-              <SelectTrigger className={triggerClass}>
+              <SelectTrigger data-error={showErrors && !fuelType ? 'true' : 'false'} className={cn(triggerClass, showErrors && !fuelType && 'border-red-400 bg-red-50')}>
                 <SelectValue placeholder="Wybierz" />
               </SelectTrigger>
               <SelectContent className="bg-white border-sky-200">
@@ -447,7 +468,7 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
 
           <Field label="Skrzynia biegów *">
             <Select value={transmission} onValueChange={setTransmission}>
-              <SelectTrigger className={triggerClass}>
+              <SelectTrigger data-error={showErrors && !transmission ? 'true' : 'false'} className={cn(triggerClass, showErrors && !transmission && 'border-red-400 bg-red-50')}>
                 <SelectValue placeholder="Wybierz" />
               </SelectTrigger>
               <SelectContent className="bg-white border-sky-200">
@@ -460,7 +481,7 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
 
           <Field label="Typ nadwozia *">
             <Select value={bodyType} onValueChange={setBodyType}>
-              <SelectTrigger className={triggerClass}>
+              <SelectTrigger data-error={showErrors && !bodyType ? 'true' : 'false'} className={cn(triggerClass, showErrors && !bodyType && 'border-red-400 bg-red-50')}>
                 <SelectValue placeholder="Wybierz" />
               </SelectTrigger>
               <SelectContent className="bg-white border-sky-200">
@@ -573,7 +594,16 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
       <Section title="Cena i lokalizacja">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <Field label="Cena *">
-            <Input name="price" type="number" required defaultValue={car?.price ?? ''} min={1} placeholder="np. 45000" className={inputClass} />
+            <Input
+              name="price"
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              min={1}
+              placeholder="np. 45000"
+              data-error={showErrors && !price ? 'true' : 'false'}
+              className={cn(inputClass, showErrors && !price && 'border-red-400 bg-red-50 focus:border-red-400 focus:ring-red-400/20')}
+            />
           </Field>
 
           <Field label="Waluta">

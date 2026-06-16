@@ -25,6 +25,7 @@ interface CarRowActionsProps {
   carId: string
   carSlug: string
   sold: boolean
+  published: boolean
   variant?: 'row' | 'card'
 }
 
@@ -40,7 +41,8 @@ function Tooltip({ label, children }: { label: string; children: React.ReactNode
   )
 }
 
-export default function CarRowActions({ carId, carSlug, sold, variant = 'row' }: CarRowActionsProps) {
+export default function CarRowActions({ carId, carSlug, sold, published, variant = 'row' }: CarRowActionsProps) {
+  const previewHref = published ? `/oferty/${carSlug}` : `/admin/cars/${carId}/preview`
   const router = useRouter()
   const [pending, startTransition] = useTransition()
   const [actionType, setActionType] = useState<'sold' | 'delete' | null>(null)
@@ -82,9 +84,9 @@ export default function CarRowActions({ carId, carSlug, sold, variant = 'row' }:
     <>
       {variant === 'row' ? (
         <div className="flex items-center gap-1">
-          <Tooltip label="Podgląd publiczny">
+          <Tooltip label={published ? 'Podgląd publiczny' : 'Podgląd (nieopublikowane)'}>
             <button
-              onClick={() => router.push(`/oferty/${carSlug}`)}
+              onClick={() => router.push(previewHref)}
               disabled={pending}
               className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
             >
@@ -140,7 +142,7 @@ export default function CarRowActions({ carId, carSlug, sold, variant = 'row' }:
         /* Card variant — large tappable buttons with labels */
         <div className="grid grid-cols-4 gap-2">
           <button
-            onClick={() => router.push(`/oferty/${carSlug}`)}
+            onClick={() => router.push(previewHref)}
             disabled={pending}
             className="flex flex-col items-center justify-center gap-1.5 min-h-[56px] rounded-xl bg-slate-50 border border-slate-200 text-slate-500 hover:text-slate-900 hover:bg-slate-100 active:scale-95 transition-all text-xs font-medium"
           >
