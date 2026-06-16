@@ -1,6 +1,6 @@
 'use client'
 
-import { markInquiryAsRead } from '@/app/(admin)/admin/inquiries/actions'
+import { deleteInquiry, markInquiryAsRead } from '@/app/(admin)/admin/inquiries/actions'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -10,7 +10,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import type { Inquiry } from '@/types/car'
-import { Clock, Mail, MessageSquare, Phone } from 'lucide-react'
+import { Clock, Mail, MessageSquare, Phone, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 
 // ── helpers ──────────────────────────────────────────────────────────────────
@@ -66,6 +66,7 @@ interface Props {
 export function InquiryList({ inquiries: initial }: Props) {
   const [inquiries, setInquiries] = useState<Inquiry[]>(initial)
   const [selected, setSelected] = useState<Inquiry | null>(null)
+  const [toDelete, setToDelete] = useState<Inquiry | null>(null)
 
   // New first, then by date desc within each group
   const sorted = [...inquiries].sort((a, b) => {
@@ -73,6 +74,14 @@ export function InquiryList({ inquiries: initial }: Props) {
     if (a.status !== 'new' && b.status === 'new') return 1
     return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
   })
+
+  const confirmDelete = async () => {
+    if (!toDelete) return
+    setInquiries((prev) => prev.filter((i) => i.id !== toDelete.id))
+    if (selected?.id === toDelete.id) setSelected(null)
+    setToDelete(null)
+    await deleteInquiry(toDelete.id)
+  }
 
   const handleOpen = async (inquiry: Inquiry) => {
     if (inquiry.status === 'new') {
@@ -197,6 +206,15 @@ export function InquiryList({ inquiries: initial }: Props) {
                         </a>
                       </Button>
                     )}
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => setToDelete(inquiry)}
+                      className="text-xs h-8 px-3 bg-red-50 border-red-200 text-red-500 hover:text-red-500 hover:bg-red-100 hover:border-red-300"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                      Usuń
+                    </Button>
                   </div>
                 </div>
 
@@ -217,12 +235,60 @@ export function InquiryList({ inquiries: initial }: Props) {
                       </a>
                     </Button>
                   )}
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => setToDelete(inquiry)}
+                    className="text-xs h-9 px-3 border-red-200 text-red-500 hover:bg-red-50 hover:border-red-300"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </Button>
                 </div>
               </div>
             </div>
           )
         })}
       </div>
+
+      {/* Delete confirm dialog */}
+      <Dialog open={!!toDelete} onOpenChange={(open) => !open && setToDelete(null)}>
+        <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-[340px] bg-white border-slate-200 text-slate-900">
+          {toDelete && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center shrink-0">
+                    <Trash2 className="h-5 w-5 text-red-500" />
+                  </div>
+                  <DialogTitle className="text-slate-900 font-bold leading-tight">
+                    Usuń zapytanie
+                  </DialogTitle>
+                </div>
+              </DialogHeader>
+              <p className="text-sm text-slate-500 mt-1">
+                Czy na pewno chcesz usunąć zapytanie od{' '}
+                <span className="font-semibold text-slate-700">{toDelete.name}</span>? Tej operacji
+                nie można cofnąć.
+              </p>
+              <div className="flex gap-2 mt-2">
+                <Button
+                  variant="outline"
+                  className="flex-1 bg-white hover:bg-slate-50 border-slate-200 text-slate-600"
+                  onClick={() => setToDelete(null)}
+                >
+                  Anuluj
+                </Button>
+                <Button
+                  className="flex-1 bg-red-500 hover:bg-red-600 text-white"
+                  onClick={confirmDelete}
+                >
+                  Usuń
+                </Button>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* Detail dialog */}
       <Dialog open={!!selected} onOpenChange={(open) => !open && setSelected(null)}>

@@ -13,3 +13,10 @@ export async function markInquiryAsRead(id: string) {
     .eq('status', 'new')
   revalidatePath('/admin/inquiries')
 }
+
+export async function deleteInquiry(id: string) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const supabase: any = await createAdminClient()
+  await supabase.from('inquiries').delete().eq('id', id)
+  revalidatePath('/admin/inquiries')
+}
