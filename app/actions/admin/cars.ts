@@ -126,6 +126,7 @@ export async function createCarAction(
 
   revalidatePath('/admin/cars')
   revalidatePath('/oferty')
+  revalidatePath('/')
   redirect('/admin/cars')
 }
 
@@ -160,6 +161,7 @@ export async function updateCarAction(
   revalidatePath('/admin/cars')
   revalidatePath(`/oferty/${formData.get('slug') as string}`)
   revalidatePath('/oferty')
+  revalidatePath('/')
   redirect('/admin/cars')
 }
 
@@ -187,6 +189,7 @@ export async function deleteCarAction(carId: string): Promise<{ error?: string }
 
   revalidatePath('/admin/cars')
   revalidatePath('/oferty')
+  revalidatePath('/')
   return {}
 }
 
@@ -200,6 +203,7 @@ export async function toggleSoldAction(carId: string, sold: boolean): Promise<{ 
   }
   revalidatePath('/admin/cars')
   revalidatePath('/oferty')
+  revalidatePath('/')
   return {}
 }
 

@@ -1,11 +1,11 @@
 -- ============================================================
--- Auto Gruby – Real Inventory from Otomoto (32 listings)
--- Generated from live otomoto.pl data, April 2026
+-- Auto Gruby – Real Inventory from Otomoto (35 listings)
+-- Updated from live otomoto.pl data, June 2026
 -- Run AFTER migrations, replaces seed.sql mock data
 -- ============================================================
 
--- Clear existing sample data first (optional)
--- DELETE FROM car_features; DELETE FROM car_images; DELETE FROM cars;
+DELETE FROM car_features; DELETE FROM car_images; DELETE FROM cars;
+
 
 INSERT INTO cars (
   slug, title, brand, model, generation, year, mileage,
@@ -295,34 +295,6 @@ INSERT INTO cars (
   'Tychy'
 ),
 (
-  'opel-meriva-2003',
-  'Opel Meriva 1.6 16V Enjoy 2003',
-  'Opel',
-  'Meriva',
-  'I (2002-2010)',
-  2003,
-  165628,
-  'benzyna'::fuel_type_enum,
-  'manualna'::transmission_enum,
-  'hatchback'::body_type_enum,
-  1598,
-  100,
-  'FWD'::drive_type_enum,
-  'Srebrny',
-  5,
-  5,
-  NULL,
-  true,
-  false,
-  'Witam ! ! Sprzedam Opel Meriva 1.6 16V Enjoy z 2003 roku. Samochód zadbany, 5-drzwiowy, praktyczny i komfortowy – idealny dla rodziny oraz do codziennego użytkowania. Przebieg 165 628 km. Silnik benzynowy o mocy 100 KM, manualna skrzynia biegów. Ekonomiczne spalanie: średnio 7,5 l/100km (miasto 9,9 l/100km, trasa 5,8 l/100km). Dwa komplety kół lato zima Wyposażenie obejmuje m.in.: *) Klimatyzacja *) Elektryczne szyby przód *) Wspomaganie kierownicy *) System ABS, elektroniczny rozdział siły hamowania *) Poduszka powietrzna kierowcy i pasażera *) Radio *) Tylni podłokietnik *) Stalowe felgi Auto gotowe do jazdy, nie wymaga wkładu finansowego. Zapraszam na oględziny i jazdę próbną ! ! Wszystkie informacje zawarte w tym ogłoszeniu należy potwierdzić u sprzedawcy.',
-  5500,
-  'PLN'::currency_enum,
-  false,
-  true,
-  false,
-  'Tychy'
-),
-(
   'skoda-kamiq-2020',
   'Skoda Kamiq 1.0 TSI Ambition 2020',
   'Skoda',
@@ -399,7 +371,7 @@ INSERT INTO cars (
   true,
   false,
   'Witam ! ! Sprzedam Nissan Pulsar 1.5 dCi 2014 roku. Auto sprowadzone, zarejestrowane w Polsce, zadbane, przebieg 185 171 km. Ekonomiczny silnik diesla 110 KM, manualna skrzynia biegów, spalanie średnie ok. 3,8 l/100km. Samochód 5-drzwiowy, komfortowy i praktyczny, idealny do miasta i na dłuższe trasy. Wyposażenie obejmuje m.in.: *) Dwustrefowa automatyczna klimatyzacja *) Tempomat i ogranicznik prędkości *) Elektryczne szyby przód i tył *) Elektrycznie składane i podgrzewane lusterka *) System ABS, ESP, kontrola trakcji *) Komplet poduszek powietrznych (kierowca, pasażer, boczne, kurtyny) *) Asystent pasa ruchu, system rozpoznawania martwego pola *) Kamera 360°, czujniki parkowania *) Keyless Go, czujnik deszczu i zmierzchu *) Podgrzewane fotele przednie, podłokietniki przód i tył *) Skórzana kierownica, multifunkcyjna *) Światła LED do jazdy dziennej, światła przeciwmgielne *) Alufelgi 18" *) Tapicerka z wstawkami skórzanymi *) Bluetooth, radio, system głośnomówiący Auto gotowe do jazdy, bez wkładu finansowego. Zapraszam na oględziny i jazdę próbną ! ! Wszystkie informacje zawarte w tym ogłoszeniu należy potwierdzić u sprzedawcy.',
-  25900,
+  23500,
   'PLN'::currency_enum,
   false,
   true,
@@ -427,7 +399,7 @@ INSERT INTO cars (
   true,
   false,
   'Witam ! ! Sprzedam Audi Q5 z 2011 roku, silnik 2.0 diesel 170KM, manual, przebieg 241 000 kilometrów. Auto świeżo sprowadzone, przygotowane do rejestracji. Samochód bezwypadkowy, regularnie serwisowany, wnętrze czyste i zadbane, klimatyzacja automatyczna, bogate wyposażenie, napęd quattro, . Nowy rozrząd filtry olej, opony letnie w bardzo dobrym stanie. Przebieg potwierdzony. Zapraszam na oględziny i jazdę próbną ! ! KREDYTY I FINANSOWANIE oraz LEASING Możliwość sprawdzenia na dowolnej stacji diagnostycznej Możliwość zakupu z gwarancją na 3 lub 12 miesięcy Przyjmujemy samochody w rozliczeniu tańsze i droższe MOŻLIWOŚĆ KREDYTOWANIA !!! AUTO GRUBY Wszystkie informacje zawarte w tym ogłoszeniu należy potwierdzić u sprzedawcy.',
-  43900,
+  37500,
   'PLN'::currency_enum,
   false,
   true,
@@ -623,7 +595,7 @@ INSERT INTO cars (
   true,
   false,
   'Witam ! ! Sprzedam Volkswagen Golf 2014 rok, wersja 1.6 silnik diesla 110KM, skrzynia manualna, napęd na przednią oś. Samochód świeżo sprowadzony, przygotowany do rejestracji, opłacony. Auto bezwypadkowe, regularnie serwisowane. Silnik dynamiczny i bardzo oszczędny (średnie spalanie 3,8 l/100km), zawieszenie, układ kierowniczy i hamulcowy bez zastrzeżeń. Wnętrze czyste i zadbane, klimatyzacja sprawna, cała elektryka działa bez zarzutu. Dwa kluczyki, nowe sprzęgło. Zapraszam na oględziny i jazdę próbną ! ! dwa komplety kół lato zima DLA OGLĄDAJĄCYCH NA OLX – WIĘCEJ ZDJĘĆ NA OTOMOTO KREDYTY I FINANSOWANIE oraz LEASING Możliwość sprawdzenia na dowolnej stacji diagnostycznej Możliwość zakupu z gwarancją na 3 lub 12 miesięcy Posiada ważne OC – można wracać na kołach Kupujący zwolniony z opłaty skarbowej 2% PCC3 (faktura marża) Przyjmujemy samochody w rozliczeniu tańsze i droższe MOŻLIWOŚĆ KREDYTOWANIA !!! AUTO GRUBY',
-  26900,
+  24900,
   'PLN'::currency_enum,
   false,
   true,
@@ -659,34 +631,6 @@ INSERT INTO cars (
   'Tychy'
 ),
 (
-  'opel-corsa-2007',
-  'Opel Corsa 1.0 12V Enjoy 2007',
-  'Opel',
-  'Corsa',
-  'D (2006-2014)',
-  2007,
-  137000,
-  'benzyna'::fuel_type_enum,
-  'manualna'::transmission_enum,
-  'hatchback'::body_type_enum,
-  998,
-  60,
-  'FWD'::drive_type_enum,
-  'Srebrny',
-  5,
-  5,
-  NULL,
-  true,
-  false,
-  'Witam ! ! Sprzedam Opel Corsa 1.0 12V Enjoy, 2007 rok, benzyna. Samochód zarejestrowany w Polsce. Przebieg 137 000 km. Auto zadbane, ekonomiczne (średnie spalanie ok. 5.6 l/100km). Wnętrze czyste, zadbane, dwa komplety kół lato zima, przegląd i OC aktualne Wyposażenie: *) Klimatyzacja manualna *) Wspomaganie kierownicy *) Elektryczne szyby przednie *) Elektrycznie regulowane lusterka *) ABS *) Poduszka powietrzna kierowcy i pasażera *) Centralny zamek *) Radio *) Komplet stalowych felg Auto sprawne, gotowe do jazdy. Zapraszam na oględziny i jazdę próbną ! ! Wszystkie informacje zawarte w tym ogłoszeniu należy potwierdzić u sprzedawcy.',
-  8900,
-  'PLN'::currency_enum,
-  false,
-  true,
-  false,
-  'Tychy'
-),
-(
   'skoda-octavia-2014',
   'Skoda Octavia 2.0 TDI (Green tec) RS 2014',
   'Skoda',
@@ -707,7 +651,7 @@ INSERT INTO cars (
   true,
   false,
   'Witam ! ! Sprzedam Skoda Octavia 2.0 TDI RS 184 KM, diesel, manual. Auto sprowadzone, gotowe do rejestracji w Polsce. Bardzo zadbany egzemplarz, dynamiczny i oszczędny. Przebieg oryginalny 200000 km. Wnętrze czyste, zadbane, lakier ładny nie porysowany. Blacha idealna zero oznak korozji. Bogate wyposażenie, aktywny wydech, nagłośnienie canton, grzana szyba i fotele. Przebieg oryginalny potwierdzony do końca. Zapraszam na oględziny i jazdę próbną ! ! Wyposażenie: *) Dwustrefowa klimatyzacja automatyczna *) Tempomat *) Bi-xenonowe reflektory z funkcją doświetlania zakrętów *) LED do jazdy dziennej i tylne *) Czujniki parkowania tył *) Podgrzewane fotele przednie, grzana szyba *) Elektryczne szyby przód i tył *) Elektryczne, składane i podgrzewane lusterka *) Wielofunkcyjna, skórzana kierownica *) Bluetooth, USB *) Systemy ABS, ESP, ASR *) Komplet poduszek powietrznych (przód, boczne, kurtyny, kolanowa) *) Isofix *) Sportowe fotele i zawieszenie *) Czujnik deszczu i zmierzchu *) Start-Stop *) Alufelgi 18" *) Radio, ekran dotykowy DLA OGLĄDAJĄCYCH NA OLX-WIĘCEJ ZDJĘĆ NA OTOMOTO KREDYTY I FINANSOWANIE oraz LEASING tel. Wyświetl numer !!! Możliwość sprawdzenia na dowolnej stacji diagnostycznej Możliwość zakupu z gwarancją na 3 lub 12 miesięcy w systemie GETHELP Posiada ważne OC Można wracać na kołach Przyjmujemy samochody w rozliczeniu (tańsze i droższe) Możliwość KREDYTOWANIA !!! AUTO GRUBY',
-  42900,
+  39900,
   'PLN'::currency_enum,
   false,
   true,
@@ -763,7 +707,7 @@ INSERT INTO cars (
   true,
   false,
   'Witam ! ! Sprzedam Fiata Talento 1.6 diesel 125KM, wersja long 9 osobowa, 2x drzwi rozsuwane Samochód sprowadzony, przygotowany do rejestracji opłacony. Autko spisuje ise bardzo dobrze, przebieg oryginalny potwierdzony. Nowe klocki tarcze przód i tył, opony zimowe. Klimatyzacja cała elektryka wszystko sprawne. Samochód do jazdy, zapraszam na oględziny i jazdę próbną ! ! Wyposażenie m.in.: *) Klimatyzacja *) Tempomat *) ABS, ESP, kontrola trakcji, asystent ruszania pod górę *) Poduszki powietrzne kierowcy i pasażera *) Czujniki parkowania tył *) Światła LED do jazdy dziennej *) Radio, Bluetooth, sterowanie radiem z kierownicy *) Elektryczne szyby przód *) Podgrzewane lusterka *) Centralny zamek *) Podłokietnik *) Foteliki Isofix Możliwość sprawdzenia na dowolnej stacji diagnostycznej. Możliwość zakupu z gwarancją. AUTO GRUBY Wszystkie informacje zawarte w tym ogłoszeniu należy potwierdzić u sprzedawcy.',
-  67900,
+  64900,
   'PLN'::currency_enum,
   false,
   true,
@@ -876,6 +820,174 @@ INSERT INTO cars (
   false,
   'Witam ! ! Sprzedam Land Rover EVOQUE 2.0d 180 koni automat 4x4. Samochód bezwypadkowy, jeden właściciel od nowości, regularnie serwisowany. Przebieg oryginalny potwierdzony do końca. Samochód bardzo zadbany, nie wymaga wkładu. Samochód w lipcu 2024 miał zrobiony duży serwis w ASO LAND ROVER( rozrząd, filtry oleje, olej w skrzyni) są na wszystko faktury ponad 3tys euro. Wnętrze auta czyste i zadbane, klimatyzacja cała elektryka wszystko sprawne . Blacha idealna zero oznak korozji. Samochód bezwypadkowy. Opony Pirelli lato 2023r. Dwa klucze, ksiżki itp. Zapraszam na oględziny i jazdę próbną ! ! Przebieg oryginalny potwierdzony do końca. DLA OGLĄDAJĄCYCH NA OLX-WIĘCEJ ZDJĘĆ NA OTOMOTO KREDYTY I FINANSOWANIE oraz LEASING tel. !!! Możliwość sprawdzenia na dowolnej stacji diagnostycznej Możliwość zakupu z gwarancja na 3 lub 12 miesięcy Posiada ważne OC Można wracać na kołach (UNIQ Kupujący zwolniony Opłaty skarbowej 2% PCC3(faktura marża) Przyjmujemy samochody w rozliczeniu tańsze i droższe MOŻLIWOŚĆ KREDYTOWANIA !!! AUTO GRUBY 43-100 TYCHY UL. CIELMICKA 36',
   55000,
+  'PLN'::currency_enum,
+  false,
+  true,
+  false,
+  'Tychy'
+),
+(
+  'renault-clio-2019',
+  'Renault Clio 0.9 Energy TCe Limited EU6 2019',
+  'Renault',
+  'Clio',
+  'IV (2012-2018)',
+  2019,
+  130000,
+  'benzyna'::fuel_type_enum,
+  'manualna'::transmission_enum,
+  'hatchback'::body_type_enum,
+  898,
+  90,
+  'FWD'::drive_type_enum,
+  'Niebieski',
+  5,
+  5,
+  NULL,
+  true,
+  true,
+  'Witam ! ! Sprzedam Renault Clio 0.9 Energy TCe Limited 90 KM, 2019 rok, benzyna, manualna skrzynia biegów. Samochód sprowadzony, bardzo zadbany, bezwypadkowy. Przebieg 130 000 km. Ekonomiczne spalanie, świetny do miasta i na dłuższe trasy. Wyposażenie obejmuje m.in.: *) Klimatyzacja manualna *) Elektryczne szyby przednie *) Wspomaganie kierownicy *) ABS, ESP *) Poduszki powietrzne *) Radio, Bluetooth, USB *) Centralny zamek Zapraszam na oględziny i jazdę próbną ! ! AUTO GRUBY Wszystkie informacje zawarte w tym ogłoszeniu należy potwierdzić u sprzedawcy.',
+  29900,
+  'PLN'::currency_enum,
+  false,
+  true,
+  false,
+  'Tychy'
+),
+(
+  'dacia-duster-2017',
+  'Dacia Duster TCe 125 2WD Comfort 2017',
+  'Dacia',
+  'Duster',
+  'I (2009-2017)',
+  2017,
+  160000,
+  'benzyna'::fuel_type_enum,
+  'manualna'::transmission_enum,
+  'suv'::body_type_enum,
+  1197,
+  125,
+  'FWD'::drive_type_enum,
+  'Niebieski',
+  5,
+  5,
+  NULL,
+  true,
+  false,
+  'Witam ! ! Sprzedam Dacia Duster 1.2 TCe 125 KM, 2017 rok, benzyna, manualna skrzynia biegów, napęd przedni. Samochód sprowadzony, przygotowany do rejestracji, opłacony. Auto bezwypadkowe, zadbane. Przebieg 160 000 km. Praktyczne i przestronne SUV, idealne na każdy teren i do codziennego użytkowania. Wyposażenie obejmuje m.in.: *) Klimatyzacja manualna *) Elektryczne szyby przednie *) Wspomaganie kierownicy *) ABS, ESP *) Poduszki powietrzne *) Radio, USB *) Centralny zamek Zapraszam na oględziny i jazdę próbną ! ! AUTO GRUBY Wszystkie informacje zawarte w tym ogłoszeniu należy potwierdzić u sprzedawcy.',
+  26500,
+  'PLN'::currency_enum,
+  false,
+  true,
+  false,
+  'Tychy'
+),
+(
+  'bmw-seria-3-2018',
+  'BMW Seria 3 316d EU6 2018',
+  'BMW',
+  'Seria 3',
+  'F30/F31 (2012-2020)',
+  2018,
+  242000,
+  'diesel'::fuel_type_enum,
+  'manualna'::transmission_enum,
+  'kombi'::body_type_enum,
+  1995,
+  116,
+  'RWD'::drive_type_enum,
+  'Biały',
+  5,
+  5,
+  NULL,
+  true,
+  true,
+  'Witam ! ! Sprzedam BMW Seria 3 316d 116 KM, 2018 rok, diesel, manualna skrzynia biegów, kombi. Samochód sprowadzony, przygotowany do rejestracji, opłacony. Auto bezwypadkowe, serwisowane, bardzo zadbany egzemplarz. Przebieg 242 000 km. Silnik diesla oszczędny i dynamiczny. Wnętrze czyste i zadbane, klimatyzacja sprawna. Wyposażenie obejmuje m.in.: *) Klimatyzacja automatyczna *) Nawigacja *) Tempomat *) ABS, DSC *) Poduszki powietrzne *) Elektryczne szyby *) Podgrzewane fotele *) Bluetooth, USB Zapraszam na oględziny i jazdę próbną ! ! AUTO GRUBY Wszystkie informacje zawarte w tym ogłoszeniu należy potwierdzić u sprzedawcy.',
+  32900,
+  'PLN'::currency_enum,
+  false,
+  true,
+  false,
+  'Tychy'
+),
+(
+  'volkswagen-golf-2009',
+  'Volkswagen Golf 1.6 Team 2009',
+  'Volkswagen',
+  'Golf',
+  'VI (2008-2013)',
+  2009,
+  225686,
+  'benzyna'::fuel_type_enum,
+  'manualna'::transmission_enum,
+  'hatchback'::body_type_enum,
+  1595,
+  102,
+  'FWD'::drive_type_enum,
+  'Srebrny',
+  5,
+  5,
+  NULL,
+  true,
+  true,
+  'Witam ! ! Sprzedam Volkswagen Golf VI 1.6 102 KM, 2009 rok, benzyna, manualna skrzynia biegów. Samochód bezwypadkowy, serwisowany, bardzo zadbany. Przebieg 225 686 km. Silnik benzynowy solidny i ekonomiczny. Wnętrze czyste i zadbane, klimatyzacja sprawna, elektryka bez zastrzeżeń. Wyposażenie obejmuje m.in.: *) Klimatyzacja manualna *) ABS, ESP *) Poduszki powietrzne *) Elektryczne szyby *) Radio *) Centralny zamek *) Wspomaganie kierownicy Zapraszam na oględziny i jazdę próbną ! ! AUTO GRUBY Wszystkie informacje zawarte w tym ogłoszeniu należy potwierdzić u sprzedawcy.',
+  18900,
+  'PLN'::currency_enum,
+  false,
+  true,
+  false,
+  'Tychy'
+),
+(
+  'jaguar-f-pace-2018',
+  'Jaguar F-Pace 2.0 i4D AWD Prestige 2018',
+  'Jaguar',
+  'F-Pace',
+  NULL,
+  2018,
+  120000,
+  'diesel'::fuel_type_enum,
+  'automatyczna'::transmission_enum,
+  'suv'::body_type_enum,
+  1999,
+  241,
+  'AWD'::drive_type_enum,
+  'Biały',
+  5,
+  5,
+  NULL,
+  true,
+  true,
+  'Witam ! ! Sprzedam Jaguar F-Pace 2.0 i4D 241 KM, 2018 rok, diesel, automat, napęd AWD. Samochód sprowadzony, bezwypadkowy, serwisowany. Przebieg 120 000 km. Luksusowe SUV klasy premium z bogatym wyposażeniem. Wnętrze czyste i zadbane, skórzana tapicerka. Wyposażenie obejmuje m.in.: *) Klimatyzacja automatyczna *) Nawigacja *) Tempomat adaptywny *) Kamera cofania *) Skórzana tapicerka *) Podgrzewane fotele *) LED reflektory *) Bluetooth, Apple CarPlay Zapraszam na oględziny i jazdę próbną ! ! AUTO GRUBY Wszystkie informacje zawarte w tym ogłoszeniu należy potwierdzić u sprzedawcy.',
+  74900,
+  'PLN'::currency_enum,
+  false,
+  true,
+  false,
+  'Tychy'
+),
+(
+  'volkswagen-golf-2025',
+  'Volkswagen Golf 1.5 eTSI mHEV Life DSG 2025',
+  'Volkswagen',
+  'Golf',
+  'VIII (2020-)',
+  2025,
+  6200,
+  'hybryda'::fuel_type_enum,
+  'automatyczna'::transmission_enum,
+  'kombi'::body_type_enum,
+  1498,
+  150,
+  'FWD'::drive_type_enum,
+  'Srebrny',
+  5,
+  5,
+  'Polska',
+  true,
+  true,
+  'Witam ! ! Sprzedam Volkswagen Golf VIII 1.5 eTSI mHEV 150 KM DSG, 2025 rok, hybryda lagodna, automat, samochód z salonu w Polsce. Przebieg 6 200 km. Jak nowy, jeden wlasciciel, pelna historia serwisowa. Ekonomiczny silnik mild-hybrid z automatyczna skrzynią DSG. Bogate wyposażenie standardowe klasy Life. Wyposażenie obejmuje m.in.: *) Klimatyzacja automatyczna *) Nawigacja *) Apple CarPlay, Android Auto *) Kamera cofania *) Tempomat adaptywny *) Asystent pasa ruchu *) Podgrzewane fotele *) LED reflektory *) System Start/Stop *) Alufelgi 17 Zapraszam na oględziny i jazdę próbną ! ! AUTO GRUBY Wszystkie informacje zawarte w tym ogłoszeniu należy potwierdzić u sprzedawcy.',
+  99900,
   'PLN'::currency_enum,
   false,
   true,
@@ -1324,20 +1436,6 @@ SELECT id, category, name FROM (VALUES
 ) AS f(category, name)
 CROSS JOIN (SELECT id FROM cars WHERE slug = 'mercedes-benz-clk-2002' LIMIT 1) AS c;
 
-INSERT INTO car_features (car_id, category, name)
-SELECT id, category, name FROM (VALUES
-  ('Audio i multimedia', 'Radio'),
-  ('Komfort i dodatki', 'Klimatyzacja manualna'),
-  ('Komfort i dodatki', 'Podłokietniki - tył'),
-  ('Komfort i dodatki', 'Elektryczne szyby przednie'),
-  ('Systemy wspomagania kierowcy', 'Wspomaganie kierownicy'),
-  ('Osiągi i tuning', 'Felgi stalowe'),
-  ('Bezpieczeństwo', 'ABS'),
-  ('Bezpieczeństwo', 'Elektroniczny system rozdziału siły hamowania'),
-  ('Bezpieczeństwo', 'Poduszka powietrzna kierowcy'),
-  ('Bezpieczeństwo', 'Poduszka powietrzna pasażera')
-) AS f(category, name)
-CROSS JOIN (SELECT id FROM cars WHERE slug = 'opel-meriva-2003' LIMIT 1) AS c;
 
 INSERT INTO car_features (car_id, category, name)
 SELECT id, category, name FROM (VALUES
@@ -1864,21 +1962,6 @@ SELECT id, category, name FROM (VALUES
 ) AS f(category, name)
 CROSS JOIN (SELECT id FROM cars WHERE slug = 'volkswagen-tiguan-2019' LIMIT 1) AS c;
 
-INSERT INTO car_features (car_id, category, name)
-SELECT id, category, name FROM (VALUES
-  ('Audio i multimedia', 'Radio'),
-  ('Komfort i dodatki', 'Klimatyzacja manualna'),
-  ('Komfort i dodatki', 'Tapicerka materiałowa'),
-  ('Komfort i dodatki', 'Elektryczne szyby przednie'),
-  ('Systemy wspomagania kierowcy', 'Lusterka boczne ustawiane elektrycznie'),
-  ('Systemy wspomagania kierowcy', 'Wspomaganie kierownicy'),
-  ('Osiągi i tuning', 'Felgi stalowe'),
-  ('Osiągi i tuning', 'Opony zimowe'),
-  ('Bezpieczeństwo', 'ABS'),
-  ('Bezpieczeństwo', 'Poduszka powietrzna kierowcy'),
-  ('Bezpieczeństwo', 'Poduszka powietrzna pasażera')
-) AS f(category, name)
-CROSS JOIN (SELECT id FROM cars WHERE slug = 'opel-corsa-2007' LIMIT 1) AS c;
 
 INSERT INTO car_features (car_id, category, name)
 SELECT id, category, name FROM (VALUES
@@ -2174,6 +2257,144 @@ SELECT id, category, name FROM (VALUES
 ) AS f(category, name)
 CROSS JOIN (SELECT id FROM cars WHERE slug = 'land-rover-range-rover-evoque-2016' LIMIT 1) AS c;
 
+INSERT INTO car_features (car_id, category, name)
+SELECT id, category, name FROM (VALUES
+  ('Audio i multimedia', 'Interfejs Bluetooth'),
+  ('Audio i multimedia', 'Radio'),
+  ('Audio i multimedia', 'Gniazdo USB'),
+  ('Komfort i dodatki', 'Klimatyzacja manualna'),
+  ('Komfort i dodatki', 'Elektryczne szyby przednie'),
+  ('Komfort i dodatki', 'Kierownica wielofunkcyjna'),
+  ('Systemy wspomagania kierowcy', 'Wspomaganie kierownicy'),
+  ('Bezpieczeństwo', 'ABS'),
+  ('Bezpieczeństwo', 'ESP'),
+  ('Bezpieczeństwo', 'Poduszka powietrzna kierowcy'),
+  ('Bezpieczeństwo', 'Poduszka powietrzna pasażera')
+) AS f(category, name)
+CROSS JOIN (SELECT id FROM cars WHERE slug = 'renault-clio-2019' LIMIT 1) AS c;
+
+INSERT INTO car_features (car_id, category, name)
+SELECT id, category, name FROM (VALUES
+  ('Audio i multimedia', 'Interfejs Bluetooth'),
+  ('Audio i multimedia', 'Radio'),
+  ('Audio i multimedia', 'Gniazdo USB'),
+  ('Komfort i dodatki', 'Klimatyzacja manualna'),
+  ('Komfort i dodatki', 'Elektryczne szyby przednie'),
+  ('Komfort i dodatki', 'Kierownica wielofunkcyjna'),
+  ('Systemy wspomagania kierowcy', 'Wspomaganie kierownicy'),
+  ('Systemy wspomagania kierowcy', 'Kontrola trakcji'),
+  ('Bezpieczeństwo', 'ABS'),
+  ('Bezpieczeństwo', 'ESP'),
+  ('Bezpieczeństwo', 'Poduszka powietrzna kierowcy'),
+  ('Bezpieczeństwo', 'Poduszka powietrzna pasażera'),
+  ('Bezpieczeństwo', 'Isofix (punkty mocowania fotelika dziecięcego)')
+) AS f(category, name)
+CROSS JOIN (SELECT id FROM cars WHERE slug = 'dacia-duster-2017' LIMIT 1) AS c;
+
+INSERT INTO car_features (car_id, category, name)
+SELECT id, category, name FROM (VALUES
+  ('Audio i multimedia', 'Interfejs Bluetooth'),
+  ('Audio i multimedia', 'Radio'),
+  ('Audio i multimedia', 'Gniazdo USB'),
+  ('Audio i multimedia', 'System nawigacji satelitarnej'),
+  ('Audio i multimedia', 'Ekran dotykowy'),
+  ('Komfort i dodatki', 'Klimatyzacja automatyczna: dwustrefowa'),
+  ('Komfort i dodatki', 'Kierownica skórzana'),
+  ('Komfort i dodatki', 'Elektryczne szyby przednie'),
+  ('Komfort i dodatki', 'Elektryczne szyby tylne'),
+  ('Komfort i dodatki', 'Podgrzewane fotele przednie'),
+  ('Systemy wspomagania kierowcy', 'Tempomat'),
+  ('Systemy wspomagania kierowcy', 'Wspomaganie kierownicy'),
+  ('Systemy wspomagania kierowcy', 'Czujnik deszczu'),
+  ('Systemy wspomagania kierowcy', 'Czujnik zmierzchu'),
+  ('Bezpieczeństwo', 'ABS'),
+  ('Bezpieczeństwo', 'ESP'),
+  ('Bezpieczeństwo', 'Poduszka powietrzna kierowcy'),
+  ('Bezpieczeństwo', 'Poduszka powietrzna pasażera'),
+  ('Bezpieczeństwo', 'Boczne poduszki powietrzne - przód')
+) AS f(category, name)
+CROSS JOIN (SELECT id FROM cars WHERE slug = 'bmw-seria-3-2018' LIMIT 1) AS c;
+
+INSERT INTO car_features (car_id, category, name)
+SELECT id, category, name FROM (VALUES
+  ('Audio i multimedia', 'Radio'),
+  ('Audio i multimedia', 'Interfejs Bluetooth'),
+  ('Komfort i dodatki', 'Klimatyzacja manualna'),
+  ('Komfort i dodatki', 'Elektryczne szyby przednie'),
+  ('Komfort i dodatki', 'Kierownica wielofunkcyjna'),
+  ('Systemy wspomagania kierowcy', 'Wspomaganie kierownicy'),
+  ('Bezpieczeństwo', 'ABS'),
+  ('Bezpieczeństwo', 'ESP'),
+  ('Bezpieczeństwo', 'Poduszka powietrzna kierowcy'),
+  ('Bezpieczeństwo', 'Poduszka powietrzna pasażera')
+) AS f(category, name)
+CROSS JOIN (SELECT id FROM cars WHERE slug = 'volkswagen-golf-2009' LIMIT 1) AS c;
+
+INSERT INTO car_features (car_id, category, name)
+SELECT id, category, name FROM (VALUES
+  ('Audio i multimedia', 'Interfejs Bluetooth'),
+  ('Audio i multimedia', 'Radio'),
+  ('Audio i multimedia', 'Gniazdo USB'),
+  ('Audio i multimedia', 'System nawigacji satelitarnej'),
+  ('Audio i multimedia', 'Ekran dotykowy'),
+  ('Audio i multimedia', 'Android Auto'),
+  ('Komfort i dodatki', 'Klimatyzacja automatyczna: dwustrefowa'),
+  ('Komfort i dodatki', 'Tapicerka skórzana'),
+  ('Komfort i dodatki', 'Elektrycznie ustawiany fotel kierowcy'),
+  ('Komfort i dodatki', 'Podgrzewane fotele przednie'),
+  ('Komfort i dodatki', 'Kierownica skórzana'),
+  ('Komfort i dodatki', 'Elektryczne szyby przednie'),
+  ('Komfort i dodatki', 'Elektryczne szyby tylne'),
+  ('Systemy wspomagania kierowcy', 'Tempomat'),
+  ('Systemy wspomagania kierowcy', 'Kamera parkowania tył'),
+  ('Systemy wspomagania kierowcy', 'Kamera parkowania przód'),
+  ('Systemy wspomagania kierowcy', 'Kontrola trakcji'),
+  ('Systemy wspomagania kierowcy', 'Czujnik deszczu'),
+  ('Systemy wspomagania kierowcy', 'Czujnik zmierzchu'),
+  ('Systemy wspomagania kierowcy', 'System Start/Stop'),
+  ('Bezpieczeństwo', 'ABS'),
+  ('Bezpieczeństwo', 'ESP'),
+  ('Bezpieczeństwo', 'Poduszka powietrzna kierowcy'),
+  ('Bezpieczeństwo', 'Poduszka powietrzna pasażera'),
+  ('Bezpieczeństwo', 'Boczne poduszki powietrzne - przód'),
+  ('Bezpieczeństwo', 'Kurtyny powietrzne - przód'),
+  ('Bezpieczeństwo', 'Isofix (punkty mocowania fotelika dziecięcego)')
+) AS f(category, name)
+CROSS JOIN (SELECT id FROM cars WHERE slug = 'jaguar-f-pace-2018' LIMIT 1) AS c;
+
+INSERT INTO car_features (car_id, category, name)
+SELECT id, category, name FROM (VALUES
+  ('Audio i multimedia', 'Interfejs Bluetooth'),
+  ('Audio i multimedia', 'Radio'),
+  ('Audio i multimedia', 'Gniazdo USB'),
+  ('Audio i multimedia', 'System nawigacji satelitarnej'),
+  ('Audio i multimedia', 'Ekran dotykowy'),
+  ('Audio i multimedia', 'Android Auto'),
+  ('Komfort i dodatki', 'Klimatyzacja automatyczna: dwustrefowa'),
+  ('Komfort i dodatki', 'Kierownica skórzana'),
+  ('Komfort i dodatki', 'Kierownica wielofunkcyjna'),
+  ('Komfort i dodatki', 'Elektryczne szyby przednie'),
+  ('Komfort i dodatki', 'Elektryczne szyby tylne'),
+  ('Komfort i dodatki', 'Podgrzewane fotele przednie'),
+  ('Systemy wspomagania kierowcy', 'Tempomat'),
+  ('Systemy wspomagania kierowcy', 'Ogranicznik prędkości'),
+  ('Systemy wspomagania kierowcy', 'System Start/Stop'),
+  ('Systemy wspomagania kierowcy', 'Kontrola trakcji'),
+  ('Systemy wspomagania kierowcy', 'Czujnik deszczu'),
+  ('Systemy wspomagania kierowcy', 'Czujnik zmierzchu'),
+  ('Systemy wspomagania kierowcy', 'Asystent pasa ruchu'),
+  ('Osiągi i tuning', 'Filtr cząstek stałych'),
+  ('Osiągi i tuning', 'Felgi aluminiowe 17'),
+  ('Bezpieczeństwo', 'ABS'),
+  ('Bezpieczeństwo', 'ESP'),
+  ('Bezpieczeństwo', 'Poduszka powietrzna kierowcy'),
+  ('Bezpieczeństwo', 'Poduszka powietrzna pasażera'),
+  ('Bezpieczeństwo', 'Kurtyny powietrzne - przód'),
+  ('Bezpieczeństwo', 'Boczne poduszki powietrzne - przód'),
+  ('Bezpieczeństwo', 'Isofix (punkty mocowania fotelika dziecięcego)')
+) AS f(category, name)
+CROSS JOIN (SELECT id FROM cars WHERE slug = 'volkswagen-golf-2025' LIMIT 1) AS c;
+
 
 -- ============================================================
 -- Car images (otomoto CDN URLs stored as storage_path)
@@ -2242,12 +2463,6 @@ FROM (VALUES
   ('mercedes-benz-clk-2002', 'https://ireland.apollo.olxcdn.com/v1/files/cbplcn2ul3h43-OTOMOTOPL/image;s=1024x768', 'Mercedes-Benz CLK 2002', 3, false),
   ('mercedes-benz-clk-2002', 'https://ireland.apollo.olxcdn.com/v1/files/8pnclvep0g6d2-OTOMOTOPL/image;s=1024x768', 'Mercedes-Benz CLK 2002', 4, false),
   ('mercedes-benz-clk-2002', 'https://ireland.apollo.olxcdn.com/v1/files/iu2jv54ke3mp1-OTOMOTOPL/image;s=1024x768', 'Mercedes-Benz CLK 2002', 5, false),
-  ('opel-meriva-2003', 'https://ireland.apollo.olxcdn.com/v1/files/mtyybdxiyr7j1-OTOMOTOPL/image;s=1024x768', 'Opel Meriva 2003', 0, true),
-  ('opel-meriva-2003', 'https://ireland.apollo.olxcdn.com/v1/files/2rfp51q1onia1-OTOMOTOPL/image;s=1024x768', 'Opel Meriva 2003', 1, false),
-  ('opel-meriva-2003', 'https://ireland.apollo.olxcdn.com/v1/files/eys95jpfuqoj-OTOMOTOPL/image;s=1024x768', 'Opel Meriva 2003', 2, false),
-  ('opel-meriva-2003', 'https://ireland.apollo.olxcdn.com/v1/files/y7sjokvtj5292-OTOMOTOPL/image;s=1024x768', 'Opel Meriva 2003', 3, false),
-  ('opel-meriva-2003', 'https://ireland.apollo.olxcdn.com/v1/files/rlso6ksm07fd1-OTOMOTOPL/image;s=1024x768', 'Opel Meriva 2003', 4, false),
-  ('opel-meriva-2003', 'https://ireland.apollo.olxcdn.com/v1/files/4j6nmiy5kaqy2-OTOMOTOPL/image;s=1024x768', 'Opel Meriva 2003', 5, false),
   ('skoda-kamiq-2020', 'https://ireland.apollo.olxcdn.com/v1/files/vjbd83jx860b3-OTOMOTOPL/image;s=1024x768', 'Skoda Kamiq 2020', 0, true),
   ('skoda-kamiq-2020', 'https://ireland.apollo.olxcdn.com/v1/files/x0rfzzrwvch9-OTOMOTOPL/image;s=1024x768', 'Skoda Kamiq 2020', 1, false),
   ('skoda-kamiq-2020', 'https://ireland.apollo.olxcdn.com/v1/files/nq800d04q7es-OTOMOTOPL/image;s=1024x768', 'Skoda Kamiq 2020', 2, false),
@@ -2320,12 +2535,6 @@ FROM (VALUES
   ('volkswagen-tiguan-2019', 'https://ireland.apollo.olxcdn.com/v1/files/bb6xw6v350zq-OTOMOTOPL/image;s=1024x768', 'Volkswagen Tiguan 2019', 3, false),
   ('volkswagen-tiguan-2019', 'https://ireland.apollo.olxcdn.com/v1/files/59uromzm2ckm1-OTOMOTOPL/image;s=1024x768', 'Volkswagen Tiguan 2019', 4, false),
   ('volkswagen-tiguan-2019', 'https://ireland.apollo.olxcdn.com/v1/files/czwliykg5wk13-OTOMOTOPL/image;s=1024x768', 'Volkswagen Tiguan 2019', 5, false),
-  ('opel-corsa-2007', 'https://ireland.apollo.olxcdn.com/v1/files/1c7rxxqi74321-OTOMOTOPL/image;s=1024x768', 'Opel Corsa 2007', 0, true),
-  ('opel-corsa-2007', 'https://ireland.apollo.olxcdn.com/v1/files/4yn7lgz194x4-OTOMOTOPL/image;s=1024x768', 'Opel Corsa 2007', 1, false),
-  ('opel-corsa-2007', 'https://ireland.apollo.olxcdn.com/v1/files/kqq20bqic2ac-OTOMOTOPL/image;s=1024x768', 'Opel Corsa 2007', 2, false),
-  ('opel-corsa-2007', 'https://ireland.apollo.olxcdn.com/v1/files/4tdmxs4ku0xk2-OTOMOTOPL/image;s=1024x768', 'Opel Corsa 2007', 3, false),
-  ('opel-corsa-2007', 'https://ireland.apollo.olxcdn.com/v1/files/rmietpsuers9-OTOMOTOPL/image;s=1024x768', 'Opel Corsa 2007', 4, false),
-  ('opel-corsa-2007', 'https://ireland.apollo.olxcdn.com/v1/files/g0drm6tsdjlu2-OTOMOTOPL/image;s=1024x768', 'Opel Corsa 2007', 5, false),
   ('skoda-octavia-2014', 'https://ireland.apollo.olxcdn.com/v1/files/v9noep01ti2d3-OTOMOTOPL/image;s=1024x768', 'Skoda Octavia 2014', 0, true),
   ('skoda-octavia-2014', 'https://ireland.apollo.olxcdn.com/v1/files/szdwyohdkotr2-OTOMOTOPL/image;s=1024x768', 'Skoda Octavia 2014', 1, false),
   ('skoda-octavia-2014', 'https://ireland.apollo.olxcdn.com/v1/files/7o3zsv5twcom3-OTOMOTOPL/image;s=1024x768', 'Skoda Octavia 2014', 2, false),
@@ -2367,6 +2576,42 @@ FROM (VALUES
   ('land-rover-range-rover-evoque-2016', 'https://ireland.apollo.olxcdn.com/v1/files/dwd7czgbae0j-OTOMOTOPL/image;s=1024x768', 'Land Rover Range Rover Evoque 2016', 2, false),
   ('land-rover-range-rover-evoque-2016', 'https://ireland.apollo.olxcdn.com/v1/files/t70gm37x88tl2-OTOMOTOPL/image;s=1024x768', 'Land Rover Range Rover Evoque 2016', 3, false),
   ('land-rover-range-rover-evoque-2016', 'https://ireland.apollo.olxcdn.com/v1/files/4ssxgl9cwvua1-OTOMOTOPL/image;s=1024x768', 'Land Rover Range Rover Evoque 2016', 4, false),
-  ('land-rover-range-rover-evoque-2016', 'https://ireland.apollo.olxcdn.com/v1/files/eo64tzz1h53s2-OTOMOTOPL/image;s=1024x768', 'Land Rover Range Rover Evoque 2016', 5, false)
+  ('land-rover-range-rover-evoque-2016', 'https://ireland.apollo.olxcdn.com/v1/files/eo64tzz1h53s2-OTOMOTOPL/image;s=1024x768', 'Land Rover Range Rover Evoque 2016', 5, false),
+  ('renault-clio-2019', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6Ijc4eDl6YW1taWNmZzMtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.7OeT73qoTwZWHKampoy0tmeYLehUy7jQj86hr483RnU/image;s=1024x768', 'Renault Clio 2019', 0, true),
+  ('renault-clio-2019', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6ImszYTF2ZXNsbmNtcDEtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.AYCRDn12rGh2iXMSvBR4e35BqYgyO6IbCklcoa4VaoM/image;s=1024x768', 'Renault Clio 2019', 1, false),
+  ('renault-clio-2019', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6ImJzMWt4ZjA2YXVsNjMtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.TkQS19Yc0hmJpPXh2hXr9bmfVIcQP9b_TrngJOl8rjs/image;s=1024x768', 'Renault Clio 2019', 2, false),
+  ('renault-clio-2019', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6ImJqZDN2N3RwZmVwejEtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.-0zWkHxZq8qP_SUqEHwVxlGw8qdT7sRr5jtXNxiHjls/image;s=1024x768', 'Renault Clio 2019', 3, false),
+  ('renault-clio-2019', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6InBucWVoZXkzYzEyeC1PVE9NT1RPUEwiLCJ3IjpbeyJmbiI6IndnNGducXA2eTFmLU9UT01PVE9QTCIsInMiOiIxNiIsImEiOiIwIiwicCI6IjEwLC0xMCJ9XX0.CmVYYwgM0Er4gT3wnOcL8bIW4zxNIcTb_cCaGtJaLso/image;s=1024x768', 'Renault Clio 2019', 4, false),
+  ('renault-clio-2019', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6InllYWJtOG03dDJ0dC1PVE9NT1RPUEwiLCJ3IjpbeyJmbiI6IndnNGducXA2eTFmLU9UT01PVE9QTCIsInMiOiIxNiIsImEiOiIwIiwicCI6IjEwLC0xMCJ9XX0.7Dy7fkeS0kOaiTZACVZyqKnjdfSB5CMxT3Io66J-HcM/image;s=1024x768', 'Renault Clio 2019', 5, false),
+  ('dacia-duster-2017', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6Ijc1aWFweHoxMHh0YjEtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.a5RQf0IjPQtyIL9voW1DOMqSQm0eAy9dxU5vR_1Ggj0/image;s=1024x768', 'Dacia Duster 2017', 0, true),
+  ('dacia-duster-2017', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IjFydDk2ejg4MThqMjMtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.XOjjpfoBtpR41tQB7mc5T_12EkKtVJRUljwg3V3Hupw/image;s=1024x768', 'Dacia Duster 2017', 1, false),
+  ('dacia-duster-2017', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6Ims2YmVuMGw1dHkyYzMtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.sB0MmAE0egyFTCQimSUOsYZS3w31wn36L3eLuWzqzeY/image;s=1024x768', 'Dacia Duster 2017', 2, false),
+  ('dacia-duster-2017', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndkaHV2cnYzaTFrajEtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNjE2YTEwLU9UT01PVE9QTCIsInMiOiIxNiIsImEiOiIwIiwicCI6IjEwLC0xMCJ9XX0.bTwtqkb4gi1Whlhi1JKMiapaOY3H3qrmZGW8M0JVn9M/image;s=1024x768', 'Dacia Duster 2017', 3, false),
+  ('dacia-duster-2017', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6InR4amVudmo5dnNhYy1PVE9NT1RPUEwiLCJ3IjpbeyJmbiI6IndnNGducXA2eTFmLU9UT01PVE9QTCIsInMiOiIxNiIsImEiOiIwIiwicCI6IjEwLC0xMCJ9XX0.lr-40WfRLS2faee5it0TgyDwkGTEDj2WGiJv8iQWuk0/image;s=1024x768', 'Dacia Duster 2017', 4, false),
+  ('dacia-duster-2017', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6ImYxODQzYW9nY2lweTEtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.GFeyV1PE1iYZdJ4x0fXrVvmY9BLzf2kHzUlJD2hwnys/image;s=1024x768', 'Dacia Duster 2017', 5, false),
+  ('bmw-seria-3-2018', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6InR3azNyb291bGt5ODEtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.vZCJJMsQ5zwaeomS-yuoCqNT_d-CNXiRkJ731OxC-2M/image;s=1024x768', 'BMW Seria 3 2018', 0, true),
+  ('bmw-seria-3-2018', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6Im91c2h6OGMydDZyMDEtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.HzUSnhyS5zX5DHmUnf_xSNvnGqpHd0gkRPTyTKm7ijk/image;s=1024x768', 'BMW Seria 3 2018', 1, false),
+  ('bmw-seria-3-2018', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6ImFtbHBtMTNyMnNuYTMtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.ohLQSiG5JwQ9o0ZvDtibbg_KQQxN1IHUadliYF7eMXc/image;s=1024x768', 'BMW Seria 3 2018', 2, false),
+  ('bmw-seria-3-2018', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6InVmYzgzMGJhejdndjMtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.f8WmDGJfyIO6PBifN7yLKW851u6g-RWnapKafWqZqEE/image;s=1024x768', 'BMW Seria 3 2018', 3, false),
+  ('bmw-seria-3-2018', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6Imp2YmJ4cDJyeDg1czMtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.5dlwFj4XfAhkUEQfWUniwWOjhUceNQK_lbzlLHZlZCg/image;s=1024x768', 'BMW Seria 3 2018', 4, false),
+  ('bmw-seria-3-2018', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6ImwyZWpwaHc5OG9wei1PVE9NT1RPUEwiLCJ3IjpbeyJmbiI6IndnNGducXA2eTFmLU9UT01PVE9QTCIsInMiOiIxNiIsImEiOiIwIiwicCI6IjEwLC0xMCJ9XX0.xOwr3bzdcDqGXVShy30fo_lX018NCnczy6dzPbk8_kU/image;s=1024x768', 'BMW Seria 3 2018', 5, false),
+  ('volkswagen-golf-2009', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6InBpY2llcGNuamxwaTItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.jTFRuEFnd_MHFtSGnFfmL0rpj1EYMjJZ01kmw-K7gK8/image;s=1024x768', 'Volkswagen Golf 2009', 0, true),
+  ('volkswagen-golf-2009', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6ImpwYjk2ZzM3NnJvOTItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.zYttQ1IgdVJ8DXGDqyv-pbwQvQm-iFIIPr0uVX9JrvM/image;s=1024x768', 'Volkswagen Golf 2009', 1, false),
+  ('volkswagen-golf-2009', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6Im5udjI3ajh5ODFqczItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.BjGYH6Eh2R7OsJZd7F0AW9Z6lB5DqiqoH6WfUgfEJvk/image;s=1024x768', 'Volkswagen Golf 2009', 2, false),
+  ('volkswagen-golf-2009', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IjMwb3hwams3NGx3NjEtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.9U9lexhj0jxR0hbuyJLcOlr-AZtlDQZS9pg3Fd4t3po/image;s=1024x768', 'Volkswagen Golf 2009', 3, false),
+  ('volkswagen-golf-2009', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6InRwOGxocG5tdnViZzItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.Vbvq5BSncXFOiflS5cIOqFqbN7FUYUO5XNIPVG3Hgvw/image;s=1024x768', 'Volkswagen Golf 2009', 4, false),
+  ('volkswagen-golf-2009', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6Ijg3ZW04ZW91eHczazMtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.6bauq8zoxGyRXALADouDIUTfSQkJZUCZyJcq0ounKGE/image;s=1024x768', 'Volkswagen Golf 2009', 5, false),
+  ('jaguar-f-pace-2018', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6ImZiaDB6ZjZ3czd0ei1PVE9NT1RPUEwiLCJ3IjpbeyJmbiI6IndnNGducXA2eTFmLU9UT01PVE9QTCIsInMiOiIxNiIsImEiOiIwIiwicCI6IjEwLC0xMCJ9XX0.WUTiCZw8MoZVsfMbk2v-IbIaJpWnsiecv8mqRK481c4/image;s=1024x768', 'Jaguar F-Pace 2018', 0, true),
+  ('jaguar-f-pace-2018', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IjJweHhpNnNiejJ4ci1PVE9NT1RPUEwiLCJ3IjpbeyJmbiI6IndnNGducXA2eTFmLU9UT01PVE9QTCIsInMiOiIxNiIsImEiOiIwIiwicCI6IjEwLC0xMCJ9XX0.1UwyP2BY8pkHVHKvsFZSibpZ_I3pe4WCSdADT3L5yCc/image;s=1024x768', 'Jaguar F-Pace 2018', 1, false),
+  ('jaguar-f-pace-2018', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6ImE2c2pucjR6dzNiYTMtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.Ga3k3yiAHhLNtuujhKQ-nnVC7hlXxbc2aamW1hVNzUA/image;s=1024x768', 'Jaguar F-Pace 2018', 2, false),
+  ('jaguar-f-pace-2018', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6Img0eGRkMW1vdWQwdTMtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNjkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.ZBSqXgCKwwhuDduvrQJ3SEdMPrM38rm4_nYKwNHw2-E/image;s=1024x768', 'Jaguar F-Pace 2018', 3, false),
+  ('jaguar-f-pace-2018', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IjBrM2hpNjlsaTRmNjEtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNjkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.8kAopLRQSdNwUH3l9OK5Oi8TfD_93k4l_a5sC7RWhkI/image;s=1024x768', 'Jaguar F-Pace 2018', 4, false),
+  ('jaguar-f-pace-2018', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6Imc4cjc5ZThnamV5eTItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNjkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.6nFMRDJulh2qwGxgoT2eNgf_GtcOtxAZ1ckLZT9C_QA/image;s=1024x768', 'Jaguar F-Pace 2018', 5, false),
+  ('volkswagen-golf-2025', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6ImpmOW9iNHFzZ3p3eTEtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.Vix3wM2axRuEoCFd6MdY_rJOvTYfE4PS21id0_4iWFw/image;s=1024x768', 'Volkswagen Golf 2025', 0, true),
+  ('volkswagen-golf-2025', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6Ijhnd2t2d2NvNm83Zi1PVE9NT1RPUEwiLCJ3IjpbeyJmbiI6IndnNGducXA2eTFmLU9UT01PVE9QTCIsInMiOiIxNiIsImEiOiIwIiwicCI6IjEwLC0xMCJ9XX0.yYv_fSWwFe4AIY8a1MoWY1-XwkNCZHkcrbh-megB3K4/image;s=1024x768', 'Volkswagen Golf 2025', 1, false),
+  ('volkswagen-golf-2025', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6ImJ0djFsMXpobmJuLU9UT01PVE9QTCIsInciOlt7ImZuIjoid2c0Z25xcDZ5MWYtT1RPTU9UT1BMIiwicyI6IjE2IiwiYSI6IjAiLCJwIjoiMTAsLTEwIn1dfQ.FRVw6g9_UzZbanB8qTft3T4ux0QbXVIRnjI-5se3saQ/image;s=1024x768', 'Volkswagen Golf 2025', 2, false),
+  ('volkswagen-golf-2025', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6InV3dmkzb2tuOXBqbzItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.8mfeq_iKt5M/image;s=1024x768', 'Volkswagen Golf 2025', 3, false),
+  ('volkswagen-golf-2025', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6ImV4ZGlma3VlcW91ajEtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.UQqrtirH7UVtzQEESmtV4ZC-JDpu-wvw8XoMTPD2BsE/image;s=1024x768', 'Volkswagen Golf 2025', 4, false),
+  ('volkswagen-golf-2025', 'https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6InBjZHo4N3R6M3NzbS1PVE9NT1RPUEwiLCJ3IjpbeyJmbiI6IndnNGducXA2eTFmLU9UT01PVE9QTCIsInMiOiIxNiIsImEiOiIwIiwicCI6IjEwLC0xMCJ9XX0.1_KbT0r8Egq9QZfaHjI52jBw7gT0pxBJ4UiZNlNEWw8/image;s=1024x768', 'Volkswagen Golf 2025', 5, false)
 ) AS f(slug, storage_path, alt, sort_order, is_cover)
 JOIN cars c ON c.slug = f.slug;
