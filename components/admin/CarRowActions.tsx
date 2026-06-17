@@ -51,7 +51,6 @@ export default function CarRowActions({ carId, carSlug, sold, published, variant
   const [actionError, setActionError] = useState<string | null>(null)
 
   const handleConfirmToggleSold = () => {
-    setSoldDialogOpen(false)
     setActionType('sold')
     setActionError(null)
     startTransition(async () => {
@@ -60,13 +59,13 @@ export default function CarRowActions({ carId, carSlug, sold, published, variant
       if (result.error) {
         setActionError(result.error)
       } else {
+        setSoldDialogOpen(false)
         router.refresh()
       }
     })
   }
 
   const handleConfirmDelete = () => {
-    setDeleteDialogOpen(false)
     setActionType('delete')
     setActionError(null)
     startTransition(async () => {
@@ -75,6 +74,7 @@ export default function CarRowActions({ carId, carSlug, sold, published, variant
       if (result.error) {
         setActionError(result.error)
       } else {
+        setDeleteDialogOpen(false)
         router.refresh()
       }
     })
@@ -202,7 +202,7 @@ export default function CarRowActions({ carId, carSlug, sold, published, variant
       )}
 
       {/* Sold confirmation dialog */}
-      <Dialog open={soldDialogOpen} onOpenChange={setSoldDialogOpen}>
+      <Dialog open={soldDialogOpen} onOpenChange={(open) => { if (!pending) setSoldDialogOpen(open) }}>
         <DialogContent className="max-w-sm bg-white border-slate-200 text-slate-900">
           <DialogHeader>
             <DialogTitle className="text-slate-900">
@@ -216,22 +216,30 @@ export default function CarRowActions({ carId, carSlug, sold, published, variant
           </DialogHeader>
           <div className="flex gap-3 justify-end mt-2">
             <DialogClose asChild>
-              <Button variant="ghost" className="text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+              <Button variant="ghost" disabled={pending} className="text-slate-600 hover:text-slate-900 hover:bg-slate-100">
                 Nie
               </Button>
             </DialogClose>
             <Button
               onClick={handleConfirmToggleSold}
-              className="bg-brand-gold text-slate-900 hover:bg-brand-gold/90 font-semibold"
+              disabled={pending}
+              className="bg-brand-gold text-slate-900 hover:bg-brand-gold/90 font-semibold min-w-28"
             >
-              Tak, {sold ? 'przywróć' : 'sprzedane'}
+              {pending && actionType === 'sold' ? (
+                <span className="flex items-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Zapisywanie...
+                </span>
+              ) : (
+                `Tak, ${sold ? 'przywróć' : 'sprzedane'}`
+              )}
             </Button>
           </div>
         </DialogContent>
       </Dialog>
 
       {/* Delete confirmation dialog */}
-      <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+      <Dialog open={deleteDialogOpen} onOpenChange={(open) => { if (!pending) setDeleteDialogOpen(open) }}>
         <DialogContent className="max-w-sm bg-white border-slate-200 text-slate-900">
           <DialogHeader>
             <DialogTitle className="text-slate-900">Usunąć auto?</DialogTitle>
@@ -241,15 +249,23 @@ export default function CarRowActions({ carId, carSlug, sold, published, variant
           </DialogHeader>
           <div className="flex gap-3 justify-end mt-2">
             <DialogClose asChild>
-              <Button variant="ghost" className="text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+              <Button variant="ghost" disabled={pending} className="text-slate-600 hover:text-slate-900 hover:bg-slate-100">
                 Nie
               </Button>
             </DialogClose>
             <Button
               onClick={handleConfirmDelete}
-              className="bg-red-500 hover:bg-red-600 text-white font-semibold"
+              disabled={pending}
+              className="bg-red-500 hover:bg-red-600 text-white font-semibold min-w-28"
             >
-              Tak, usuń
+              {pending && actionType === 'delete' ? (
+                <span className="flex items-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Usuwanie...
+                </span>
+              ) : (
+                'Tak, usuń'
+              )}
             </Button>
           </div>
         </DialogContent>

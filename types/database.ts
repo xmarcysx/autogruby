@@ -70,7 +70,7 @@ export interface Database {
       car_views_stats: {
         Row: {
           id: string
-          car_id: string
+          car_id: string | null
           viewed_at: string
           ip_hash: string | null
         }

@@ -68,33 +68,36 @@ async function uploadImages(
   imageFiles: File[],
   coverIndex: number,
 ) {
-  for (let i = 0; i < imageFiles.length; i++) {
-    const file = imageFiles[i]
-    if (!file || file.size === 0) continue
+  const uploads = imageFiles
+    .map((file, i) => ({ file, i }))
+    .filter(({ file }) => file && file.size > 0)
 
-    const ext = file.name.split('.').pop() ?? 'jpg'
-    const storagePath = `${carId}/${Date.now()}-${i}.${ext}`
+  await Promise.all(
+    uploads.map(async ({ file, i }) => {
+      const ext = file.name.split('.').pop() ?? 'jpg'
+      const storagePath = `${carId}/${Date.now()}-${i}.${ext}`
 
-    const arrayBuffer = await file.arrayBuffer()
-    const buffer = new Uint8Array(arrayBuffer)
+      const arrayBuffer = await file.arrayBuffer()
+      const buffer = new Uint8Array(arrayBuffer)
 
-    const { error: uploadError } = await supabase.storage
-      .from('car-images')
-      .upload(storagePath, buffer, { contentType: file.type, upsert: false })
+      const { error: uploadError } = await supabase.storage
+        .from('car-images')
+        .upload(storagePath, buffer, { contentType: file.type, upsert: false })
 
-    if (uploadError) {
-      console.error('[uploadImages] upload error:', uploadError.message)
-      continue
-    }
+      if (uploadError) {
+        console.error('[uploadImages] upload error:', uploadError.message)
+        return
+      }
 
-    await supabase.from('car_images').insert({
-      car_id: carId,
-      storage_path: storagePath,
-      alt: title,
-      sort_order: i,
-      is_cover: i === coverIndex,
-    })
-  }
+      await supabase.from('car_images').insert({
+        car_id: carId,
+        storage_path: storagePath,
+        alt: title,
+        sort_order: i,
+        is_cover: i === coverIndex,
+      })
+    }),
+  )
 }
 
 export async function createCarAction(

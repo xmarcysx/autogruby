@@ -24,7 +24,7 @@ import {
   X,
 } from 'lucide-react'
 import Image from 'next/image'
-import { useRef, useState, useTransition } from 'react'
+import { useEffect, useMemo, useRef, useState, useTransition } from 'react'
 
 interface CarFormProps {
   car?: Car
@@ -382,16 +382,11 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
       <Section title="Podstawowe informacje">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <Field label="Marka *">
-            <Select value={brand} onValueChange={(v) => { setBrand(v); updateTitle(v, model, year) }}>
-              <SelectTrigger data-error={showErrors && !brand ? 'true' : 'false'} className={cn(triggerClass, showErrors && !brand && 'border-red-400 bg-red-50 focus:border-red-400')}>
-                <SelectValue placeholder="Wybierz markę" />
-              </SelectTrigger>
-              <SelectContent className="bg-white border-sky-200 max-h-56">
-                {CAR_BRANDS.map((b) => (
-                  <SelectItem key={b} value={b} className={itemClass}>{b}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <BrandCombobox
+              value={brand}
+              onChange={(v) => { setBrand(v); updateTitle(v, model, year) }}
+              hasError={showErrors && !brand}
+            />
             <input type="hidden" name="brand" value={brand} />
           </Field>
 
@@ -649,6 +644,7 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
         <Button
           type="button"
           variant="outline"
+          disabled={pending}
           className="border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100"
           onClick={() => window.history.back()}
         >
@@ -689,6 +685,61 @@ function Field({ label, children, className }: { label: string; children: React.
     <div className={`space-y-1.5 ${className ?? ''}`}>
       <Label className="text-slate-700 text-xs font-medium">{label}</Label>
       {children}
+    </div>
+  )
+}
+
+function BrandCombobox({ value, onChange, hasError }: { value: string; onChange: (v: string) => void; hasError?: boolean }) {
+  const [open, setOpen] = useState(false)
+  const [query, setQuery] = useState(value)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => setQuery(value), [value])
+
+  useEffect(() => {
+    if (!open) return
+    const onClickOutside = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setOpen(false)
+        setQuery(value)
+      }
+    }
+    document.addEventListener('mousedown', onClickOutside)
+    return () => document.removeEventListener('mousedown', onClickOutside)
+  }, [open, value])
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    if (!q) return CAR_BRANDS
+    return CAR_BRANDS.filter((b) => b.toLowerCase().includes(q))
+  }, [query])
+
+  return (
+    <div ref={containerRef} className="relative">
+      <Input
+        value={query}
+        onChange={(e) => { setQuery(e.target.value); setOpen(true) }}
+        onFocus={() => setOpen(true)}
+        onBlur={() => { if (CAR_BRANDS.includes(query.trim())) onChange(query.trim()) }}
+        placeholder="Wpisz lub wybierz markę"
+        data-error={hasError ? 'true' : 'false'}
+        className={cn(inputClass, hasError && 'border-red-400 bg-red-50 focus:border-red-400 focus:ring-red-400/20')}
+        autoComplete="off"
+      />
+      {open && filtered.length > 0 && (
+        <div className="absolute z-20 mt-1 w-full max-h-56 overflow-auto rounded-xl border border-sky-200 bg-white shadow-lg">
+          {filtered.map((b) => (
+            <button
+              key={b}
+              type="button"
+              onMouseDown={(e) => { e.preventDefault(); onChange(b); setQuery(b); setOpen(false) }}
+              className={cn('w-full text-left px-3 py-2 text-sm text-slate-800 hover:bg-sky-50 hover:text-brand-blue', b === value && 'bg-sky-50 font-medium')}
+            >
+              {b}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

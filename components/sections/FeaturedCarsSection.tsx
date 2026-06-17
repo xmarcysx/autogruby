@@ -2,13 +2,18 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { CarCard } from '@/components/common/CarCard'
+import { CarCarousel } from '@/components/common/CarCarousel'
 import { SectionHeading } from '@/components/common/SectionHeading'
 import { getFeaturedCars } from '@/services/cars'
 
+const VISIBLE_LIMIT = 3
+
 export async function FeaturedCarsSection() {
-  const cars = await getFeaturedCars(3)
+  const cars = await getFeaturedCars(9)
 
   if (cars.length === 0) return null
+
+  const isCarousel = cars.length > VISIBLE_LIMIT
 
   return (
     <section
@@ -31,11 +36,15 @@ export async function FeaturedCarsSection() {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cars.map((car, index) => (
-            <CarCard key={car.id} car={car} priority={index === 0} />
-          ))}
-        </div>
+        {isCarousel ? (
+          <CarCarousel cars={cars} />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {cars.map((car, index) => (
+              <CarCard key={car.id} car={car} priority={index === 0} />
+            ))}
+          </div>
+        )}
 
         {/* CTA pod kartami — desktop i mobile */}
         <div className="mt-12 text-center">

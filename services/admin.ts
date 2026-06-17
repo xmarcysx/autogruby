@@ -218,6 +218,7 @@ export async function getAdminTopCars(
     .from('car_views_stats')
     .select('car_id')
     .gte('viewed_at', thirtyDaysAgo)
+    .not('car_id', 'is', null)
 
   if (!data || data.length === 0) return []
 
