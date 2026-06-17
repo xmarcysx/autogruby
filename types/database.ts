@@ -41,7 +41,9 @@ export interface Database {
           created_at: string
           updated_at: string
         }
-        Insert: Omit<Database['public']['Tables']['cars']['Row'], 'id' | 'created_at' | 'updated_at'>
+        Insert: Omit<Database['public']['Tables']['cars']['Row'], 'id' | 'created_at' | 'updated_at'> & {
+          id?: string
+        }
         Update: Partial<Database['public']['Tables']['cars']['Insert']>
       }
       car_images: {

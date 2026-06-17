@@ -1,6 +1,5 @@
 'use client'
 
-import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import {
   Select,
   SelectContent,
@@ -8,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 const SORT_OPTIONS = [
   { value: 'newest', label: 'Najnowsze' },
@@ -33,9 +33,6 @@ export function SortSelect() {
 
   return (
     <div className="flex items-center gap-2">
-      <label htmlFor="sort-select" className="text-sm text-slate-600 whitespace-nowrap">
-        Sortuj:
-      </label>
       <Select value={current} onValueChange={handleChange}>
         <SelectTrigger
           id="sort-select"

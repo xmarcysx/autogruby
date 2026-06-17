@@ -60,44 +60,33 @@ function parseCarData(formData: FormData, brand?: string, model?: string, year?:
   }
 }
 
-async function uploadImages(
+interface UploadedImage {
+  storage_path: string
+  alt: string
+  sort_order: number
+  is_cover: boolean
+}
+
+function parseUploadedImages(formData: FormData): UploadedImage[] {
+  const raw = formData.get('uploaded_images') as string | null
+  if (!raw) return []
+  try {
+    return JSON.parse(raw) as UploadedImage[]
+  } catch {
+    return []
+  }
+}
+
+async function insertImageRecords(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   supabase: any,
   carId: string,
-  title: string,
-  imageFiles: File[],
-  coverIndex: number,
+  images: UploadedImage[],
 ) {
-  const uploads = imageFiles
-    .map((file, i) => ({ file, i }))
-    .filter(({ file }) => file && file.size > 0)
-
-  await Promise.all(
-    uploads.map(async ({ file, i }) => {
-      const ext = file.name.split('.').pop() ?? 'jpg'
-      const storagePath = `${carId}/${Date.now()}-${i}.${ext}`
-
-      const arrayBuffer = await file.arrayBuffer()
-      const buffer = new Uint8Array(arrayBuffer)
-
-      const { error: uploadError } = await supabase.storage
-        .from('car-images')
-        .upload(storagePath, buffer, { contentType: file.type, upsert: false })
-
-      if (uploadError) {
-        console.error('[uploadImages] upload error:', uploadError.message)
-        return
-      }
-
-      await supabase.from('car_images').insert({
-        car_id: carId,
-        storage_path: storagePath,
-        alt: title,
-        sort_order: i,
-        is_cover: i === coverIndex,
-      })
-    }),
-  )
+  if (images.length === 0) return
+  await supabase
+    .from('car_images')
+    .insert(images.map((img) => ({ ...img, car_id: carId })))
 }
 
 export async function createCarAction(
@@ -110,8 +99,10 @@ export async function createCarAction(
   const brand = formData.get('brand') as string
   const model = formData.get('model') as string
   const year = formData.get('year') as string
+  const carId = formData.get('car_id') as string
 
   const carData = {
+    id: carId,
     slug: generateSlug(brand, model, year),
     ...parseCarData(formData, brand, model, year),
   }
@@ -123,9 +114,7 @@ export async function createCarAction(
     return { error: 'Błąd podczas dodawania auta: ' + (error?.message ?? 'nieznany błąd') }
   }
 
-  const imageFiles = formData.getAll('images') as File[]
-  const coverIndex = parseInt((formData.get('cover_index') as string) ?? '0')
-  await uploadImages(supabase, car.id, carData.title, imageFiles, coverIndex)
+  await insertImageRecords(supabase, car.id, parseUploadedImages(formData))
 
   revalidatePath('/admin/cars')
   revalidatePath('/oferty')
@@ -150,14 +139,18 @@ export async function updateCarAction(
     return { error: 'Błąd podczas aktualizacji auta: ' + error.message }
   }
 
-  // Handle new image uploads
-  const imageFiles = formData.getAll('images') as File[]
-  await uploadImages(supabase, carId, carData.title, imageFiles, -1)
-
-  // Update cover image if specified
+  const uploadedImages = parseUploadedImages(formData)
   const existingCoverId = formData.get('existing_cover_id') as string
-  if (existingCoverId) {
+  const newCoverSet = uploadedImages.some((img) => img.is_cover)
+
+  // Clear the previous cover before assigning a new one, so only one remains.
+  if (existingCoverId || newCoverSet) {
     await supabase.from('car_images').update({ is_cover: false }).eq('car_id', carId)
+  }
+
+  await insertImageRecords(supabase, carId, uploadedImages)
+
+  if (existingCoverId) {
     await supabase.from('car_images').update({ is_cover: true }).eq('id', existingCoverId)
   }
 

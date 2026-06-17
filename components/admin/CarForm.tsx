@@ -1,6 +1,7 @@
 'use client'
 
 import type { CarFormState } from '@/app/actions/admin/cars'
+import { uploadCarImage } from '@/lib/supabase/storage'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -42,6 +43,7 @@ interface PreviewImage {
 
 export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarFormProps) {
   const [pending, startTransition] = useTransition()
+  const [uploading, setUploading] = useState(false)
   const [formError, setFormError] = useState<string | undefined>()
   const [showErrors, setShowErrors] = useState(false)
   const [previewImages, setPreviewImages] = useState<PreviewImage[]>([])
@@ -133,13 +135,32 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
       if (key !== 'images') formData.append(key, value)
     }
 
-    const coverIndex = previewImages.findIndex((img) => img.isCover)
-    formData.set('cover_index', String(coverIndex))
-    previewImages.forEach((img) => formData.append('images', img.file))
-
     if (coverExistingId) formData.set('existing_cover_id', coverExistingId)
 
     startTransition(async () => {
+      // Images are uploaded directly to Supabase Storage from the browser —
+      // sending raw file bytes through the server action would hit Vercel's
+      // 4.5MB serverless function body limit and fail with a 413.
+      const carId = car?.id ?? crypto.randomUUID()
+      formData.set('car_id', carId)
+
+      if (previewImages.length > 0) {
+        setUploading(true)
+        try {
+          const uploaded = await Promise.all(
+            previewImages.map((img, i) =>
+              uploadCarImage(carId, img.file, { alt: title, sortOrder: i, isCover: img.isCover }),
+            ),
+          )
+          formData.set('uploaded_images', JSON.stringify(uploaded))
+        } catch (err) {
+          setUploading(false)
+          setFormError(err instanceof Error ? err.message : 'Nie udało się wysłać zdjęć.')
+          return
+        }
+        setUploading(false)
+      }
+
       const result = await action({}, formData)
       if (result?.error) setFormError(result.error)
     })
@@ -654,7 +675,7 @@ export default function CarForm({ car, action, submitLabel = 'Zapisz' }: CarForm
           {pending ? (
             <span className="flex items-center gap-2">
               <Loader2 className="h-4 w-4 animate-spin" />
-              Zapisywanie...
+              {uploading ? 'Wysyłanie zdjęć...' : 'Zapisywanie...'}
             </span>
           ) : (
             <span className="flex items-center gap-2">

@@ -62,9 +62,9 @@ export default async function AdminCarsPage({ searchParams }: PageProps) {
         {/* Filters bar */}
         <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
           <div className="flex flex-col sm:flex-row gap-4">
-            <form className="flex-1">
+            <form className="flex-1 flex gap-2">
               <input type="hidden" name="status" value={status} />
-              <div className="relative">
+              <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
                 <input
                   name="search"
@@ -74,6 +74,10 @@ export default async function AdminCarsPage({ searchParams }: PageProps) {
                   className="w-full bg-sky-50 border border-sky-200 rounded-xl pl-9 pr-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue/20"
                 />
               </div>
+              <Button type="submit" className="bg-brand-blue hover:bg-brand-blue-dark text-white shrink-0">
+                <Search className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline">Szukaj</span>
+              </Button>
             </form>
 
             <div className="flex gap-1 p-1 bg-slate-100 rounded-xl">
